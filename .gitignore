@@ -1,0 +1,12 @@
+third_party/**
+*obj
+*tlog
+*exe
+*bin
+**/.git/**
+.git/**
+*log
+*idb
+*pdb
+**/Debug/**
+**/Release/**
