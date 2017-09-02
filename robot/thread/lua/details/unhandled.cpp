@@ -1,4 +1,4 @@
-#include "deserialize.hpp"
+#include "serialize.hpp"
 #include <message/lua/unhandled.hpp>
 #include <utils/string/string_streambuf.hpp>
 
@@ -51,7 +51,7 @@ static void serialize_object(sol::table tab, std::ostream& os, std::string& buff
 }
 
 template <>
-void deserialize<robot::message::lua::unhandled>(sol::table tab, robot::message::lua::unhandled& reply) {
+void serialize<robot::message::lua::unhandled>(sol::table tab, robot::message::lua::unhandled& reply) {
 
     reply.buffer_.resize(2048);
     utils::string_streambuf sb(reply.buffer_);

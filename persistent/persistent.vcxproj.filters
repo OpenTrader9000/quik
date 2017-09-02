@@ -1,2 +1,923 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" />
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{5e07379a-ec17-4aff-8be8-46b6badea403}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\lua">
+      <UniqueIdentifier>{34109db4-37df-4457-bbc8-0974cc515652}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party">
+      <UniqueIdentifier>{60a7af5b-c0f1-4b3d-8f1f-dd5729cfa56f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\HinnantDate">
+      <UniqueIdentifier>{a45c848d-ff4a-4de1-a107-56b7530936e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\sqlite">
+      <UniqueIdentifier>{3721044d-2af4-4a02-beb6-4c3d3d11ea78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\sqlpp11">
+      <UniqueIdentifier>{f11ffb8e-1c1b-427e-a2b7-b00be7839859}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\sqlpp11-sqlite-src">
+      <UniqueIdentifier>{e2e7d468-f95a-4cd2-a5b3-3f19a7a1307c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\sqlpp11-sqlite-src\detail">
+      <UniqueIdentifier>{08dd161e-68f3-48ff-9ddf-f6cf1b28995c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\sqlpp11\aggregate_functions">
+      <UniqueIdentifier>{0bb26b15-c022-435a-9a64-bc870a91192c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\sqlpp11\data_types">
+      <UniqueIdentifier>{ad71bd9d-88f7-4515-9858-523eae1163e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\sqlpp11\data_types\boolean">
+      <UniqueIdentifier>{6d996111-08bc-4723-9393-d65c3e0e2295}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\sqlpp11\data_types\day_point">
+      <UniqueIdentifier>{981f999d-85fc-4d75-8b10-18ed70f43e0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\sqlpp11\data_types\floating_point">
+      <UniqueIdentifier>{44402183-4955-4fa5-83f3-23d86f7fdf36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\sqlpp11\data_types\integral">
+      <UniqueIdentifier>{93f79353-48f9-4c51-9a4f-784a46bb85c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\sqlpp11\data_types\no_value">
+      <UniqueIdentifier>{9f0ef820-03ab-4806-8dfa-998d4c4b25ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\sqlpp11\data_types\text">
+      <UniqueIdentifier>{6c3a1992-4ede-4004-90b0-5903d8b29433}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\sqlpp11\data_types\time_of_day">
+      <UniqueIdentifier>{09cb5b6a-e37f-469e-9c27-71223c9ff907}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\sqlpp11\data_types\time_point">
+      <UniqueIdentifier>{edf729c9-f2c9-464b-ac20-86b98707b8f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\sqlpp11\data_types\unsigned_integral">
+      <UniqueIdentifier>{38a67c27-80e4-4400-9b2a-56b96c28a060}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\sqlpp11\detail">
+      <UniqueIdentifier>{47a93489-03d5-4268-8c0b-77a28accb0a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\sqlpp11\ppgen">
+      <UniqueIdentifier>{60ac57c1-75f2-46da-886f-c07a183fec48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\sqlpp11\ppgen\colops">
+      <UniqueIdentifier>{bac1bb08-aad9-440f-b948-d15b5336f42e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\sqlpp11\ppgen\tblops">
+      <UniqueIdentifier>{8271ff2b-1820-404e-ae5b-3eaa4560b93d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\sqlpp11\ppgen\tools">
+      <UniqueIdentifier>{fdbd24ad-c92a-4c18-acf9-28fd5c126385}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\sqlpp11\sqlite3">
+      <UniqueIdentifier>{48f1569b-7723-4247-bd6a-787994d7c606}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="query">
+      <UniqueIdentifier>{e55d1f59-2314-46e9-bdc4-152e8d9abd06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="query\lua">
+      <UniqueIdentifier>{5a4c9d72-6409-4e0c-9172-1a33f1b39e24}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="third_party\HinnantDate\chrono_io.h">
+      <Filter>third_party\HinnantDate</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\HinnantDate\date.h">
+      <Filter>third_party\HinnantDate</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\HinnantDate\ios.h">
+      <Filter>third_party\HinnantDate</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\HinnantDate\islamic.h">
+      <Filter>third_party\HinnantDate</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\HinnantDate\iso_week.h">
+      <Filter>third_party\HinnantDate</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\HinnantDate\julian.h">
+      <Filter>third_party\HinnantDate</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\HinnantDate\tz.h">
+      <Filter>third_party\HinnantDate</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\HinnantDate\tz_private.h">
+      <Filter>third_party\HinnantDate</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11-sqlite-src\detail\connection_handle.h">
+      <Filter>third_party\sqlpp11-sqlite-src\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11-sqlite-src\detail\prepared_statement_handle.h">
+      <Filter>third_party\sqlpp11-sqlite-src\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\aggregate_functions.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\alias.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\alias_operators.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\alias_provider.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\all_of.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\any.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\assignment.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\auto_alias.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\bad_expression.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\basic_expression_operators.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\boolean_expression.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\case.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\char_sequence.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\chrono.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\column.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\column_fwd.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\column_types.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\connection.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\connection_pool.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\consistent.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\cte.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\custom_query.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\default_value.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\dynamic_join.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\dynamic_pre_join.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\dynamic_select_column_list.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\eval.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\exception.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\exists.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\expression.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\expression_fwd.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\expression_operators.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\expression_return_types.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\field_spec.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\for_update.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\from.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\functions.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\group_by.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\having.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\hidden.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\in.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\in_fwd.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\inconsistent.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\insert.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\insert_value.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\insert_value_list.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\interpret.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\interpret_tuple.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\interpretable.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\interpretable_list.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\interpreter.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\into.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\is_not_null.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\is_null.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\is_null_fwd.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\join.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\join_types.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\limit.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\logic.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\multi_column.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\named_interpretable.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\no_data.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\no_name.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\noop.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\noop_fwd.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\not_in.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\null.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\offset.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\on.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\operand_check.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\order_by.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\parameter.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\parameter_list.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\policy_update.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\pool_connection.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\portable_static_assert.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\pre_join.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\prepared_execute.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\prepared_insert.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\prepared_remove.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\prepared_select.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\prepared_update.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\remove.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\result.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\result_field.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\result_field_base.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\result_row.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\result_row_fwd.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\rhs_wrap.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\schema.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\schema_qualified_table.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\select.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\select_column_list.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\select_flag_list.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\select_flags.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\select_pseudo_table.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\serialize.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\serializer.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\serializer_context.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\simple_column.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\single_table.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\some.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\sort_order.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\sqlpp11.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\statement.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\statement_fwd.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\table.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\table_alias.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\table_ref.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\transaction.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\tvin.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\type_traits.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\unconditional.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\union.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\union_data.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\union_flags.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\update.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\update_list.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\using.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\value.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\value_or_null.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\value_type.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\value_type_fwd.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\verbatim.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\verbatim_table.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\where.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\with.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\without_table_check.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\wrap_operand.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\wrong.h">
+      <Filter>third_party\sqlpp11</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\aggregate_functions\avg.h">
+      <Filter>third_party\sqlpp11\aggregate_functions</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\aggregate_functions\count.h">
+      <Filter>third_party\sqlpp11\aggregate_functions</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\aggregate_functions\max.h">
+      <Filter>third_party\sqlpp11\aggregate_functions</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\aggregate_functions\min.h">
+      <Filter>third_party\sqlpp11\aggregate_functions</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\aggregate_functions\sum.h">
+      <Filter>third_party\sqlpp11\aggregate_functions</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\boolean.h">
+      <Filter>third_party\sqlpp11\data_types</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\column_operators.h">
+      <Filter>third_party\sqlpp11\data_types</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\day_point.h">
+      <Filter>third_party\sqlpp11\data_types</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\floating_point.h">
+      <Filter>third_party\sqlpp11\data_types</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\integral.h">
+      <Filter>third_party\sqlpp11\data_types</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\no_value.h">
+      <Filter>third_party\sqlpp11\data_types</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\parameter_value.h">
+      <Filter>third_party\sqlpp11\data_types</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\parameter_value_base.h">
+      <Filter>third_party\sqlpp11\data_types</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\text.h">
+      <Filter>third_party\sqlpp11\data_types</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\time_of_day.h">
+      <Filter>third_party\sqlpp11\data_types</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\time_point.h">
+      <Filter>third_party\sqlpp11\data_types</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\unsigned_integral.h">
+      <Filter>third_party\sqlpp11\data_types</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\boolean\column_operators.h">
+      <Filter>third_party\sqlpp11\data_types\boolean</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\boolean\data_type.h">
+      <Filter>third_party\sqlpp11\data_types\boolean</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\boolean\expression_operators.h">
+      <Filter>third_party\sqlpp11\data_types\boolean</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\boolean\operand.h">
+      <Filter>third_party\sqlpp11\data_types\boolean</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\boolean\parameter_value.h">
+      <Filter>third_party\sqlpp11\data_types\boolean</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\boolean\result_field.h">
+      <Filter>third_party\sqlpp11\data_types\boolean</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\boolean\wrap_operand.h">
+      <Filter>third_party\sqlpp11\data_types\boolean</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\day_point\column_operators.h">
+      <Filter>third_party\sqlpp11\data_types\day_point</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\day_point\data_type.h">
+      <Filter>third_party\sqlpp11\data_types\day_point</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\day_point\expression_operators.h">
+      <Filter>third_party\sqlpp11\data_types\day_point</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\day_point\operand.h">
+      <Filter>third_party\sqlpp11\data_types\day_point</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\day_point\parameter_value.h">
+      <Filter>third_party\sqlpp11\data_types\day_point</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\day_point\result_field.h">
+      <Filter>third_party\sqlpp11\data_types\day_point</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\day_point\wrap_operand.h">
+      <Filter>third_party\sqlpp11\data_types\day_point</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\floating_point\column_operators.h">
+      <Filter>third_party\sqlpp11\data_types\floating_point</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\floating_point\data_type.h">
+      <Filter>third_party\sqlpp11\data_types\floating_point</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\floating_point\expression_operators.h">
+      <Filter>third_party\sqlpp11\data_types\floating_point</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\floating_point\operand.h">
+      <Filter>third_party\sqlpp11\data_types\floating_point</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\floating_point\parameter_value.h">
+      <Filter>third_party\sqlpp11\data_types\floating_point</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\floating_point\result_field.h">
+      <Filter>third_party\sqlpp11\data_types\floating_point</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\floating_point\wrap_operand.h">
+      <Filter>third_party\sqlpp11\data_types\floating_point</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\integral\column_operators.h">
+      <Filter>third_party\sqlpp11\data_types\integral</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\integral\data_type.h">
+      <Filter>third_party\sqlpp11\data_types\integral</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\integral\expression_operators.h">
+      <Filter>third_party\sqlpp11\data_types\integral</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\integral\operand.h">
+      <Filter>third_party\sqlpp11\data_types\integral</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\integral\parameter_value.h">
+      <Filter>third_party\sqlpp11\data_types\integral</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\integral\result_field.h">
+      <Filter>third_party\sqlpp11\data_types\integral</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\integral\wrap_operand.h">
+      <Filter>third_party\sqlpp11\data_types\integral</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\unsigned_integral\column_operators.h">
+      <Filter>third_party\sqlpp11\data_types\unsigned_integral</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\unsigned_integral\data_type.h">
+      <Filter>third_party\sqlpp11\data_types\unsigned_integral</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\unsigned_integral\expression_operators.h">
+      <Filter>third_party\sqlpp11\data_types\unsigned_integral</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\unsigned_integral\operand.h">
+      <Filter>third_party\sqlpp11\data_types\unsigned_integral</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\unsigned_integral\parameter_value.h">
+      <Filter>third_party\sqlpp11\data_types\unsigned_integral</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\unsigned_integral\result_field.h">
+      <Filter>third_party\sqlpp11\data_types\unsigned_integral</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\unsigned_integral\wrap_operand.h">
+      <Filter>third_party\sqlpp11\data_types\unsigned_integral</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\time_point\column_operators.h">
+      <Filter>third_party\sqlpp11\data_types\time_point</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\time_point\data_type.h">
+      <Filter>third_party\sqlpp11\data_types\time_point</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\time_point\expression_operators.h">
+      <Filter>third_party\sqlpp11\data_types\time_point</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\time_point\operand.h">
+      <Filter>third_party\sqlpp11\data_types\time_point</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\time_point\parameter_value.h">
+      <Filter>third_party\sqlpp11\data_types\time_point</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\time_point\result_field.h">
+      <Filter>third_party\sqlpp11\data_types\time_point</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\time_point\wrap_operand.h">
+      <Filter>third_party\sqlpp11\data_types\time_point</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\time_of_day\column_operators.h">
+      <Filter>third_party\sqlpp11\data_types\time_of_day</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\time_of_day\data_type.h">
+      <Filter>third_party\sqlpp11\data_types\time_of_day</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\time_of_day\expression_operators.h">
+      <Filter>third_party\sqlpp11\data_types\time_of_day</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\time_of_day\operand.h">
+      <Filter>third_party\sqlpp11\data_types\time_of_day</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\time_of_day\parameter_value.h">
+      <Filter>third_party\sqlpp11\data_types\time_of_day</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\time_of_day\result_field.h">
+      <Filter>third_party\sqlpp11\data_types\time_of_day</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\time_of_day\wrap_operand.h">
+      <Filter>third_party\sqlpp11\data_types\time_of_day</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\text\column_operators.h">
+      <Filter>third_party\sqlpp11\data_types\text</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\text\concat.h">
+      <Filter>third_party\sqlpp11\data_types\text</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\text\data_type.h">
+      <Filter>third_party\sqlpp11\data_types\text</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\text\expression_operators.h">
+      <Filter>third_party\sqlpp11\data_types\text</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\text\like.h">
+      <Filter>third_party\sqlpp11\data_types\text</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\text\operand.h">
+      <Filter>third_party\sqlpp11\data_types\text</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\text\parameter_value.h">
+      <Filter>third_party\sqlpp11\data_types\text</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\text\result_field.h">
+      <Filter>third_party\sqlpp11\data_types\text</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\text\wrap_operand.h">
+      <Filter>third_party\sqlpp11\data_types\text</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\no_value\column_operators.h">
+      <Filter>third_party\sqlpp11\data_types\no_value</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\no_value\data_type.h">
+      <Filter>third_party\sqlpp11\data_types\no_value</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\no_value\expression_operators.h">
+      <Filter>third_party\sqlpp11\data_types\no_value</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\no_value\operand.h">
+      <Filter>third_party\sqlpp11\data_types\no_value</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\no_value\parameter_value.h">
+      <Filter>third_party\sqlpp11\data_types\no_value</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\no_value\result_field.h">
+      <Filter>third_party\sqlpp11\data_types\no_value</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\data_types\no_value\wrap_operand.h">
+      <Filter>third_party\sqlpp11\data_types\no_value</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\detail\copy_tuple_args.h">
+      <Filter>third_party\sqlpp11\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\detail\enable_if.h">
+      <Filter>third_party\sqlpp11\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\detail\field_index_sequence.h">
+      <Filter>third_party\sqlpp11\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\detail\get_first.h">
+      <Filter>third_party\sqlpp11\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\detail\get_last.h">
+      <Filter>third_party\sqlpp11\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\detail\index_sequence.h">
+      <Filter>third_party\sqlpp11\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\detail\pick_arg.h">
+      <Filter>third_party\sqlpp11\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\detail\sum.h">
+      <Filter>third_party\sqlpp11\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\detail\type_set.h">
+      <Filter>third_party\sqlpp11\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\detail\type_vector.h">
+      <Filter>third_party\sqlpp11\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\detail\void.h">
+      <Filter>third_party\sqlpp11\detail</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\colops\auto_increment.h">
+      <Filter>third_party\sqlpp11\ppgen\colops</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\colops\blob.h">
+      <Filter>third_party\sqlpp11\ppgen\colops</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\colops\bool.h">
+      <Filter>third_party\sqlpp11\ppgen\colops</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\colops\comment.h">
+      <Filter>third_party\sqlpp11\ppgen\colops</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\colops\datetime.h">
+      <Filter>third_party\sqlpp11\ppgen\colops</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\colops\default.h">
+      <Filter>third_party\sqlpp11\ppgen\colops</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\colops\floating_point.h">
+      <Filter>third_party\sqlpp11\ppgen\colops</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\colops\foreign_key.h">
+      <Filter>third_party\sqlpp11\ppgen\colops</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\colops\index.h">
+      <Filter>third_party\sqlpp11\ppgen\colops</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\colops\integer.h">
+      <Filter>third_party\sqlpp11\ppgen\colops</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\colops\not_null.h">
+      <Filter>third_party\sqlpp11\ppgen\colops</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\colops\null.h">
+      <Filter>third_party\sqlpp11\ppgen\colops</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\colops\primary_key.h">
+      <Filter>third_party\sqlpp11\ppgen\colops</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\colops\text.h">
+      <Filter>third_party\sqlpp11\ppgen\colops</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\colops\timestamp.h">
+      <Filter>third_party\sqlpp11\ppgen\colops</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\colops\unique_index.h">
+      <Filter>third_party\sqlpp11\ppgen\colops</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\colops\varchar.h">
+      <Filter>third_party\sqlpp11\ppgen\colops</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\tools\tuple_pop_front.h">
+      <Filter>third_party\sqlpp11\ppgen\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\tools\wrap_seq.h">
+      <Filter>third_party\sqlpp11\ppgen\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\tblops\character_set.h">
+      <Filter>third_party\sqlpp11\ppgen\tblops</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\tblops\comment.h">
+      <Filter>third_party\sqlpp11\ppgen\tblops</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\tblops\default.h">
+      <Filter>third_party\sqlpp11\ppgen\tblops</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\ppgen\tblops\engine.h">
+      <Filter>third_party\sqlpp11\ppgen\tblops</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\sqlite3\bind_result.h">
+      <Filter>third_party\sqlpp11\sqlite3</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\sqlite3\connection.h">
+      <Filter>third_party\sqlpp11\sqlite3</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\sqlite3\connection_config.h">
+      <Filter>third_party\sqlpp11\sqlite3</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\sqlite3\dynamic_libsqlite3.h">
+      <Filter>third_party\sqlpp11\sqlite3</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\sqlite3\insert_or.h">
+      <Filter>third_party\sqlpp11\sqlite3</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\sqlite3\prepared_statement.h">
+      <Filter>third_party\sqlpp11\sqlite3</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\sqlite3\serializer.h">
+      <Filter>third_party\sqlpp11\sqlite3</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlpp11\sqlite3\sqlite3.h">
+      <Filter>third_party\sqlpp11\sqlite3</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlite\sqlite3.h">
+      <Filter>third_party\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\sqlite\sqlite3ext.h">
+      <Filter>third_party\sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="persistent.hpp" />
+    <ClInclude Include="query\lua\unhandled.hpp">
+      <Filter>query\lua</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="third_party\HinnantDate\tz.cpp">
+      <Filter>third_party\HinnantDate</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\sqlpp11-sqlite-src\bind_result.cpp">
+      <Filter>third_party\sqlpp11-sqlite-src</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\sqlpp11-sqlite-src\connection.cpp">
+      <Filter>third_party\sqlpp11-sqlite-src</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\sqlpp11-sqlite-src\prepared_statement.cpp">
+      <Filter>third_party\sqlpp11-sqlite-src</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\sqlpp11-sqlite-src\detail\connection_handle.cpp">
+      <Filter>third_party\sqlpp11-sqlite-src\detail</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\sqlpp11-sqlite-src\detail\dynamic_libsqlite3.cpp">
+      <Filter>third_party\sqlpp11-sqlite-src\detail</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\sqlite\sqlite3.c">
+      <Filter>third_party\sqlite</Filter>
+    </ClCompile>
+    <ClCompile Include="persistent.cpp" />
+    <ClCompile Include="query\lua\unhandled.cpp">
+      <Filter>query\lua</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
