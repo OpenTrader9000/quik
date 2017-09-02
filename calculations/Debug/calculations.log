@@ -1,0 +1,20 @@
+﻿Build started 01.09.2017 23:34:45.
+     1>Project "C:\Users\Andrey\Documents\Visual Studio 2017\Projects\quik\calculations\calculations.vcxproj" on node 2 (Build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\calculations.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\calculations.pdb" /Gd /TP /analyze- /errorReport:prompt calculate.cpp
+         calculate.cpp
+       Lib:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\Lib.exe /OUT:"C:\Users\Andrey\Documents\Visual Studio 2017\Projects\quik\Debug\calculations.lib" /NOLOGO Debug\calculate.obj
+         calculations.vcxproj -> C:\Users\Andrey\Documents\Visual Studio 2017\Projects\quik\Debug\calculations.lib
+       CopyFilesToOutputDirectory:
+         Copying file from "Debug\calculations.pdb" to "C:\Users\Andrey\Documents\Visual Studio 2017\Projects\quik\Debug\calculations.pdb".
+       FinalizeBuildStatus:
+         Deleting file "Debug\calculations.tlog\unsuccessfulbuild".
+         Touching "Debug\calculations.tlog\calculations.lastbuildstate".
+     1>Done Building Project "C:\Users\Andrey\Documents\Visual Studio 2017\Projects\quik\calculations\calculations.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.72

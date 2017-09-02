@@ -1,0 +1,33 @@
+#pragma once
+
+namespace robot {
+namespace message {
+enum class codes {
+    EXEC_LUA = 1,
+    EXEC,
+    FLUSH,
+    ON_TRADE,
+    ON_TRADES,
+    ON_ORDER,
+    ON_TRANSACTION,
+    SEND_TRANSACTION,
+    ON_ACCOUNT_BALANCE,
+    ON_ACCOUNT_POSITION,
+    ON_ALL_TRADE,
+    ON_DEPO_LIMIT,
+    ON_DEPO_LIMIT_DELETE,
+    ON_FUTURES_CLIENT_HOLDING,
+    ON_FUTURES_LIMIT_CHANGE,
+    ON_FUTURES_LIMIT_DELETE,
+    ON_MONEY_LIMIT,
+    ON_MONEY_LIMIT_DELETE,
+    ON_NEG_DEAL,
+    ON_NEG_TRADE,
+    ON_STOP,
+    ON_STOP_ORDER,
+    ON_TRANS_REPLY,
+    STOP,
+    UNHANDLED
+};
+}
+} // namespace robot

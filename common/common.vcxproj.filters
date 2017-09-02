@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="numbers">
+      <UniqueIdentifier>{42f09746-2f22-47db-b22e-28fb43c28321}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="numbers\bcd.cpp">
+      <Filter>numbers</Filter>
+    </ClCompile>
+    <ClCompile Include="numbers\integer.cpp">
+      <Filter>numbers</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="numbers\bcd.hpp">
+      <Filter>numbers</Filter>
+    </ClInclude>
+    <ClInclude Include="numbers\float.hpp">
+      <Filter>numbers</Filter>
+    </ClInclude>
+    <ClInclude Include="numbers\integer.hpp">
+      <Filter>numbers</Filter>
+    </ClInclude>
+    <ClInclude Include="numbers\string.hpp">
+      <Filter>numbers</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

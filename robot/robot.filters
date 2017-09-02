@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="worker">
+      <UniqueIdentifier>{e0101be5-51a3-40dc-8bc1-f4375ce4a20c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="message">
+      <UniqueIdentifier>{1b3d28a6-086b-40d7-a868-bfd891c38e46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thread">
+      <UniqueIdentifier>{a7721912-2a5b-47d6-8811-7838f08fdca0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thread\persistent">
+      <UniqueIdentifier>{a9337bbd-57bd-428b-b203-62f41e6de58b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thread\lua">
+      <UniqueIdentifier>{cd6302f9-8352-49a6-8bff-e2924759f2e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thread\compute">
+      <UniqueIdentifier>{39acd21a-b6b0-41cc-a4a8-2c6dd712f2c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thread\telegram">
+      <UniqueIdentifier>{26031b01-790b-4936-83fd-874c6494b789}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="workaround">
+      <UniqueIdentifier>{b6fc5369-9c0a-4142-a315-b06eb3385d52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="message\lua">
+      <UniqueIdentifier>{936eee40-d404-4243-bc45-bf47ac0db4a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="message\common">
+      <UniqueIdentifier>{30d23182-7ac9-4bc6-8258-4ad53ff01ddc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="message\event">
+      <UniqueIdentifier>{3d2bb425-d2d1-4c0b-9a1a-69f860275a7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="message\trade">
+      <UniqueIdentifier>{239d505d-9719-4c8d-b9c4-4df3d5d97e40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thread\lua\details">
+      <UniqueIdentifier>{ebc66774-5b76-4619-8443-307c137f679d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="worker\dispatcher.hpp">
+      <Filter>worker</Filter>
+    </ClInclude>
+    <ClInclude Include="message\base.hpp">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\defines.hpp">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\lua\lua.hpp">
+      <Filter>thread\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="message\codes.hpp">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\telegram\telegram.hpp">
+      <Filter>thread\telegram</Filter>
+    </ClInclude>
+    <ClInclude Include="worker\run.hpp">
+      <Filter>worker</Filter>
+    </ClInclude>
+    <ClInclude Include="message\lua\send_transaction.hpp">
+      <Filter>message\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="message\alloc.hpp">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="message\lua\exec.hpp">
+      <Filter>message\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="message\common\exec.hpp">
+      <Filter>message\common</Filter>
+    </ClInclude>
+    <ClInclude Include="message\event\flush.hpp">
+      <Filter>message\event</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_account_position.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_account_balance.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_depo_limit.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_depo_limit_delete.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_futures_client_holding.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_futures_limit_change.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_futures_limit_delete.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_money_limit.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_money_limit_delete.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_neg_deal.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_neg_trade.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_stop_order.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_trade.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_trans_reply.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_stop.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_all_trade.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\event\stop.hpp">
+      <Filter>message\event</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\lua\details\deserialize.hpp">
+      <Filter>thread\lua\details</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\lua\details\on_trans_reply.cpp">
+      <Filter>thread\lua\details</Filter>
+    </ClInclude>
+    <ClInclude Include="message\lua\unhandled.hpp">
+      <Filter>message\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\lua\details\unhandled.cpp">
+      <Filter>thread\lua\details</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="robot.cpp" />
+    <ClCompile Include="worker\dispatcher.cpp">
+      <Filter>worker</Filter>
+    </ClCompile>
+    <ClCompile Include="message\base.cpp">
+      <Filter>message</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\lua\lua.cpp">
+      <Filter>thread\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\telegram\telegram.cpp">
+      <Filter>thread\telegram</Filter>
+    </ClCompile>
+    <ClCompile Include="worker\run.cpp">
+      <Filter>worker</Filter>
+    </ClCompile>
+    <ClCompile Include="workaround\ssl_link_dependency.cpp">
+      <Filter>workaround</Filter>
+    </ClCompile>
+    <ClCompile Include="message\lua\send_transaction.cpp">
+      <Filter>message\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="message\alloc.cpp">
+      <Filter>message</Filter>
+    </ClCompile>
+    <ClCompile Include="worker\config.hpp">
+      <Filter>worker</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
