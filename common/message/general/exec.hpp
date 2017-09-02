@@ -4,8 +4,9 @@
 #include <message/codes.hpp>
 
 
-namespace robot {namespace message {
 namespace common {
+namespace message {
+namespace general {
 
 struct exec : public base {
 
@@ -41,6 +42,6 @@ auto make_exec(FunctionType&& function) {
     return ReturnType(new exec_wrapper<FunctionType>(std::forward<FunctionType>(function)));
 }
 
+} // namespace general
+} // namespace message
 } // namespace common
-} // namespace robot {namespace message
-}

@@ -1,12 +1,12 @@
 #include "lua.hpp"
-#include "details/deserialize.hpp"
-#include <message/event/stop.hpp>
+#include "details/serialize.hpp"
+#include <common/message/event/stop.hpp>
 #include <message/lua/exec.hpp>
 #include <sol/sol.hpp>
 #include <worker/config.hpp>
 #include <worker/dispatcher.hpp>
 #include <worker/run.hpp>
-#include <message/lua/unhandled.hpp>
+#include <common/message/general/unhandled.hpp>
 
 namespace robot {
 namespace thread {
@@ -22,14 +22,14 @@ lua::~lua() {
 
 void lua::work(lua_State* L) {
 
-    using namespace message;
+    using namespace common::message;
 
     while (worker::run()) {
 
         ptr task;
         exec_queue_.wait_dequeue(task);
 
-        if (task->code_ == message::event::stop::code)
+        if (task->code_ == event::stop::code)
             return;
 
         task.cast<message::lua::exec>()->execute(L);
@@ -76,7 +76,9 @@ void lua::start(lua_State* L) {
 
 void lua::dump(char const* function, sol::table tab) {
     
-    auto mes = message::make<message::lua::unhandled>();
+    using unhandled_t = common::message::general::unhandled;
+
+    auto mes = common::message::make<unhandled_t>();
 
     mes->name_ = function;
 
@@ -95,7 +97,8 @@ void lua::on_quote(char const* class_code, char const* sec_code){
 
 
 void lua::stop(lua_State* L) {
-    exec_queue_.enqueue(message::make<message::event::stop>());
+    using namespace common::message;
+    exec_queue_.enqueue(make<event::stop>());
 }
 
 
@@ -112,7 +115,7 @@ void stop(lua_State* L) {
     lua::instance_->stop(L);
 }
 
-void enqueue_task(message::ptr task) {
+void enqueue_task(common::message::ptr task) {
     assert(task->code_ == message::lua::exec::code);
     lua::instance_->exec_queue_.enqueue(task);
 }

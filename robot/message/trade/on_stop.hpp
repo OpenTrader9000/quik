@@ -1,15 +1,15 @@
 #pragma once
 
-#include <message/base.hpp>
-#include <message/codes.hpp>
+#include <common/message/base.hpp>
+#include <common/message/codes.hpp>
 
 namespace robot {
 namespace message {
 namespace trade {
 
-struct on_stop : public robot::message::base {
+struct on_stop : public common::message::base {
 
-    enum { code = codes::ON_STOP };
+    enum { code = common::message::codes::ON_STOP };
 
     on_stop()
     : base(code) {

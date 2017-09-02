@@ -6,7 +6,7 @@
 #include <assert.h>
 #include <atomic>
 
-namespace robot {
+namespace common {
 namespace message {
 struct base {
     int code_;

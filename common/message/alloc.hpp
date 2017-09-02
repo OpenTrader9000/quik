@@ -11,7 +11,7 @@
 #define ORDER_WRITE std::memory_order_release
 
 
-namespace robot {
+namespace common {
 namespace message {
 struct buffer_pointer;
 struct buffer_type {

@@ -1,15 +1,15 @@
 #pragma once
 
-#include <message/base.hpp>
-#include <message/codes.hpp>
+#include <common/message/base.hpp>
+#include <common/message/codes.hpp>
 
 namespace robot {
 namespace message {
 namespace trade {
 
-struct on_money_limit : public robot::message::base {
+struct on_money_limit : public common::message::base {
 
-    enum { code = codes::ON_MONEY_LIMIT };
+    enum { code = common::message::codes::ON_MONEY_LIMIT };
 
     on_money_limit()
     : base(code) {

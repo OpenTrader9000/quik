@@ -1,6 +1,6 @@
 #pragma once
 
-namespace robot {
+namespace common {
 namespace message {
 enum class codes {
     EXEC_LUA = 1,
@@ -30,4 +30,4 @@ enum class codes {
     UNHANDLED
 };
 }
-} // namespace robot
+} // namespace common

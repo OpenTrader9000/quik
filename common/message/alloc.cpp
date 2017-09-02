@@ -6,7 +6,7 @@
     \brief allocation mechanism for a multiple different types of objects with reduced time to live.
 */
 
-namespace robot {
+namespace common {
 namespace message {
 
 void buffer_type::increment_use_counter() {
@@ -93,4 +93,4 @@ void buffer_holder_type::allocate_buffer() {
 }
 
 } // namespace message
-} // namespace robot
+} // namespace common

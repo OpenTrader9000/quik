@@ -8,7 +8,7 @@ extern "C" {
 #include <memory>
 
 
-#include <message/base.hpp>
+#include <common/message/base.hpp>
 #include <thread/defines.hpp>
 #include <sol/sol.hpp>
 
@@ -21,7 +21,7 @@ void work(lua_State* L);
 void start(lua_State* L);
 void stop(lua_State* L);
 
-void enqueue_task(message::ptr task);
+void enqueue_task(common::message::ptr task);
 
 struct lua {
 

@@ -69,7 +69,12 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir);$(ProjectDir);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir);$(ProjectDir);</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>
@@ -132,10 +137,19 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="message\alloc.cpp" />
+    <ClCompile Include="message\base.cpp" />
     <ClCompile Include="numbers\bcd.cpp" />
     <ClCompile Include="numbers\integer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="message\alloc.hpp" />
+    <ClInclude Include="message\base.hpp" />
+    <ClInclude Include="message\codes.hpp" />
+    <ClInclude Include="message\event\flush.hpp" />
+    <ClInclude Include="message\event\stop.hpp" />
+    <ClInclude Include="message\general\exec.hpp" />
+    <ClInclude Include="message\general\unhandled.hpp" />
     <ClInclude Include="numbers\bcd.hpp" />
     <ClInclude Include="numbers\float.hpp" />
     <ClInclude Include="numbers\integer.hpp" />

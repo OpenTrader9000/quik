@@ -5,15 +5,15 @@ extern "C" {
 struct lua_State;
 }
 
-#include <message/base.hpp>
+#include <common/message/base.hpp>
 
 namespace robot {
 namespace message {
 namespace lua {
 
-struct exec : public base {
+struct exec : public common::message::base {
 
-    enum { code = codes::EXEC_LUA };
+    enum { code = common::message::codes::EXEC_LUA };
 
     exec()
     : base(code) {
@@ -42,7 +42,7 @@ struct exec_wrapper : public exec {
 
 template <typename FunctionType>
 auto make_exec(FunctionType&& function) {
-    using ReturnType = ptr_concrete<exec_wrapper<FunctionType>>;
+    using ReturnType = common::message::ptr_concrete<exec_wrapper<FunctionType>>;
     return ReturnType(new exec_wrapper<FunctionType>(std::forward<FunctionType>(function)));
 }
 } // namespace lua

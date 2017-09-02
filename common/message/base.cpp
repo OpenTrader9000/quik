@@ -1,6 +1,6 @@
 #include "base.hpp"
 
-namespace robot {
+namespace common {
 namespace message {
 base::base(int code)
 : code_(code)
@@ -72,4 +72,4 @@ size_t ptr::decrement() {
 }
 
 } // namespace message
-} // namespace robot
+} // namespace common

@@ -1,12 +1,11 @@
 #pragma once
 
-#include <message/base.hpp>
-#include <message/codes.hpp>
+#include <common/message/base.hpp>
+#include <common/message/codes.hpp>
 
-namespace robot {
+namespace common {
 namespace message {
-namespace lua {
-
+namespace general {
 struct unhandled : public base {
     enum { code = codes::UNHANDLED };
 
@@ -17,6 +16,7 @@ struct unhandled : public base {
     std::string name_;
     std::string buffer_;
 };
-} // namespace lua
+
+} // namespace general
 } // namespace message
-} // namespace robot
+} // namespace common

@@ -1,15 +1,15 @@
 #pragma once
 
-#include <message/base.hpp>
-#include <message/codes.hpp>
+#include <common/message/base.hpp>
+#include <common/message/codes.hpp>
 
 namespace robot {
 namespace message {
 namespace trade {
 
-struct on_trade : public robot::message::base {
+struct on_trade : public common::message::base {
 
-    enum { code = codes::ON_TRADE };
+    enum { code = common::message::codes::ON_TRADE };
 
     on_trade()
     : base(code) {

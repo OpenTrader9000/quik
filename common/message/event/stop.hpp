@@ -1,9 +1,9 @@
 #pragma once
 
-#include <message/base.hpp>
-#include <message/codes.hpp>
+#include <common/message/base.hpp>
+#include <common/message/codes.hpp>
 
-namespace robot {
+namespace common {
 namespace message {
 namespace event {
 struct stop : public base {

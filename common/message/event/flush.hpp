@@ -1,12 +1,12 @@
 #pragma once
 
-#include <message/base.hpp>
-#include <message/codes.hpp>
+#include <common/message/base.hpp>
+#include <common/message/codes.hpp>
 
-namespace robot {
+namespace common {
 namespace message {
 namespace event {
-struct flush : public robot::message::base {
+struct flush : public common::message::base {
 
     enum { code = codes::FLUSH };
 
@@ -16,4 +16,4 @@ struct flush : public robot::message::base {
 };
 } // namespace event
 } // namespace message
-} // namespace robot
+} // namespace common

@@ -7,6 +7,15 @@
     <Filter Include="numbers">
       <UniqueIdentifier>{42f09746-2f22-47db-b22e-28fb43c28321}</UniqueIdentifier>
     </Filter>
+    <Filter Include="message">
+      <UniqueIdentifier>{9fe1e4c5-9787-4c19-b713-c3b4a98f2f73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="message\event">
+      <UniqueIdentifier>{67c954ba-27b1-4727-b4cc-10444ed9b7f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="message\general">
+      <UniqueIdentifier>{f495a1f2-2411-4930-ae83-1f2be43392bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="numbers\bcd.cpp">
@@ -14,6 +23,12 @@
     </ClCompile>
     <ClCompile Include="numbers\integer.cpp">
       <Filter>numbers</Filter>
+    </ClCompile>
+    <ClCompile Include="message\alloc.cpp">
+      <Filter>message</Filter>
+    </ClCompile>
+    <ClCompile Include="message\base.cpp">
+      <Filter>message</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -28,6 +43,27 @@
     </ClInclude>
     <ClInclude Include="numbers\string.hpp">
       <Filter>numbers</Filter>
+    </ClInclude>
+    <ClInclude Include="message\event\flush.hpp">
+      <Filter>message\event</Filter>
+    </ClInclude>
+    <ClInclude Include="message\event\stop.hpp">
+      <Filter>message\event</Filter>
+    </ClInclude>
+    <ClInclude Include="message\alloc.hpp">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="message\base.hpp">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="message\codes.hpp">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="message\general\exec.hpp">
+      <Filter>message\general</Filter>
+    </ClInclude>
+    <ClInclude Include="message\general\unhandled.hpp">
+      <Filter>message\general</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
