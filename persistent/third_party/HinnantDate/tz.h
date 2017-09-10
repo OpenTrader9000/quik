@@ -125,6 +125,7 @@ static_assert(HAS_REMOTE_API == 0 ? AUTO_DOWNLOAD == 0 : true,
 #include <utility>
 #include <vector>
 
+#define DATE_BUILD_LIB
 #ifdef _WIN32
 #  ifdef DATE_BUILD_DLL
 #    define DATE_API __declspec(dllexport)

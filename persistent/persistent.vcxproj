@@ -19,8 +19,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="config.hpp" />
+    <ClInclude Include="ddl\generated\source.hpp" />
+    <ClInclude Include="impl\persistent.hpp" />
+    <ClInclude Include="impl\sql.hpp" />
     <ClInclude Include="persistent.hpp" />
+    <ClInclude Include="query\dsl\index.hpp" />
+    <ClInclude Include="query\dsl\list.hpp" />
+    <ClInclude Include="query\dsl\range.hpp" />
+    <ClInclude Include="query\dsl\ts.hpp" />
     <ClInclude Include="query\lua\unhandled.hpp" />
+    <ClInclude Include="query\result\unhandled.hpp" />
     <ClInclude Include="third_party\HinnantDate\chrono_io.h" />
     <ClInclude Include="third_party\HinnantDate\date.h" />
     <ClInclude Include="third_party\HinnantDate\ios.h" />
@@ -291,6 +300,10 @@
     <ClInclude Include="third_party\sqlpp11\wrong.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="impl\persistent.cpp" />
+    <ClCompile Include="impl\sql.cpp" />
+    <ClCompile Include="impl\sql_flush.cpp" />
+    <ClCompile Include="impl\sql_specific.cpp" />
     <ClCompile Include="persistent.cpp" />
     <ClCompile Include="query\lua\unhandled.cpp" />
     <ClCompile Include="third_party\HinnantDate\tz.cpp" />
@@ -300,6 +313,13 @@
     <ClCompile Include="third_party\sqlpp11-sqlite-src\detail\connection_handle.cpp" />
     <ClCompile Include="third_party\sqlpp11-sqlite-src\detail\dynamic_libsqlite3.cpp" />
     <ClCompile Include="third_party\sqlpp11-sqlite-src\prepared_statement.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ddl\source\ddl2cpp.py" />
+    <None Include="ddl\source\scenario.sql" />
+    <None Include="ddl\source\unhandled.sql" />
+    <None Include="ddl\source\update.bat" />
+    <None Include="ddl\source\update.py" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{BD90BACD-FFD7-41FC-9D7F-231FC6A8FBEC}</ProjectGuid>
@@ -353,7 +373,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -362,10 +385,15 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
     </Link>
+    <PreBuildEvent>
+      <Command>C:\python27\python "$(SolutionDir)\persistent\ddl\source\update.py"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -388,12 +416,17 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <PreBuildEvent>
+      <Command>C:\python27\python "$(SolutionDir)\persistent\ddl\source\update.py"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>

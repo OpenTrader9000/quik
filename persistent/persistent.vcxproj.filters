@@ -82,6 +82,24 @@
     <Filter Include="query\lua">
       <UniqueIdentifier>{5a4c9d72-6409-4e0c-9172-1a33f1b39e24}</UniqueIdentifier>
     </Filter>
+    <Filter Include="impl">
+      <UniqueIdentifier>{07fe3f3a-ddfb-4ebc-8ecf-695b5415335b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ddl">
+      <UniqueIdentifier>{b7c2a453-0b30-4943-ba22-7bf084c68c50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ddl\source">
+      <UniqueIdentifier>{ed71a380-3799-4768-8245-e779242084c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ddl\generated">
+      <UniqueIdentifier>{3ceb338a-43b3-4482-867e-13c1b79f1e6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="query\dsl">
+      <UniqueIdentifier>{d340b566-b7e2-4873-a017-4f43a0ebee31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="query\result">
+      <UniqueIdentifier>{b6d736a2-8b32-4a26-b103-9fb7aa7e6e28}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="third_party\HinnantDate\chrono_io.h">
@@ -892,6 +910,31 @@
     <ClInclude Include="query\lua\unhandled.hpp">
       <Filter>query\lua</Filter>
     </ClInclude>
+    <ClInclude Include="config.hpp" />
+    <ClInclude Include="impl\persistent.hpp">
+      <Filter>impl</Filter>
+    </ClInclude>
+    <ClInclude Include="impl\sql.hpp">
+      <Filter>impl</Filter>
+    </ClInclude>
+    <ClInclude Include="ddl\generated\source.hpp">
+      <Filter>ddl\generated</Filter>
+    </ClInclude>
+    <ClInclude Include="query\dsl\ts.hpp">
+      <Filter>query\dsl</Filter>
+    </ClInclude>
+    <ClInclude Include="query\dsl\index.hpp">
+      <Filter>query\dsl</Filter>
+    </ClInclude>
+    <ClInclude Include="query\result\unhandled.hpp">
+      <Filter>query\result</Filter>
+    </ClInclude>
+    <ClInclude Include="query\dsl\list.hpp">
+      <Filter>query\dsl</Filter>
+    </ClInclude>
+    <ClInclude Include="query\dsl\range.hpp">
+      <Filter>query\dsl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="third_party\HinnantDate\tz.cpp">
@@ -919,5 +962,34 @@
     <ClCompile Include="query\lua\unhandled.cpp">
       <Filter>query\lua</Filter>
     </ClCompile>
+    <ClCompile Include="impl\persistent.cpp">
+      <Filter>impl</Filter>
+    </ClCompile>
+    <ClCompile Include="impl\sql.cpp">
+      <Filter>impl</Filter>
+    </ClCompile>
+    <ClCompile Include="impl\sql_flush.cpp">
+      <Filter>impl</Filter>
+    </ClCompile>
+    <ClCompile Include="impl\sql_specific.cpp">
+      <Filter>impl</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ddl\source\ddl2cpp.py">
+      <Filter>ddl\source</Filter>
+    </None>
+    <None Include="ddl\source\unhandled.sql">
+      <Filter>ddl\source</Filter>
+    </None>
+    <None Include="ddl\source\update.bat">
+      <Filter>ddl\source</Filter>
+    </None>
+    <None Include="ddl\source\update.py">
+      <Filter>ddl\source</Filter>
+    </None>
+    <None Include="ddl\source\scenario.sql">
+      <Filter>ddl\source</Filter>
+    </None>
   </ItemGroup>
 </Project>
