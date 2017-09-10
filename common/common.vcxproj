@@ -83,6 +83,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -110,6 +111,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -139,10 +141,15 @@
   <ItemGroup>
     <ClCompile Include="message\alloc.cpp" />
     <ClCompile Include="message\base.cpp" />
+    <ClCompile Include="message\ptr.cpp" />
     <ClCompile Include="numbers\bcd.cpp" />
     <ClCompile Include="numbers\integer.cpp" />
+    <ClCompile Include="thread\run.cpp" />
+    <ClCompile Include="thread\sink.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="container\container.hpp" />
+    <ClInclude Include="defines.hpp" />
     <ClInclude Include="message\alloc.hpp" />
     <ClInclude Include="message\base.hpp" />
     <ClInclude Include="message\codes.hpp" />
@@ -150,10 +157,17 @@
     <ClInclude Include="message\event\stop.hpp" />
     <ClInclude Include="message\general\exec.hpp" />
     <ClInclude Include="message\general\unhandled.hpp" />
+    <ClInclude Include="message\message.hpp" />
+    <ClInclude Include="message\ptr.hpp" />
     <ClInclude Include="numbers\bcd.hpp" />
     <ClInclude Include="numbers\float.hpp" />
     <ClInclude Include="numbers\integer.hpp" />
     <ClInclude Include="numbers\string.hpp" />
+    <ClInclude Include="scenario\entry.hpp" />
+    <ClInclude Include="storage\scenario_entry.hpp" />
+    <ClInclude Include="storage\unhandled.hpp" />
+    <ClInclude Include="thread\run.hpp" />
+    <ClInclude Include="thread\sink.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

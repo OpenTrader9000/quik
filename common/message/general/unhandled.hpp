@@ -2,19 +2,27 @@
 
 #include <common/message/base.hpp>
 #include <common/message/codes.hpp>
+#include <common/storage/unhandled.hpp>
 
 namespace common {
 namespace message {
 namespace general {
 struct unhandled : public base {
+
     enum { code = codes::UNHANDLED };
 
     unhandled()
     : base(code) {
     }
 
-    std::string name_;
-    std::string buffer_;
+    storage::unhandled body_;
+
+    std::string& name()     { return body_.name_; }
+    std::string& body()     { return body_.body_; }
+    uint64_t    & timestamp(){ return body_.timestamp_; }
+
+    void set_type_plain()        { body_.type_ = storage::plain; }
+    void set_type_function()     { body_.type_ = storage::function; }
 };
 
 } // namespace general

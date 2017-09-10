@@ -2,6 +2,8 @@
 
 namespace common {
 namespace message {
+
+enum code_type { SQL_CODE = 0x10000 };
 enum class codes {
     EXEC_LUA = 1,
     EXEC,
@@ -27,7 +29,16 @@ enum class codes {
     ON_STOP_ORDER,
     ON_TRANS_REPLY,
     STOP,
-    UNHANDLED
+    UNHANDLED = SQL_CODE,
+    SCENARIO_ENTRY 
 };
+
+inline bool is_sql(int code) {
+    return (code & static_cast<int>(code_type::SQL_CODE)) != 0;
 }
+
+inline bool is_flush(int code) {
+    return (code & static_cast<int>(codes::FLUSH)) != 0;
+}
+} // namespace message
 } // namespace common
