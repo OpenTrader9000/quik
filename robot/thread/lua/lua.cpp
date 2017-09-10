@@ -7,6 +7,8 @@
 #include <worker/dispatcher.hpp>
 #include <worker/run.hpp>
 #include <common/message/general/unhandled.hpp>
+#include <persistent/persistent.hpp>
+#include <utils/time/time.hpp>
 
 namespace robot {
 namespace thread {
@@ -55,9 +57,12 @@ void lua::start(lua_State* L) {
 
     s.set_function("dump", [this](char const* name, sol::table tab) { dump(name, tab); })
     .set_function("on_trade", [this](sol::table trade) { on_trade(trade); })
+    .set_function("is_security_handles",
+                  [this](char const* class_code, char const* sec_code) { return false; })
     .set_function("on_quote", [this](char const* class_code,
                                      char const* sec_code) { on_quote(class_code, sec_code); })
-    .set_function("on_transaction", [this](sol::table transaction) { on_transaction(transaction); });
+    .set_function("on_transaction", [this](sol::table transaction) { on_transaction(transaction); })
+    .set_function("setup_scenario", [this](char const* scenario_name) { /*TODO: Implement*/ });
 
     sol::table config_table(L);
 
@@ -70,20 +75,28 @@ void lua::start(lua_State* L) {
     config.telegram_.ids_       = extract_vector<int64_t>(telegram["allowed_ids"]);
 
 
+    /* LOAD PERSISTENT CONFIG */
+    auto persistent             = config_table["persistent"];
+    config.persistent_.path2db_ = persistent["path2db"];
+
     worker::dispatcher::init(config);
 }
 
 
+// dump some function single input
 void lua::dump(char const* function, sol::table tab) {
     
     using unhandled_t = common::message::general::unhandled;
 
     auto mes = common::message::make<unhandled_t>();
 
-    mes->name_ = function;
+    mes->set_type_function();
+    mes->name() = function;
+    mes->timestamp() = utils::time::timestamp_in_ms();
 
     details::deserialize(tab, mes);
 
+    persistent::push_query(std::move(mes));
 }
 
 void lua::on_trade(sol::table trade){

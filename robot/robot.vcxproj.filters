@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="robot.cpp" />
+    <ClCompile Include="message\lua\send_transaction.cpp">
+      <Filter>message\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="workaround\ssl_link_dependency.cpp">
+      <Filter>workaround</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\lua\lua.cpp">
+      <Filter>thread\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\lua\details\unhandled.cpp">
+      <Filter>thread\lua\details</Filter>
+    </ClCompile>
+    <ClCompile Include="worker\dispatcher.cpp">
+      <Filter>worker</Filter>
+    </ClCompile>
+    <ClCompile Include="worker\run.cpp">
+      <Filter>worker</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\telegram\telegram.cpp">
+      <Filter>thread\telegram</Filter>
+    </ClCompile>
+    <ClCompile Include="worker\config.hpp">
+      <Filter>worker</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="message\trade\on_account_balance.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_account_position.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_all_trade.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_depo_limit.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_depo_limit_delete.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_futures_client_holding.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_futures_limit_change.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_futures_limit_delete.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_money_limit.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_money_limit_delete.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_neg_deal.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_neg_trade.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_stop.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_stop_order.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_trade.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\on_trans_reply.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\lua\exec.hpp">
+      <Filter>message\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="message\lua\send_transaction.hpp">
+      <Filter>message\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\lua\lua.hpp">
+      <Filter>thread\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\lua\details\on_trans_reply.cpp">
+      <Filter>thread\lua\details</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\lua\details\serialize.hpp">
+      <Filter>thread\lua\details</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\defines.hpp">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="worker\dispatcher.hpp">
+      <Filter>worker</Filter>
+    </ClInclude>
+    <ClInclude Include="worker\run.hpp">
+      <Filter>worker</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\telegram\telegram.hpp">
+      <Filter>thread\telegram</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="message">
+      <UniqueIdentifier>{533b357e-b810-4047-8935-0dd8f130647d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="message\trade">
+      <UniqueIdentifier>{873ae807-dbb2-4520-b9fb-ff7190ab7486}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="message\lua">
+      <UniqueIdentifier>{378c6098-7212-4081-85df-bb892103e29c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="workaround">
+      <UniqueIdentifier>{be1bb73f-47a3-465d-a269-7e72caaca620}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thread">
+      <UniqueIdentifier>{d3836538-e66b-488d-b0b9-dae0e5e7af21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thread\lua">
+      <UniqueIdentifier>{054b4aa6-4590-4524-b527-183936acc117}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thread\lua\details">
+      <UniqueIdentifier>{e1ea619a-5a4b-4810-ba57-af5fdf6c40f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="worker">
+      <UniqueIdentifier>{19c6b186-b895-46d6-90b6-91700b09a460}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thread\telegram">
+      <UniqueIdentifier>{cc069e38-48d7-4889-870f-15c19b977042}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

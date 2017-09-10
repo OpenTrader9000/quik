@@ -2,11 +2,45 @@
 #include <message/lua/exec.hpp>
 #include <tgbot/tgbot.h>
 #include <thread/lua/lua.hpp>
-#include <worker/run.hpp>
+//#include <worker/run.hpp>
+#include <common/thread/run.hpp>
 
 namespace robot {
 namespace thread {
 namespace telegram {
+
+using tg_mes_ptr_t = std::shared_ptr<TgBot::Message>;
+
+struct telegram {
+
+
+    telegram(std::string token, std::vector<int64_t> ids);
+    ~telegram();
+
+    void on_command_portfolio(tg_mes_ptr_t);
+    void on_command_order(tg_mes_ptr_t);
+    void on_command_limits(tg_mes_ptr_t);
+
+    void message_state_mashine(tg_mes_ptr_t mes);
+
+    void run_thread();
+
+    TgBot::Bot* bot_;
+    std::vector<int64_t> allowed_ids_;
+
+    std::thread thread_;
+};
+
+static std::unique_ptr<telegram>    instance_;
+
+void init(std::string token, std::vector<int64_t> ids) {
+    instance_ = std::make_unique<telegram>(token, ids);
+}
+
+void stop() {
+    instance_.reset();
+}
+
 
 telegram::telegram(std::string token, std::vector<int64_t> ids)
 : bot_(nullptr)
@@ -43,10 +77,10 @@ void telegram::run_thread() {
         try {
             // printf("Bot username: %s\n", bot.getApi().getMe()->username.c_str());
             TgBot::TgLongPoll longPoll(*bot_);
-            while (worker::run())
+            while (common::thread::run())
                 longPoll.start();
         } catch (TgBot::TgException&) {
-            if (!worker::run())
+            if (!common::thread::run())
                 return;
 
             // run this routine in lua thread

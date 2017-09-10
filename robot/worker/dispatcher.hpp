@@ -29,9 +29,14 @@ struct dispatcher {
 
     bool run_;
 
-    using telegram_ptr_t = std::shared_ptr<thread::telegram::telegram>;
+    //using telegram_ptr_t = std::shared_ptr<thread::telegram::telegram>;
+    //
+    //telegram_ptr_t bot_thread_;
 
-    telegram_ptr_t bot_thread_;
+    // TODO: Remove it. Make the better loop
+    void event_loop();
+    std::thread event_loop_;
+    int         delay_in_ms_;
 
     static std::unique_ptr<dispatcher> instance_;
 };

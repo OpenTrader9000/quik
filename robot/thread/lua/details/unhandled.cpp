@@ -12,7 +12,7 @@ using namespace common::message::general;
 //\brief short function for a serialization
 // \param tab - lua table
 // \param os - ostream with string inside
-// \param buffer - string from ostream
+// \param buffer - string from ostream (for removing dot =)) )
 static void serialize_object(sol::table tab, std::ostream& os, std::string& buffer) {
 
 
@@ -55,11 +55,11 @@ static void serialize_object(sol::table tab, std::ostream& os, std::string& buff
 template <>
 void serialize<unhandled>(sol::table tab, unhandled& reply) {
 
-    reply.buffer_.resize(2048);
-    utils::string_streambuf sb(reply.buffer_);
+    reply.body().resize(2048);
+    utils::string_streambuf sb(reply.body());
     std::ostream os(&sb);
 
-    serialize_object(tab, os, reply.buffer_);
+    serialize_object(tab, os, reply.body());
 }
 } // namespace details
 } // namespace lua

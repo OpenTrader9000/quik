@@ -8,8 +8,8 @@ extern "C" {
 #include <memory>
 
 
-#include <common/message/base.hpp>
-#include <thread/defines.hpp>
+#include <common/message/message.hpp>
+#include <common/defines.hpp>
 #include <sol/sol.hpp>
 
 
@@ -38,11 +38,8 @@ struct lua {
     void on_transaction(sol::table transaction);
     void on_quote(char const* class_code, char const* sec_code);
 
-
-
    // private:
-    thread::multithread_queue_t exec_queue_;
-
+    common::multithread_queue_t exec_queue_;
 
     static std::unique_ptr<lua> instance_;
 
