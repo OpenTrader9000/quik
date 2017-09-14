@@ -21,8 +21,8 @@ struct unhandled : public base {
     std::string& body()     { return body_.body_; }
     uint64_t    & timestamp(){ return body_.timestamp_; }
 
-    void set_type_plain()        { body_.type_ = storage::plain; }
-    void set_type_function()     { body_.type_ = storage::function; }
+    void set_type_plain()        { body_.type_ = static_cast<int>(storage::unhandled_message_type::plain); }
+    void set_type_function()     { body_.type_ = static_cast<int>(storage::unhandled_message_type::function); }
 };
 
 } // namespace general
