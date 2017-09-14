@@ -21,6 +21,9 @@ struct sink {
     // main loop for a handling messages
     void loop();
 
+    // wait sink for a syncronization purposes
+    void wait_sink();
+
     // push new message in async queue
     void push(::common::message::ptr&&);
 
@@ -33,6 +36,7 @@ struct sink {
     // client messaging
     virtual void consume(::common::message::ptr&&) = 0;
 
+    bool sink_stopped_ = false;
     std::thread thread_;
     QueueType queue_;
 };

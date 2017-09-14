@@ -11,14 +11,20 @@ sink<QueueType>::sink() {
 
 template <typename QueueType>
 sink<QueueType>::~sink() {
-    if (thread_.joinable())
-        thread_.join();
+    assert(sink_stopped_);
 }
 
 template <typename QueueType>
 void sink<QueueType>::start_sink() {
     thread_ = std::thread(&sink<QueueType>::loop, this);
 }
+template <typename QueueType>
+void sink<QueueType>::wait_sink() {
+    if (thread_.joinable())
+        thread_.join();
+    sink_stopped_ = true;
+}
+
 
 template <typename QueueType>
 void sink<QueueType>::push(::common::message::ptr&& message) {
@@ -39,7 +45,7 @@ void sink<multithread_queue_t>::loop() {
     std::vector<ptr_t> buffer;
     buffer.reserve(1024);
     while (run()) {
-        queue_.wait_dequeue_bulk(std::back_inserter(buffer), buffer.capacity());
+        queue_.wait_dequeue_bulk_timed(std::back_inserter(buffer), buffer.capacity(), std::chrono::milliseconds(100));
         for (ptr_t& mes : buffer)
             consume(std::move(mes));
         buffer.clear();

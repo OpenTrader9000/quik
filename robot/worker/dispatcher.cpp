@@ -38,15 +38,17 @@ void dispatcher::clear() {
 
 void dispatcher::stop() {
     instance_->run_ = false;
+    if (instance_->event_loop_.joinable())
+        instance_->event_loop_.join();
 }
 
 
 // TODO: This ugly code must be removed
 void dispatcher::event_loop() {
-    delay_in_ms_ = 5000;
+    delay_in_ms_ = 2000;
     while (instance_->run_) {
         auto flush_message = common::message::make<common::message::event::flush>();
-        persistent::push_query(std::move(flush_message));
+        persistent::push_event(std::move(flush_message));
         std::this_thread::sleep_for(std::chrono::milliseconds(delay_in_ms_));
     }
 }
@@ -60,8 +62,7 @@ dispatcher::dispatcher() : run_(true) {
 }
 
 dispatcher::~dispatcher() {
-    if (event_loop_.joinable())
-        event_loop_.join();
+
 }
 } // namespace worker
 } // namespace robot
