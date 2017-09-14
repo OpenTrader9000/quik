@@ -1,17 +1,19 @@
 #include "deserialize.hpp"
-#include <common/message/general/unhandled.hpp>
-#include <utils/string/string_streambuf.hpp>
 #include "lua2json.hpp"
+#include <common/message/scenario/entry.hpp>
+#include <utils/string/string_streambuf.hpp>
 
 namespace robot {
 namespace thread {
 namespace lua {
 namespace details {
 
-using namespace common::message::general;
+// most the same code as unhandled message
+
+using namespace common::message::scenario;
 
 template <>
-void deserialize<unhandled>(sol::table tab, unhandled& reply) {
+void deserialize<entry>(sol::table tab, entry& reply) {
 
     reply.body().resize(2048);
     utils::string_streambuf sb(reply.body());

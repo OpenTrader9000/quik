@@ -36,7 +36,12 @@ struct lua {
 
     void on_trade(sol::table trade);
     void on_transaction(sol::table transaction);
-    void on_quote(char const* class_code, char const* sec_code);
+    void on_quote(char const* class_code, char const* sec_code, sol::table tab);
+    void setup_scenario(char const* name);
+    void dump_scenario(char const* name, sol::table, char const* info = ""); // default is functions
+
+    uint64_t                          last_ts_in_ms_;
+    std::vector<common::message::ptr> scenario_cache_;
 
    // private:
     common::multithread_queue_t exec_queue_;

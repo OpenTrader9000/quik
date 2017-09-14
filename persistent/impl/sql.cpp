@@ -23,7 +23,11 @@ sql::sql(std::string const& path2db)
     connect();
 }
 
-sql::~sql() {}
+sql::~sql() {
+    wait_sink();
+    // write last data
+    flush();
+}
 
 void sql::connect() {
     sqlpp::sqlite3::connection_config config;
@@ -82,6 +86,9 @@ void sql::flush() {
 
     if (code_set.find(codes::UNHANDLED) != code_set.end())
         flush_unhandled();
+
+    if (code_set.find(codes::SCENARIO_ENTRY) != code_set.end())
+        flush_scenario();
 
 
     cache_.clear();

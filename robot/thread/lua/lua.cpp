@@ -1,5 +1,5 @@
 #include "lua.hpp"
-#include "details/serialize.hpp"
+#include "details/deserialize.hpp"
 #include <common/message/event/stop.hpp>
 #include <message/lua/exec.hpp>
 #include <sol/sol.hpp>
@@ -7,6 +7,8 @@
 #include <worker/dispatcher.hpp>
 #include <worker/run.hpp>
 #include <common/message/general/unhandled.hpp>
+#include <common/message/scenario/entry.hpp>
+#include <common/scenario/scenario.hpp>
 #include <persistent/persistent.hpp>
 #include <utils/time/time.hpp>
 
@@ -16,8 +18,9 @@ namespace lua {
 
 std::unique_ptr<lua> lua::instance_;
 
-lua::lua() {
-}
+lua::lua()
+: last_ts_in_ms_(std::numeric_limits<decltype(last_ts_in_ms_)>::max()) 
+{}
 
 lua::~lua() {
 }
@@ -48,8 +51,6 @@ std::vector<value_type> extract_vector(sol::table tab) {
     return result;
 }
 
-
-
 void lua::start(lua_State* L) {
 
 
@@ -59,10 +60,11 @@ void lua::start(lua_State* L) {
     .set_function("on_trade", [this](sol::table trade) { on_trade(trade); })
     .set_function("is_security_handles",
                   [this](char const* class_code, char const* sec_code) { return false; })
-    .set_function("on_quote", [this](char const* class_code,
-                                     char const* sec_code) { on_quote(class_code, sec_code); })
+    .set_function("on_quote", [this](char const* class_code, char const* sec_code,
+                                     sol::table tab) { on_quote(class_code, sec_code, tab); })
     .set_function("on_transaction", [this](sol::table transaction) { on_transaction(transaction); })
-    .set_function("setup_scenario", [this](char const* scenario_name) { /*TODO: Implement*/ });
+    .set_function("setup_scenario",
+                  [this](char const* scenario_name) { setup_scenario(scenario_name); });
 
     sol::table config_table(L);
 
@@ -99,18 +101,76 @@ void lua::dump(char const* function, sol::table tab) {
     persistent::push_query(std::move(mes));
 }
 
+void lua::setup_scenario(char const* name) {
+    int scenario_id = persistent::create_scenario(name);
+    common::scenario::set(scenario_id);
+}
+
+
+void lua::dump_scenario(char const * name, sol::table tab, char const* info )
+{
+    static constexpr unsigned send_periond_in_ms = 200;
+
+    using scenario_entry_t = common::message::scenario::entry;
+
+    auto mes = common::message::make<scenario_entry_t>();
+
+    mes->set_type_function();
+    mes->name() = name;
+    mes->timestamp() = utils::time::timestamp_in_ms();
+    mes->info() = info;
+    mes->scenario_id() = common::scenario::id();
+
+    details::deserialize(tab, mes);
+
+    auto timestamp = mes->timestamp();
+
+    scenario_cache_.push_back(std::move(mes));
+    
+    // send data every n ms
+    if (last_ts_in_ms_ - timestamp > send_periond_in_ms) {
+        persistent::push_queries(scenario_cache_);
+        scenario_cache_.clear();
+        last_ts_in_ms_ = timestamp;
+    }
+}
+
 void lua::on_trade(sol::table trade){
+    if (common::scenario::id() != 0) {
+        dump_scenario("OnAllTrade", trade);
+        return;
+    }
 }
 
 void lua::on_transaction(sol::table transaction){
+
 }
 
-void lua::on_quote(char const* class_code, char const* sec_code){
+void lua::on_quote(char const* class_code, char const* sec_code, sol::table tab){
+    
+    if (common::scenario::id() != 0) {
+        
+        char buffer[65] = {};
+        sprintf_s(buffer, "%s-%s", class_code, sec_code);
+
+        dump_scenario("OnQuote", tab, buffer);
+        return;
+    }
 }
 
 
 void lua::stop(lua_State* L) {
     using namespace common::message;
+
+    // end all queries
+    if (!scenario_cache_.empty()) {
+        persistent::push_queries(scenario_cache_);
+        scenario_cache_.clear();
+    }
+
+    // must flush all persistent buffers
+    persistent::stop();
+
     exec_queue_.enqueue(make<event::stop>());
 }
 
@@ -125,6 +185,7 @@ void start(lua_State* L) {
 }
 
 void stop(lua_State* L) {
+    worker::dispatcher::stop();
     lua::instance_->stop(L);
 }
 

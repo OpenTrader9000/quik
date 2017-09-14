@@ -9,11 +9,11 @@ namespace lua {
 namespace details {
 
 template <typename ConcreteType>
-void serialize(sol::table table, ConcreteType& result);
+void deserialize(sol::table table, ConcreteType& result);
 
 template <typename MessageType>
 inline void deserialize(sol::table table, common::message::ptr_concrete<MessageType>& result) {
-    serialize(table, *result);
+    deserialize(table, *result);
 }
 
 } // namespace details

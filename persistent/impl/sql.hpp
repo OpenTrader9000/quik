@@ -37,12 +37,13 @@ struct sql : public sink_mt_t {
 
     // function removes scenario with name and adds as new one
     // \return scenarion_id in database
-    uint64_t create_scenario(std::string const& name);
+    int create_scenario(std::string const& name);
 
  private:
     void flush();
 
     void flush_unhandled();
+    void flush_scenario();
 
     void create_database();
 
