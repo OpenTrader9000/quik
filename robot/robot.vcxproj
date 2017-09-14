@@ -170,6 +170,8 @@
     </ClCompile>
     <ClCompile Include="message\lua\send_transaction.cpp" />
     <ClCompile Include="robot.cpp" />
+    <ClCompile Include="thread\lua\details\lua2json.cpp" />
+    <ClCompile Include="thread\lua\details\scenario.cpp" />
     <ClCompile Include="thread\lua\lua.cpp" />
     <ClCompile Include="thread\telegram\telegram.cpp" />
     <ClCompile Include="workaround\ssl_link_dependency.cpp" />
@@ -197,8 +199,9 @@
     <ClInclude Include="message\trade\on_trade.hpp" />
     <ClInclude Include="message\trade\on_trans_reply.hpp" />
     <ClInclude Include="thread\defines.hpp" />
+    <ClInclude Include="thread\lua\details\lua2json.hpp" />
     <ClInclude Include="thread\lua\details\on_trans_reply.cpp" />
-    <ClInclude Include="thread\lua\details\serialize.hpp" />
+    <ClInclude Include="thread\lua\details\deserialize.hpp" />
     <ClCompile Include="thread\lua\details\unhandled.cpp">
       <FileType>CppCode</FileType>
     </ClCompile>

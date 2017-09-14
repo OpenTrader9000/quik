@@ -27,6 +27,12 @@
     <ClCompile Include="worker\config.hpp">
       <Filter>worker</Filter>
     </ClCompile>
+    <ClCompile Include="thread\lua\details\lua2json.cpp">
+      <Filter>thread\lua\details</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\lua\details\scenario.cpp">
+      <Filter>thread\lua\details</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="message\trade\on_account_balance.hpp">
@@ -89,9 +95,6 @@
     <ClInclude Include="thread\lua\details\on_trans_reply.cpp">
       <Filter>thread\lua\details</Filter>
     </ClInclude>
-    <ClInclude Include="thread\lua\details\serialize.hpp">
-      <Filter>thread\lua\details</Filter>
-    </ClInclude>
     <ClInclude Include="thread\defines.hpp">
       <Filter>thread</Filter>
     </ClInclude>
@@ -103,6 +106,12 @@
     </ClInclude>
     <ClInclude Include="thread\telegram\telegram.hpp">
       <Filter>thread\telegram</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\lua\details\lua2json.hpp">
+      <Filter>thread\lua\details</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\lua\details\deserialize.hpp">
+      <Filter>thread\lua\details</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

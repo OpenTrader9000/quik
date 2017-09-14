@@ -54,6 +54,9 @@
     <ClCompile Include="message\ptr.cpp">
       <Filter>message</Filter>
     </ClCompile>
+    <ClCompile Include="scenario\scenario.cpp">
+      <Filter>scenario</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="numbers\bcd.hpp">
@@ -108,11 +111,17 @@
     <ClInclude Include="storage\unhandled.hpp">
       <Filter>storage</Filter>
     </ClInclude>
-    <ClInclude Include="scenario\entry.hpp">
-      <Filter>message\scenario</Filter>
-    </ClInclude>
     <ClInclude Include="storage\scenario_entry.hpp">
       <Filter>storage</Filter>
+    </ClInclude>
+    <ClInclude Include="message\scenario\entry.hpp">
+      <Filter>message\scenario</Filter>
+    </ClInclude>
+    <ClInclude Include="scenario\scenario.hpp">
+      <Filter>scenario</Filter>
+    </ClInclude>
+    <ClInclude Include="container\array_view.hpp">
+      <Filter>container</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

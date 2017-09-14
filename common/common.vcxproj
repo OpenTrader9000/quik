@@ -144,10 +144,12 @@
     <ClCompile Include="message\ptr.cpp" />
     <ClCompile Include="numbers\bcd.cpp" />
     <ClCompile Include="numbers\integer.cpp" />
+    <ClCompile Include="scenario\scenario.cpp" />
     <ClCompile Include="thread\run.cpp" />
     <ClCompile Include="thread\sink.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="container\array_view.hpp" />
     <ClInclude Include="container\container.hpp" />
     <ClInclude Include="defines.hpp" />
     <ClInclude Include="message\alloc.hpp" />
@@ -159,11 +161,12 @@
     <ClInclude Include="message\general\unhandled.hpp" />
     <ClInclude Include="message\message.hpp" />
     <ClInclude Include="message\ptr.hpp" />
+    <ClInclude Include="message\scenario\entry.hpp" />
     <ClInclude Include="numbers\bcd.hpp" />
     <ClInclude Include="numbers\float.hpp" />
     <ClInclude Include="numbers\integer.hpp" />
     <ClInclude Include="numbers\string.hpp" />
-    <ClInclude Include="scenario\entry.hpp" />
+    <ClInclude Include="scenario\scenario.hpp" />
     <ClInclude Include="storage\scenario_entry.hpp" />
     <ClInclude Include="storage\unhandled.hpp" />
     <ClInclude Include="thread\run.hpp" />
