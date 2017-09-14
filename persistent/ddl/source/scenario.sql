@@ -10,6 +10,7 @@ CREATE TABLE scenario_entry (
     name            varchar(36) not null,
     ts              bigint unsigned not null,
     body            text        default null,
+	info			varchar(64) default null, --this data might be enough
     scenario_id     integer     not null,
     FOREIGN KEY (scenario_id) REFERENCES scenario(id)
 );
