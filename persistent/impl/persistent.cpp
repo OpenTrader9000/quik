@@ -1,6 +1,7 @@
 #pragma once
 
 #include "persistent.hpp"
+#include <common/message/event/flush.hpp>
 
 
 namespace persistent {
@@ -17,6 +18,10 @@ persistent::~persistent() {
 
 void persistent::start(){
     sql_.start_sink();
+}
+
+void persistent::stop() {
+    sql_.push(common::message::make<common::message::event::flush>());
 }
 
 

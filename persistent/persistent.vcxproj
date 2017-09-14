@@ -28,8 +28,6 @@
     <ClInclude Include="query\dsl\list.hpp" />
     <ClInclude Include="query\dsl\range.hpp" />
     <ClInclude Include="query\dsl\ts.hpp" />
-    <ClInclude Include="query\lua\unhandled.hpp" />
-    <ClInclude Include="query\result\unhandled.hpp" />
     <ClInclude Include="third_party\HinnantDate\chrono_io.h" />
     <ClInclude Include="third_party\HinnantDate\date.h" />
     <ClInclude Include="third_party\HinnantDate\ios.h" />
@@ -305,7 +303,6 @@
     <ClCompile Include="impl\sql_flush.cpp" />
     <ClCompile Include="impl\sql_specific.cpp" />
     <ClCompile Include="persistent.cpp" />
-    <ClCompile Include="query\lua\unhandled.cpp" />
     <ClCompile Include="third_party\HinnantDate\tz.cpp" />
     <ClCompile Include="third_party\sqlite\sqlite3.c" />
     <ClCompile Include="third_party\sqlpp11-sqlite-src\bind_result.cpp" />

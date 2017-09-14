@@ -79,9 +79,6 @@
     <Filter Include="query">
       <UniqueIdentifier>{e55d1f59-2314-46e9-bdc4-152e8d9abd06}</UniqueIdentifier>
     </Filter>
-    <Filter Include="query\lua">
-      <UniqueIdentifier>{5a4c9d72-6409-4e0c-9172-1a33f1b39e24}</UniqueIdentifier>
-    </Filter>
     <Filter Include="impl">
       <UniqueIdentifier>{07fe3f3a-ddfb-4ebc-8ecf-695b5415335b}</UniqueIdentifier>
     </Filter>
@@ -96,9 +93,6 @@
     </Filter>
     <Filter Include="query\dsl">
       <UniqueIdentifier>{d340b566-b7e2-4873-a017-4f43a0ebee31}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="query\result">
-      <UniqueIdentifier>{b6d736a2-8b32-4a26-b103-9fb7aa7e6e28}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -907,9 +901,6 @@
       <Filter>third_party\sqlite</Filter>
     </ClInclude>
     <ClInclude Include="persistent.hpp" />
-    <ClInclude Include="query\lua\unhandled.hpp">
-      <Filter>query\lua</Filter>
-    </ClInclude>
     <ClInclude Include="config.hpp" />
     <ClInclude Include="impl\persistent.hpp">
       <Filter>impl</Filter>
@@ -925,9 +916,6 @@
     </ClInclude>
     <ClInclude Include="query\dsl\index.hpp">
       <Filter>query\dsl</Filter>
-    </ClInclude>
-    <ClInclude Include="query\result\unhandled.hpp">
-      <Filter>query\result</Filter>
     </ClInclude>
     <ClInclude Include="query\dsl\list.hpp">
       <Filter>query\dsl</Filter>
@@ -959,9 +947,6 @@
       <Filter>third_party\sqlite</Filter>
     </ClCompile>
     <ClCompile Include="persistent.cpp" />
-    <ClCompile Include="query\lua\unhandled.cpp">
-      <Filter>query\lua</Filter>
-    </ClCompile>
     <ClCompile Include="impl\persistent.cpp">
       <Filter>impl</Filter>
     </ClCompile>

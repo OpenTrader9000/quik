@@ -31,7 +31,10 @@ struct persistent {
     */
 
 
-private:
+    // handle signals
+    // this signal must be placed after every possible sql or persistent signal
+    void stop();
+//private:
 
     /*
         SQL INTERFACE/DATA
