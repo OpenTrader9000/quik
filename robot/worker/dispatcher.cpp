@@ -45,11 +45,20 @@ void dispatcher::stop() {
 
 // TODO: This ugly code must be removed
 void dispatcher::event_loop() {
-    delay_in_ms_ = 2000;
+    delay_in_ms_ = 1000;
+    unsigned delay_count = 15;
+    unsigned counter = 0;
     while (instance_->run_) {
+
+        // every delay_count seconds flush data
+        std::this_thread::sleep_for(std::chrono::milliseconds(delay_in_ms_));
+        if (++counter != delay_count)
+            continue;
+
+        // send flush message
         auto flush_message = common::message::make<common::message::event::flush>();
         persistent::push_event(std::move(flush_message));
-        std::this_thread::sleep_for(std::chrono::milliseconds(delay_in_ms_));
+        counter = 0;
     }
 }
 
