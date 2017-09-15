@@ -109,7 +109,7 @@ void lua::setup_scenario(char const* name) {
 
 void lua::dump_scenario(char const * name, sol::table tab, char const* info )
 {
-    static constexpr unsigned send_periond_in_ms = 200;
+    static constexpr unsigned send_periond_in_ms = 1000;
 
     using scenario_entry_t = common::message::scenario::entry;
 
@@ -170,7 +170,7 @@ void lua::stop(lua_State* L) {
 
     // must flush all persistent buffers
     persistent::stop();
-
+    
     exec_queue_.enqueue(make<event::stop>());
 }
 
@@ -184,9 +184,16 @@ void start(lua_State* L) {
     lua::instance_->start(L);
 }
 
+// every possible static/global class must be cleans here
 void stop(lua_State* L) {
+    // stopping
     worker::dispatcher::stop();
     lua::instance_->stop(L);
+
+    //clearing
+    worker::dispatcher::clear();
+    lua::instance_.reset();
+
 }
 
 void enqueue_task(common::message::ptr task) {

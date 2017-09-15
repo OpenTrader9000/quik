@@ -18,20 +18,21 @@ extern "C" {
 #include <thread/lua/lua.hpp>
 #include <worker/run.hpp>
 
+
 bool work = true;
-int start (lua_State* L) {
+extern "C" int __declspec(dllexport) start (lua_State* L) {
     // register all possible functions
     // and init from config
     robot::thread::lua::start(L);
     return 0;
 }
 
-int stop (lua_State* L) {
+extern "C" int __declspec(dllexport) stop (lua_State* L) {
     robot::thread::lua::stop(L);
     return 0;
 }
 
-int do_work(lua_State* L) {
+extern "C" int __declspec(dllexport) do_work(lua_State* L) {
     robot::thread::lua::work(L);
     return 0;
 }
