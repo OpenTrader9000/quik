@@ -24,9 +24,9 @@ static void serialize_value(sol::object const& value, std::ostream& os, std::str
 
     if (value_type == sol::type::number) {
         // floating point values must be strings
-        os << value.as<int64_t>();
+        os << value.as<double>();
     } else if (value_type == sol::type::string) {
-        os << "\"" << value.as<char const*>() << "\"";
+        os << " \"" << value.as<char const*>() << "\"";
     } else if (value_type == sol::type::table) {
         if (luaL_getn(value.lua_state(), -1) == 0)
             serialize_object(value, os, buffer);

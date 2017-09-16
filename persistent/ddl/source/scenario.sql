@@ -14,3 +14,5 @@ CREATE TABLE scenario_entry (
     scenario_id     integer     not null,
     FOREIGN KEY (scenario_id) REFERENCES scenario(id)
 );
+
+CREATE INDEX scenario_entry_name_index on scenario_entry(name);

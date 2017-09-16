@@ -18,8 +18,6 @@ extern "C" {
 #include <thread/lua/lua.hpp>
 #include <worker/run.hpp>
 
-
-bool work = true;
 extern "C" int __declspec(dllexport) start (lua_State* L) {
     // register all possible functions
     // and init from config
