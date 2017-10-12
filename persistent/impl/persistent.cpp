@@ -9,7 +9,7 @@ namespace impl {
 
 persistent::persistent(::persistent::config const& config)
 : sql_(config.path2db_)
-// trade(config.trade_path_),
+, trades_cache_(config.trades_archive_folder_)
 // quote(config.quote_path_)
 {}
 
@@ -18,6 +18,7 @@ persistent::~persistent() {
 
 void persistent::start(){
     sql_.start_sink();
+    trades_cache_.start_sink();
 }
 
 void persistent::stop() {
@@ -29,8 +30,12 @@ void persistent::push_mv(ptr_t&& message) {
 
     // flush send all. sql to sql
     auto code = message->code_;
-    // just sql for now
-    sql_.push(std::move(message));
+    if (message.is_code(common::message::codes::FLUSH)) {
+        // just sql for now
+        sql_.push(message);
+        trades_cache_.push(message);
+        
+    }
 }
 
 void persistent::push_cp(ptr_t const& message) {

@@ -19,6 +19,11 @@ void deserialize<entry>(sol::table tab, entry& reply) {
     utils::string_streambuf sb(reply.body());
     std::ostream os(&sb);
 
+    // disable scientific notation
+    os.setf(std::ios::fixed, std::ios::floatfield);
+    os.setf(std::ios::showpoint);
+
+
     serialize_table(tab, os, reply.body());
 }
 } // namespace details

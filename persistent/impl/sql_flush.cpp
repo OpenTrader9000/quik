@@ -40,7 +40,7 @@ void sql::flush_unhandled() {
         if (!p || p->code_ != static_cast<int>(common::message::codes::UNHANDLED))
             continue;
 
-        auto concrete = p.cast<common::message::general::unhandled>();
+        auto concrete = p.extract<common::message::general::unhandled>();
 
         prep.params.ts   = concrete->timestamp();
         prep.params.body = concrete->body();
@@ -75,7 +75,7 @@ void sql::flush_scenario()
         if (!p || p->code_ != static_cast<int>(common::message::codes::SCENARIO_ENTRY))
             continue;
 
-        auto concrete = p.cast<common::message::scenario::entry>();
+        auto concrete = p.extract<common::message::scenario::entry>();
 
         prep.params.ts         = concrete->timestamp();
         prep.params.body       = concrete->body();

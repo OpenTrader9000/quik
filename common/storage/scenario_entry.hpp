@@ -14,6 +14,7 @@ namespace storage {
 enum class scenario_entry_type { plain = 1, function = 2 };
 
 struct scenario_entry {
+    int idx_ = 0;
     std::string name_;
     std::string body_;
     std::string info_;

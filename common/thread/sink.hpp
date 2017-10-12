@@ -27,6 +27,9 @@ struct sink {
     // push new message in async queue
     void push(::common::message::ptr&&);
 
+    // push message with copy
+    void push(::common::message::ptr& mes);
+
     // works just with multithread queue
     template <typename It>
     void push_bulk(It first, size_t count) {

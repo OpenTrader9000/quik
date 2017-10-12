@@ -31,6 +31,9 @@
     <Filter Include="scenario">
       <UniqueIdentifier>{92082b8f-2979-4c0c-81b4-d6e465eb78cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="message\trade">
+      <UniqueIdentifier>{374444fd-f386-4e8d-9751-6e6a97eb772a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="numbers\bcd.cpp">
@@ -57,6 +60,7 @@
     <ClCompile Include="scenario\scenario.cpp">
       <Filter>scenario</Filter>
     </ClCompile>
+    <ClCompile Include="session\session.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="numbers\bcd.hpp">
@@ -122,6 +126,33 @@
     </ClInclude>
     <ClInclude Include="container\array_view.hpp">
       <Filter>container</Filter>
+    </ClInclude>
+    <ClInclude Include="..\message\event\start.hpp" />
+    <ClInclude Include="..\message\storage\event.hpp" />
+    <ClInclude Include="session\session.hpp" />
+    <ClInclude Include="storage\trade.hpp">
+      <Filter>storage</Filter>
+    </ClInclude>
+    <ClInclude Include="storage\quote.hpp">
+      <Filter>storage</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\trade.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\quote.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="container\small_vector.hpp">
+      <Filter>container</Filter>
+    </ClInclude>
+    <ClInclude Include="container\quotes.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="message\trade\quotes.hpp">
+      <Filter>message\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="storage\serialize.hpp">
+      <Filter>storage</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

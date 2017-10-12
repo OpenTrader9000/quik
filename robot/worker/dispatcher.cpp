@@ -19,7 +19,7 @@ void dispatcher::init(config const& conf) {
     // it must be setted up before everything
     common::thread::setup_run_flag(dispatcher::instance_->run_);
 
-    assert(conf.telegram_ && conf.persistent_);
+    //assert(conf.telegram_ && conf.persistent_);
 
     /*
         INIT ALL THREADS
@@ -46,8 +46,12 @@ void dispatcher::stop() {
 // TODO: This ugly code must be removed
 void dispatcher::event_loop() {
     delay_in_ms_ = 1000;
-    unsigned delay_count = 15;
+    unsigned delay_count = 1;
     unsigned counter = 0;
+
+    // fabrique method)
+    auto flush_message = []() { return common::message::make<common::message::event::flush>(); };
+
     while (instance_->run_) {
 
         // every delay_count seconds flush data
@@ -56,10 +60,13 @@ void dispatcher::event_loop() {
             continue;
 
         // send flush message
-        auto flush_message = common::message::make<common::message::event::flush>();
-        persistent::push_event(std::move(flush_message));
+        persistent::push_event(flush_message());
+
         counter = 0;
     }
+
+    persistent::push_event(flush_message());
+
 }
 
 bool dispatcher::run() {

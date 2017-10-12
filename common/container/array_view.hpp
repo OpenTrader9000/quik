@@ -39,6 +39,8 @@ struct array_view_iterator {
 template <typename T>
 struct array_view {
 
+    using value_type = T;
+
     array_view(T* ptr, unsigned size)
     : ptr_(ptr)
     , size_(size) {}
@@ -53,6 +55,10 @@ struct array_view {
     }
 
     ~array_view() {}
+
+    bool empty() const {
+        return size_ == 0 || ptr_ == nullptr;
+    }
 
     unsigned size() const { return size_; }
 

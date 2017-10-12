@@ -31,6 +31,12 @@ void sink<QueueType>::push(::common::message::ptr&& message) {
     queue_.enqueue(std::move(message));
 }
 
+template <typename QueueType>
+void sink<QueueType>::push(::common::message::ptr& message) {
+    queue_.enqueue(message);
+}
+
+
 template <>
 void sink<reader_writer_queue_t>::loop() {
     while (run()) {

@@ -30,7 +30,7 @@ def needToUpdate(listOfFiles, dirPath):
 
 
 def main():
-  units = ['unhandled', 'scenario']
+  units = ['session', 'event', 'unhandled', 'scenario']
 
   dirPath = 'ddl/source' #os.path.dirname(os.path.realpath(__file__))
 

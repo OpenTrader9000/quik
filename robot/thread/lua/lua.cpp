@@ -1,5 +1,6 @@
 #include "lua.hpp"
 #include "details/deserialize.hpp"
+#include "details/datetime.hpp"
 #include <common/message/event/stop.hpp>
 #include <message/lua/exec.hpp>
 #include <sol/sol.hpp>
@@ -11,6 +12,10 @@
 #include <common/scenario/scenario.hpp>
 #include <persistent/persistent.hpp>
 #include <utils/time/time.hpp>
+#include <common/message/trade/trade.hpp>
+#include <common/message/trade/quotes.hpp>
+
+
 
 namespace robot {
 namespace thread {
@@ -19,8 +24,8 @@ namespace lua {
 std::unique_ptr<lua> lua::instance_;
 
 lua::lua()
-: last_ts_in_ms_(std::numeric_limits<decltype(last_ts_in_ms_)>::max()) 
-{}
+: is_test_(false)
+, send_timestamp_(utils::time::timestamp_in_ms()) {}
 
 lua::~lua() {
 }
@@ -78,8 +83,17 @@ void lua::start(lua_State* L) {
 
 
     /* LOAD PERSISTENT CONFIG */
-    auto persistent             = config_table["persistent"];
-    config.persistent_.path2db_ = persistent["path2db"];
+    auto persistent                           = config_table["persistent"];
+    config.persistent_.path2db_               = persistent["path2db"];
+    config.persistent_.trades_archive_folder_ = persistent["trades_archive"];
+
+    sol::table instruments = config_table["instruments"];
+    instruments.for_each([&](sol::object const&, sol::object const& value) {
+        sol::table inst = value;
+        std::string sec_code = inst["sec_code"];
+        int         power    = inst["pow"];
+        pows_[sec_code]      = power;
+    });
 
     worker::dispatcher::init(config);
 }
@@ -87,6 +101,8 @@ void lua::start(lua_State* L) {
 
 // dump some function single input
 void lua::dump(char const* function, sol::table tab) {
+
+    update_timestamp();
     
     using unhandled_t = common::message::general::unhandled;
 
@@ -94,7 +110,7 @@ void lua::dump(char const* function, sol::table tab) {
 
     mes->set_type_function();
     mes->name() = function;
-    mes->timestamp() = utils::time::timestamp_in_ms();
+    mes->timestamp() = last_timestamp_;
 
     details::deserialize(tab, mes);
 
@@ -109,69 +125,127 @@ void lua::setup_scenario(char const* name) {
 
 void lua::dump_scenario(char const * name, sol::table tab, char const* info )
 {
-    static constexpr unsigned send_periond_in_ms = 1000;
-
     using scenario_entry_t = common::message::scenario::entry;
 
     auto mes = common::message::make<scenario_entry_t>();
 
     mes->set_type_function();
     mes->name() = name;
-    mes->timestamp() = utils::time::timestamp_in_ms();
+    mes->timestamp() = last_timestamp_;
     mes->info() = info;
     mes->scenario_id() = common::scenario::id();
 
     details::deserialize(tab, mes);
 
-    auto timestamp = mes->timestamp();
-
     scenario_cache_.push_back(std::move(mes));
-    
+}
+
+void lua::update_timestamp() {
+
+    // if test is running timestamp must be setting up by setup_test_timestamp
+    if (is_test_)
+        return;
+
+    // this small optimization avoid double time computation
+    // all callbacks runs in the single one thread
+    last_timestamp_ = utils::time::timestamp_in_ms();
+}
+
+/*
+    try push all message to persistent
+*/
+void lua::try_flush()
+{
+    static constexpr unsigned send_periond_in_ms = 1000;
+
     // send data every n ms
-    if (last_ts_in_ms_ - timestamp > send_periond_in_ms) {
-        persistent::push_queries(scenario_cache_);
-        scenario_cache_.clear();
-        last_ts_in_ms_ = timestamp;
+    if (last_timestamp_ - send_timestamp_ > send_periond_in_ms) {
+        flush();
+        send_timestamp_ = last_timestamp_;
     }
 }
 
+void lua::flush() {
+    persistent::push_queries(scenario_cache_);
+    persistent::push_trades(trade_cache_);
+    scenario_cache_.clear();
+    trade_cache_.clear();
+ }
+
 void lua::on_trade(sol::table trade){
+
+    update_timestamp();
+
+    //auto dum = stackDump(trade.lua_state());
+
     if (common::scenario::id() != 0) {
         dump_scenario("OnAllTrade", trade);
-        return;
     }
+
+    std::string sec_code = trade["sec_code"];
+
+    auto message                 = common::message::make<common::message::trade::trade>();
+    message->sec_code_           = trade["sec_code"];
+    message->machine_timestamp() = last_timestamp_;
+    message->server_timestamp()  = details::timestamp(trade["datetime"]);
+    message->open_interest()     = trade["open_interest"];
+    message->quantity()          = trade["qty"];
+    message->price()             = common::numbers::bcd(trade["price"], pows_[sec_code]);
+
+    //message->price().parse((char*)trade["price"]);
+
+    // parse bid
+    int flags = trade["flags"];
+    bool is_offer = ((flags & 1) != 0);
+    bool is_bid = ((flags & 2) != 0);
+    assert(is_bid || is_offer);
+
+    if (is_bid) {
+        message->trade_.set_bid();
+    }
+    else  {
+        message->trade_.set_offer();
+    }
+
+    trade_cache_.push_back(std::move(message));
+
+    try_flush();
+
 }
 
 void lua::on_transaction(sol::table transaction){
+    update_timestamp();
 
+
+    // 
+    try_flush();
 }
 
 void lua::on_quote(char const* class_code, char const* sec_code, sol::table tab){
+
+    update_timestamp();
     
     if (common::scenario::id() != 0) {
-        
         char buffer[65] = {};
         sprintf_s(buffer, "%s-%s", class_code, sec_code);
-
         dump_scenario("OnQuote", tab, buffer);
-        return;
     }
+    
+    try_flush();
 }
 
 
 void lua::stop(lua_State* L) {
     using namespace common::message;
 
-    // end all queries
-    if (!scenario_cache_.empty()) {
-        persistent::push_queries(scenario_cache_);
-        scenario_cache_.clear();
-    }
+    // first of all stop main loop
+    exec_queue_.enqueue(make<event::stop>());
+
+    flush();
 
     // must flush all persistent buffers
     persistent::stop();
     
-    exec_queue_.enqueue(make<event::stop>());
 }
 
 
@@ -194,6 +268,18 @@ void stop(lua_State* L) {
     worker::dispatcher::clear();
     lua::instance_.reset();
 
+}
+
+void run_in_test_environment()
+{
+    assert(lua::instance_);
+    lua::instance_->is_test_ = true;
+}
+
+void setup_test_timestamp(uint64_t new_timestamp)
+{
+    assert(lua::instance_);
+    lua::instance_->last_timestamp_ = new_timestamp;
 }
 
 void enqueue_task(common::message::ptr task) {

@@ -23,8 +23,26 @@ static void serialize_value(sol::object const& value, std::ostream& os, std::str
     sol::type value_type = value.get_type();
 
     if (value_type == sol::type::number) {
+
+        assert(os.floatfield);
+
         // floating point values must be strings
         os << value.as<double>();
+
+        // now delete all symbols after dot
+        // every floating point number must be like
+        // 0.10000, 10423.000000
+        // all surplus zeroes must be removed
+        while (buffer.back() == '0')
+            buffer.pop_back();
+
+        // after previous operation examples will be looks like
+        // 0.1, 10423.
+        if (buffer.back() == '.')
+            buffer.pop_back();
+
+        //0.1, 10423
+
     } else if (value_type == sol::type::string) {
         os << " \"" << value.as<char const*>() << "\"";
     } else if (value_type == sol::type::table) {
@@ -57,7 +75,7 @@ static void serialize_array(sol::table tab, std::ostream& os, std::string& buffe
     os << ']';
 }
 
-//\brief short function for a serialization
+//\brief short function for serialization
 // \param tab - lua table
 // \param os - ostream with string inside
 // \param buffer - string from ostream (for removing dot =)) )

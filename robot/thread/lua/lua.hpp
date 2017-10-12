@@ -21,6 +21,10 @@ void work(lua_State* L);
 void start(lua_State* L);
 void stop(lua_State* L);
 
+void run_in_test_environment();
+void setup_test_timestamp(uint64_t new_timestamp);
+
+
 void enqueue_task(common::message::ptr task);
 
 struct lua {
@@ -40,8 +44,22 @@ struct lua {
     void setup_scenario(char const* name);
     void dump_scenario(char const* name, sol::table, char const* info = ""); // default is functions
 
-    uint64_t                          last_ts_in_ms_;
+    void update_timestamp();
+    void try_flush();
+    void flush();
+
+    bool                              is_test_;
+
+    uint64_t                          send_timestamp_;
+    uint64_t                          last_timestamp_;
+
+    std::unordered_map<std::string, int>    pows_;
+
+    // cache is differs for possible future design purposses
     std::vector<common::message::ptr> scenario_cache_;
+    std::vector<common::message::ptr> trade_cache_;
+
+
 
    // private:
     common::multithread_queue_t exec_queue_;

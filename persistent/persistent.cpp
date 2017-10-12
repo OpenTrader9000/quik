@@ -3,7 +3,7 @@
 #include "impl/persistent.hpp"
 
 namespace persistent {
-    static std::unique_ptr< impl::persistent> instance_;
+static std::unique_ptr<impl::persistent> instance_;
 
 
 void init(::persistent::config const& config) {
@@ -23,24 +23,45 @@ void push_query(message_t&& query_message) {
     instance_->push_mv(std::move(query_message));
 }
 
-void push_queries(message_view_t messages)
-{
+void push_queries(messages_view_t messages) {
     using iter_t = decltype(messages.begin());
 
     assert(instance_);
     instance_->sql_.push_bulk(std::move_iterator<iter_t>(messages.begin()), messages.size());
 }
 
-int create_scenario(char const * value)
-{
+int create_scenario(char const* value) {
     assert(instance_);
     return instance_->sql_.create_scenario(value);
 }
 
-void stop()
-{
+void stop() {
     instance_->stop();
     instance_.reset();
+}
+
+std::vector<scenario_t>
+extract_scenario_entries(std::string const& scenario_name, int idx, unsigned count, array_view_t<std::string> callbacks) {
+    assert(instance_);
+    return instance_->sql_.extract_scenario_entries(scenario_name, idx, count, callbacks);
+}
+
+int start_session(std::string name) {
+    assert(instance_);
+    return instance_->sql_.start_session(name);
+}
+
+void push_trade(message_t&& trade) {
+    if (!instance_)
+        return;
+    instance_->trades_cache_.push(std::move(trade));
+}
+
+void push_trades(messages_view_t messages) {
+    using iter_t = decltype(messages.begin());
+
+    assert(instance_);
+    instance_->trades_cache_.push_bulk(std::move_iterator<iter_t>(messages.begin()), messages.size());
 }
 
 } // namespace persistent

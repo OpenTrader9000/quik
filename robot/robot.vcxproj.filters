@@ -33,6 +33,9 @@
     <ClCompile Include="thread\lua\details\scenario.cpp">
       <Filter>thread\lua\details</Filter>
     </ClCompile>
+    <ClCompile Include="thread\lua\details\datetime.cpp">
+      <Filter>thread\lua\details</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="message\trade\on_account_balance.hpp">
@@ -111,6 +114,12 @@
       <Filter>thread\lua\details</Filter>
     </ClInclude>
     <ClInclude Include="thread\lua\details\deserialize.hpp">
+      <Filter>thread\lua\details</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\lua\details\datetime.hpp">
+      <Filter>thread\lua\details</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\lua\details\order_book_element.hpp">
       <Filter>thread\lua\details</Filter>
     </ClInclude>
   </ItemGroup>

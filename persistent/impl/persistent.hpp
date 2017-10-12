@@ -4,12 +4,17 @@
 #include <memory>
 #include "sql.hpp"
 
+#include <persistent/trade/trade/cache.hpp>
+
 namespace persistent {
 namespace impl {
 
 
 
 struct persistent {
+
+    using trades_cache_t = ::persistent::trade::trade::cache;
+
     persistent(::persistent::config const& config);
     ~persistent();
 
@@ -40,7 +45,8 @@ struct persistent {
         SQL INTERFACE/DATA
     */
 
-    sql     sql_;
+    sql            sql_;
+    trades_cache_t trades_cache_;
 
     static std::unique_ptr<persistent> instance_;
 

@@ -10,10 +10,12 @@ namespace numbers {
 
 
 struct bcd {
-    int64_t fractional_size_ : 5;
-    int64_t value_ : 59;
+    uint64_t sign_ : 1;
+    uint64_t fractional_size_ : 4;
+    uint64_t value_ : 59;
 
     bcd();
+    bcd(double d, int power);
     bcd(bcd const&) = default;
     bcd(bcd&&) = default;
     bcd(char const*);
@@ -39,7 +41,8 @@ struct bcd {
     bcd& operator/(IntegerType divider);
 
     void clear();
-    void parse(char const* str);
+    void parse(char const* str, int power = -1);
+
 };
 
 template <typename IntegerType>
@@ -58,10 +61,14 @@ inline bcd& bcd::operator/(IntegerType divider) {
 }
 
 bcd parse_bcd(char const* value);
+bcd parse_bcd(char const* value, int power);
 
 } // namespace numbers
 } // namespace common
 using unibcd_t = common::numbers::bcd;
 inline unibcd_t parse_bcd(char const* value) {
     return common::numbers::parse_bcd(value);
+}
+inline unibcd_t parse_bcd(char const* value, int power) {
+    return common::numbers::parse_bcd(value, power);
 }

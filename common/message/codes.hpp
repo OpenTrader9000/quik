@@ -3,7 +3,11 @@
 namespace common {
 namespace message {
 
-enum code_type { SQL_CODE = 0x10000 };
+enum code_type {
+    SQL_CODE    = 0x10000,
+    TRADE_CODES = 0x20000,
+};
+
 enum class codes {
     EXEC_LUA = 1,
     EXEC,
@@ -29,8 +33,13 @@ enum class codes {
     ON_STOP_ORDER,
     ON_TRANS_REPLY,
     STOP,
+    START,
     UNHANDLED = SQL_CODE,
-    SCENARIO_ENTRY 
+    SCENARIO_ENTRY,
+    EVENT,
+    TRADE = TRADE_CODES,
+    QUOTE,
+    QUOTES
 };
 
 inline bool is_sql(int code) {

@@ -94,6 +94,15 @@
     <Filter Include="query\dsl">
       <UniqueIdentifier>{d340b566-b7e2-4873-a017-4f43a0ebee31}</UniqueIdentifier>
     </Filter>
+    <Filter Include="query\concrete">
+      <UniqueIdentifier>{1e9c40b3-1fbb-4508-a8e2-54cf230805f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="trade">
+      <UniqueIdentifier>{7b9f7701-633c-4378-91c7-cc609043901f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="trade\trade">
+      <UniqueIdentifier>{128efa73-bb5d-49e3-b337-b49d94b9aa11}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="third_party\HinnantDate\chrono_io.h">
@@ -923,6 +932,25 @@
     <ClInclude Include="query\dsl\range.hpp">
       <Filter>query\dsl</Filter>
     </ClInclude>
+    <ClInclude Include="query\concrete\scenario_entry.hpp">
+      <Filter>query\concrete</Filter>
+    </ClInclude>
+    <ClInclude Include="query\dsl\value.hpp">
+      <Filter>query\dsl</Filter>
+    </ClInclude>
+    <ClInclude Include="trade\trade\cache.hpp">
+      <Filter>trade\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.hpp" />
+    <ClInclude Include="trade\trade\serializer.hpp">
+      <Filter>trade\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="trade\trade\file.hpp">
+      <Filter>trade\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="trade\trade\deserializer.hpp">
+      <Filter>trade\trade</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="third_party\HinnantDate\tz.cpp">
@@ -959,6 +987,18 @@
     <ClCompile Include="impl\sql_specific.cpp">
       <Filter>impl</Filter>
     </ClCompile>
+    <ClCompile Include="trade\trade\cache.cpp">
+      <Filter>trade\trade</Filter>
+    </ClCompile>
+    <ClCompile Include="trade\trade\serializer.cpp">
+      <Filter>trade\trade</Filter>
+    </ClCompile>
+    <ClCompile Include="trade\trade\file.cpp">
+      <Filter>trade\trade</Filter>
+    </ClCompile>
+    <ClCompile Include="trade\trade\deserializer.cpp">
+      <Filter>trade\trade</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ddl\source\ddl2cpp.py">
@@ -974,6 +1014,12 @@
       <Filter>ddl\source</Filter>
     </None>
     <None Include="ddl\source\scenario.sql">
+      <Filter>ddl\source</Filter>
+    </None>
+    <None Include="ddl\source\session.sql">
+      <Filter>ddl\source</Filter>
+    </None>
+    <None Include="ddl\source\event.sql">
       <Filter>ddl\source</Filter>
     </None>
   </ItemGroup>

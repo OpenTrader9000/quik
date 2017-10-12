@@ -2,7 +2,9 @@
 //
 
 // single one dependency
+#ifndef _TEST
 #pragma comment (lib, "qlua.lib")
+#endif
 
 
 extern "C" {
@@ -33,6 +35,14 @@ extern "C" int __declspec(dllexport) stop (lua_State* L) {
 extern "C" int __declspec(dllexport) do_work(lua_State* L) {
     robot::thread::lua::work(L);
     return 0;
+}
+
+extern "C" void __declspec(dllexport) run_in_test_environment() {
+    robot::thread::lua::run_in_test_environment();
+}
+
+extern "C" void __declspec(dllexport) setup_test_timestamp(uint64_t new_timestamp) {
+    robot::thread::lua::setup_test_timestamp(new_timestamp);
 }
 
 static const luaL_Reg lib[] = { { "stop", stop }, { "start", start }, { "do_work", do_work }, { nullptr, nullptr } };

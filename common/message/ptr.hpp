@@ -25,6 +25,8 @@ struct ptr {
         return ptr_;
     }
 
+    bool is_code(codes c) { return (ptr_ != nullptr) && (ptr_->code_ == static_cast<int>(c)); }
+
     //template <typename T>
     //T* cast() {
     //    assert(T::code == ptr_->code_);
@@ -32,7 +34,10 @@ struct ptr {
     //}
 
     template<typename T>
-    ptr_concrete<T> cast();
+    ptr_concrete<T> extract();
+
+    template<typename T>
+    T* cast();
 
 
     void reset();
@@ -67,7 +72,7 @@ struct ptr_concrete : public ptr {
 
 
 template<typename T>
-inline ptr_concrete<T> ptr::cast()
+inline ptr_concrete<T> ptr::extract()
 {
     ptr_concrete<T> result;
 
@@ -77,6 +82,13 @@ inline ptr_concrete<T> ptr::cast()
     result.ptr_ = ptr_;
     ptr_ = nullptr;
     return result;
+}
+
+template<typename T>
+inline T * ptr::cast()
+{
+    assert(T::code == ptr_->code_);
+    return reinterpret_cast<T*>(ptr_);
 }
 
 template <typename MessageType, typename... Args>

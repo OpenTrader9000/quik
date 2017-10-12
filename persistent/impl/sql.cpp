@@ -66,9 +66,9 @@ void sql::create_database() {
 }
 
 
-void sql::push(ptr_t&& src) {
-    sink_mt_t::push(std::move(src));
-}
+//void sql::push(ptr_t&& src) {
+//    sink_mt_t::push(std::move(src));
+//}
 
 
 void sql::flush() {
@@ -92,7 +92,7 @@ void sql::flush() {
 
 
     cache_.clear();
-}
+ }
 
 void sql::consume(ptr_t&& message) {
 

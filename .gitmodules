@@ -13,3 +13,6 @@
 [submodule "third_party/sqlpp11"]
 	path = third_party/sqlpp11
 	url = https://github.com/rbock/sqlpp11
+[submodule "third_party/rapidjson"]
+	path = third_party/rapidjson
+	url = https://github.com/Tencent/rapidjson
