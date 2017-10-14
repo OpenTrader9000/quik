@@ -461,6 +461,7 @@
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
       <DisableSpecificWarnings>4503;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>/D_CRT_SECURE_NO_WARNINGS /D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -480,6 +481,7 @@
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
       <DisableSpecificWarnings>4503;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalOptions>/D_CRT_SECURE_NO_WARNINGS /D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -524,6 +526,7 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
       <DisableSpecificWarnings>4503;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>/D_CRT_SECURE_NO_WARNINGS /D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -546,6 +549,7 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
       <DisableSpecificWarnings>4503;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalOptions>/D_CRT_SECURE_NO_WARNINGS /D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <common/numbers/bcd.hpp>
+#include <tuple>
 
 namespace common {
 namespace storage {
@@ -23,6 +24,11 @@ struct trade {
 	uint64_t     server_timestamp_;
     unsigned     quantity_;
     unsigned     open_interest_;
+
+	static auto fields() {
+        return std::make_tuple(&trade::flags_, &trade::price_, &trade::trade_num_, &trade::machine_timestamp_,
+                               &trade::server_timestamp_, &trade::quantity_, &trade::open_interest_);
+    }
 };
 } // namespace storage
 } // namespace common

@@ -191,6 +191,7 @@ void lua::on_trade(sol::table trade){
     message->open_interest()     = trade["open_interest"];
     message->quantity()          = trade["qty"];
     message->price()             = common::numbers::bcd(trade["price"], pows_[sec_code]);
+	message->trade_number()		 = trade["trade_num"];
 
     //message->price().parse((char*)trade["price"]);
 

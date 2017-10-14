@@ -56,8 +56,8 @@ void cache::flush() {
     while (start_day_ts < max_ts) {
         // walk every sec_code
         for (auto& pair : count_map) {
-            serializer ser(pair.first, storage_folder_);
-            ser.serialize(messages_, pair.second, start_day_ts, start_day_ts + day_in_ms);
+            serializer ser(pair.first, storage_folder_, start_day_ts, start_day_ts + day_in_ms);
+            ser.serialize(messages_, pair.second );
         }
         start_day_ts += day_in_ms;
     }

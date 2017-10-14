@@ -34,6 +34,9 @@
     <Filter Include="message\trade">
       <UniqueIdentifier>{374444fd-f386-4e8d-9751-6e6a97eb772a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="storage\compress">
+      <UniqueIdentifier>{36ba9978-76eb-44c6-8ac8-83558ad1deca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="numbers\bcd.cpp">
@@ -153,6 +156,21 @@
     </ClInclude>
     <ClInclude Include="storage\serialize.hpp">
       <Filter>storage</Filter>
+    </ClInclude>
+    <ClInclude Include="storage\compress\integer.hpp">
+      <Filter>storage\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="storage\compress\unsinged.hpp">
+      <Filter>storage\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="storage\compress\signed.hpp">
+      <Filter>storage\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="storage\compress\unsigned_history.hpp">
+      <Filter>storage\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="storage\compress\signed_history.hpp">
+      <Filter>storage\compress</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

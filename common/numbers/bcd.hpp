@@ -28,6 +28,9 @@ struct bcd {
     float to_float() const;
     string to_string() const;
 
+    uint64_t as_uint64_t() const;
+    void from_uint64_t(uint64_t value);
+
     bool operator==(bcd const& other) const;
     bool operator!=(bcd const& other) const;
     bcd& operator+(bcd const& other);

@@ -32,7 +32,7 @@ bcd::bcd(double d, int power)
 : fractional_size_(power) {
 
     assert(sizeof(pow10) > power);
-    assert(power > 0);
+    assert(power >= 0);
     
     sign_ = (d < 0 ? 1 : 0);
     double new_value = (d * pow10[power] + (sign_ == 1 ? -0.5 : 0.5));
@@ -206,6 +206,22 @@ string bcd::to_string() const {
 
     std::reverse(result.str, result.str + pointer);
     return result;
+}
+
+uint64_t bcd::as_uint64_t() const
+{
+    uint64_t result = 0;
+    result += (sign_ << 63);
+    result += (fractional_size_ << 59);
+    result += value_;
+    return result;
+}
+
+void bcd::from_uint64_t(uint64_t value)
+{
+    sign_ = (value >> 63);
+    fractional_size_ = (value_ >> 59) & 0xF;
+    value_ = value & 0x07FFFFFFFFFFFFFF;
 }
 
 

@@ -16,13 +16,14 @@
 namespace persistent {
 namespace trade {
 namespace trade {
-serializer::serializer(std::string const& sec_code, std::string const& storage_folder)
-: file(sec_code, storage_folder, mode::WRITE)
- {}
+serializer::serializer(std::string const& sec_code, std::string const& storage_folder, uint64_t start_time, uint64_t end_time)
+: file(sec_code, storage_folder, start_time / 1000 + 1, mode::WRITE)
+, start_time_(start_time)
+, end_time_(end_time) {}
 
 serializer::~serializer() {} 
 
-void serializer::serialize(messages_view_t messages, unsigned count, uint64_t start_time, uint64_t end_time) {
+void serializer::serialize(messages_view_t messages, unsigned count) {
 
     using trade_t = common::message::trade::trade;
 
@@ -33,36 +34,30 @@ void serializer::serialize(messages_view_t messages, unsigned count, uint64_t st
 	trades_buffer.reserve(sizeof(common::storage::trade));
 
 	// File contains many valuable data
-	open(start_time / 1000 + 1);
+	open();
 
     unsigned trades_count  = 0;
-    uint64_t max_timestamp = 0;
     for (auto& p : messages) {
         // trade exist, trade has proper time
         if (!p)
             continue;
         
+		// fiter possible external trades
         auto ptr = p.cast<trade_t>();
         auto srv_time = ptr->server_timestamp();
-        if (ptr->sec_code_ != sec_code_ || (srv_time < start_time && srv_time >= end_time)) {
+        if (ptr->sec_code_ != sec_code_ || (srv_time < start_time_ && srv_time >= end_time_)) {
             continue;
         }
 
-        // all criterias are passed. But trade might be stay from a previous day
-        if (srv_time < header_.last_timestamp_in_ms_) {
-            std::cerr << "removed trade, srv_time: " << srv_time << ", last_timestamp: " << header_.last_timestamp_in_ms_ << "\n";
-            p.reset();
-            continue;
-        }
+        // trade_holder will destroied at the end of the scope
+        auto trade_holder = p.extract<trade_t>();
 
-        max_timestamp = std::max(max_timestamp, srv_time);
 		++trades_count;
 
-		// trade_holder will destroied at the end of the scope
-        auto trade_holder = p.extract<trade_t>();
 		auto& trade = trade_holder->trade_;
-        common::storage::serialize(trades_buffer, trade.flags_, trade.price_, trade.machine_timestamp_,
-                                   trade.server_timestamp_, trade.quantity_, trade.open_interest_);
+		common::storage::visit_fields(trade, [&](char* buffer, unsigned size) {
+			std::copy(buffer, buffer + size, std::back_inserter(trades_buffer));
+		});
     }
 	
 	// no one trade is add
@@ -71,21 +66,12 @@ void serializer::serialize(messages_view_t messages, unsigned count, uint64_t st
 
     filestream_.seekp(0, std::fstream::end);
     filestream_.write(trades_buffer.data(), trades_buffer.size());
+
 	filestream_.flush();
 
     header_.trades_count_ += trades_count;
-    header_.last_timestamp_in_ms_ = max_timestamp;
-
+	 
 	update_header();
-    //update_trades_count();
-    //update_timestamp();
-	//
-	//filestream_.seekp(0, std::fstream::end);
-	//
-	//
-	////filestream_.flush();
-	//filestream_.close();
-    
 }
 
 } // namespace trade

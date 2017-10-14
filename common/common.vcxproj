@@ -124,16 +124,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir);$(ProjectDir);$(BOOST)</IncludePath>
+    <IncludePath>$(SolutionDir);$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir);$(ProjectDir);$(BOOST)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugAndTest|Win32'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir);$(ProjectDir);$(BOOST)</IncludePath>
+    <IncludePath>$(SolutionDir);$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir);$(ProjectDir);$(BOOST)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir);$(ProjectDir);$(BOOST)</IncludePath>
+    <IncludePath>$(SolutionDir);$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir);$(ProjectDir);$(BOOST)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAndTest|Win32'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir);$(ProjectDir);$(BOOST)</IncludePath>
+    <IncludePath>$(SolutionDir);$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir);$(ProjectDir);$(BOOST)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -297,6 +297,11 @@
     <ClInclude Include="numbers\string.hpp" />
     <ClInclude Include="scenario\scenario.hpp" />
     <ClInclude Include="session\session.hpp" />
+    <ClInclude Include="storage\compress\integer.hpp" />
+    <ClInclude Include="storage\compress\signed.hpp" />
+    <ClInclude Include="storage\compress\signed_history.hpp" />
+    <ClInclude Include="storage\compress\unsigned_history.hpp" />
+    <ClInclude Include="storage\compress\unsinged.hpp" />
     <ClInclude Include="storage\quote.hpp" />
     <ClInclude Include="storage\scenario_entry.hpp" />
     <ClInclude Include="storage\serialize.hpp" />

@@ -20,6 +20,7 @@ struct trade : public ::common::message::base {
     unsigned&     open_interest() { return trade_.open_interest_; }
     uint64_t&     machine_timestamp() { return trade_.machine_timestamp_; }
     uint64_t&     server_timestamp() { return trade_.server_timestamp_; }
+	uint64_t&     trade_number() { return trade_.trade_num_; }
     
     std::string     sec_code_;
     storage::trade  trade_;

@@ -30,19 +30,20 @@ deserializer::deserialize(uint64_t start_time_in_ms, uint64_t end_time_in_ms, un
     unsigned trades_count = 0;
     unsigned max_trades_count = 0;
     for (unsigned idx = 0; idx < possible_files_count; ++idx) {
-        files.emplace_back(sec_code_, storage_folder_, file::mode::READ);
-
         uint64_t time = start_time + day_time * idx;
-        
+
+        files.emplace_back(sec_code_, storage_folder_, time, file::mode::READ);
         file& last = files.back();
-        if (!last.open(time)) {
+        if (!last.open()) {
             files.pop_back();
             continue;
         }
 
+        unsigned file_trades_count = last.file_header().trades_count_;
+
         // might be some troubles with this algorithm
-        trades_count += last.header_.trades_count_; // TODO: make here const)
-        max_trades_count = std::max(last.header_.trades_count_, max_trades_count);
+        trades_count += file_trades_count; // TODO: make here const)
+        max_trades_count = std::max(file_trades_count, max_trades_count);
         if (trades_count >= upper_limit)
             break;        
     }

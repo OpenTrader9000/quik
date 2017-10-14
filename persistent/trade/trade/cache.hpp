@@ -4,6 +4,8 @@
 #include <common/message/ptr.hpp>
 #include <common/thread/sink.hpp>
 
+#include <unordered_set>
+
 
 namespace persistent {
 namespace trade {
@@ -28,6 +30,7 @@ private:
     void flush();
 
     std::vector<common::message::ptr>   messages_;
+    std::unordered_set<std::string>     not_finalized_files_;
 
 };
 
