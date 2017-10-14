@@ -34,7 +34,7 @@ file::file(std::string const& sec_code, std::string const& storage_folder, uint6
 
 file::file(std::string const& path)
 : path_(path)
-, mode_(mode::WRITE) {}
+, mode_(mode::READ) {}
 
 file::~file() {}
 

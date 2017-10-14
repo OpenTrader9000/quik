@@ -45,7 +45,7 @@ void serializer::serialize(messages_view_t messages, unsigned count) {
 		// fiter possible external trades
         auto ptr = p.cast<trade_t>();
         auto srv_time = ptr->server_timestamp();
-        if (ptr->sec_code_ != sec_code_ || (srv_time < start_time_ && srv_time >= end_time_)) {
+        if (ptr->sec_code_ != sec_code_ || srv_time < start_time_ || srv_time >= end_time_) {
             continue;
         }
 
