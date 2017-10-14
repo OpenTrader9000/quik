@@ -19,7 +19,6 @@ uint64_t timestamp(sol::table datetime) {
 
     time.tm_mon -= 1;
     time.tm_year -= 1900;
-    time.tm_min += 1;
 
     unsigned ms = datetime["ms"];
 
