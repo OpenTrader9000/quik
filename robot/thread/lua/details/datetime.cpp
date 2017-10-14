@@ -10,8 +10,8 @@ uint64_t timestamp(sol::table datetime) {
 
     struct tm time {};
 
-    time.tm_sec  = datetime["seconds"];
-    time.tm_min  = datetime["minutes"];
+    time.tm_sec  = datetime["sec"];
+    time.tm_min  = datetime["min"];
     time.tm_hour = datetime["hour"];
     time.tm_mday = datetime["day"];
     time.tm_mon  = datetime["month"];
