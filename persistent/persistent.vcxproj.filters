@@ -103,6 +103,9 @@
     <Filter Include="trade\trade">
       <UniqueIdentifier>{128efa73-bb5d-49e3-b337-b49d94b9aa11}</UniqueIdentifier>
     </Filter>
+    <Filter Include="trade\quote">
+      <UniqueIdentifier>{576f7362-0b7c-45eb-b938-a69d89948cd7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="third_party\HinnantDate\chrono_io.h">
@@ -951,6 +954,18 @@
     <ClInclude Include="trade\trade\deserializer.hpp">
       <Filter>trade\trade</Filter>
     </ClInclude>
+    <ClInclude Include="trade\quote\cache.hpp">
+      <Filter>trade\quote</Filter>
+    </ClInclude>
+    <ClInclude Include="trade\quote\deserializer.hpp">
+      <Filter>trade\quote</Filter>
+    </ClInclude>
+    <ClInclude Include="trade\quote\file.hpp">
+      <Filter>trade\quote</Filter>
+    </ClInclude>
+    <ClInclude Include="trade\quote\serializer.hpp">
+      <Filter>trade\quote</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="third_party\HinnantDate\tz.cpp">
@@ -998,6 +1013,18 @@
     </ClCompile>
     <ClCompile Include="trade\trade\deserializer.cpp">
       <Filter>trade\trade</Filter>
+    </ClCompile>
+    <ClCompile Include="trade\quote\cache.cpp">
+      <Filter>trade\quote</Filter>
+    </ClCompile>
+    <ClCompile Include="trade\quote\deserializer.cpp">
+      <Filter>trade\quote</Filter>
+    </ClCompile>
+    <ClCompile Include="trade\quote\file.cpp">
+      <Filter>trade\quote</Filter>
+    </ClCompile>
+    <ClCompile Include="trade\quote\serializer.cpp">
+      <Filter>trade\quote</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

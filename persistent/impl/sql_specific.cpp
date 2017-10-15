@@ -66,12 +66,12 @@ std::vector<scenario_entry_t> sql::extract_scenario_entries(std::string const& s
         scenario_entry_t& element = result.back();
 
         element.body_ = row.body;
-        element.idx_ = row.id;
+        element.idx_ = static_cast<int>(row.id);
         element.info_ = row.info;
         element.name_ = row.name;
         element.scenario_id_ = row.scenarioId;
         element.timestamp_ = row.ts;
-        element.type_ = row.type;
+        element.type_ = static_cast<int>(row.type);
     }
 
     return result;

@@ -11,7 +11,7 @@ namespace trade {
 
 struct header {
     char          sec_code_[16];
-    unsigned      trades_count_;
+    uint64_t      trades_count_;
 	unsigned	  version_;
     unsigned char flags_;
     unsigned char reserved_[16]; // possible structure information

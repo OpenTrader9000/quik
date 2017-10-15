@@ -27,8 +27,8 @@ deserializer::deserialize(uint64_t start_time_in_ms, uint64_t end_time_in_ms, un
     files.reserve(possible_files_count);
 
     // open and count items
-    unsigned trades_count = 0;
-    unsigned max_trades_count = 0;
+    uint64_t trades_count = 0;
+    uint64_t max_trades_count = 0;
     for (unsigned idx = 0; idx < possible_files_count; ++idx) {
         uint64_t time = start_time + day_time * idx;
 
@@ -39,7 +39,7 @@ deserializer::deserialize(uint64_t start_time_in_ms, uint64_t end_time_in_ms, un
             continue;
         }
 
-        unsigned file_trades_count = last.file_header().trades_count_;
+        uint64_t file_trades_count = last.file_header().trades_count_;
 
         // might be some troubles with this algorithm
         trades_count += file_trades_count; // TODO: make here const)

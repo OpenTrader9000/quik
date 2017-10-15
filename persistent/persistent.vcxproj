@@ -315,6 +315,10 @@
     <ClInclude Include="third_party\sqlpp11\without_table_check.h" />
     <ClInclude Include="third_party\sqlpp11\wrap_operand.h" />
     <ClInclude Include="third_party\sqlpp11\wrong.h" />
+    <ClInclude Include="trade\quote\cache.hpp" />
+    <ClInclude Include="trade\quote\deserializer.hpp" />
+    <ClInclude Include="trade\quote\file.hpp" />
+    <ClInclude Include="trade\quote\serializer.hpp" />
     <ClInclude Include="trade\trade\cache.hpp" />
     <ClInclude Include="trade\trade\deserializer.hpp" />
     <ClInclude Include="trade\trade\file.hpp" />
@@ -333,6 +337,10 @@
     <ClCompile Include="third_party\sqlpp11-sqlite-src\detail\connection_handle.cpp" />
     <ClCompile Include="third_party\sqlpp11-sqlite-src\detail\dynamic_libsqlite3.cpp" />
     <ClCompile Include="third_party\sqlpp11-sqlite-src\prepared_statement.cpp" />
+    <ClCompile Include="trade\quote\cache.cpp" />
+    <ClCompile Include="trade\quote\deserializer.cpp" />
+    <ClCompile Include="trade\quote\file.cpp" />
+    <ClCompile Include="trade\quote\serializer.cpp" />
     <ClCompile Include="trade\trade\cache.cpp" />
     <ClCompile Include="trade\trade\deserializer.cpp" />
     <ClCompile Include="trade\trade\file.cpp" />
@@ -437,19 +445,28 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(BOOST);$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugAndTest|Win32'">
-    <IncludePath>$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(BOOST);$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(BOOST);$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAndTest|Win32'">
-    <IncludePath>$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(BOOST);$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugAndTest|x64'">
-    <IncludePath>$(BOOST);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>$(BOOST);$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(BOOST);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(BOOST);$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(BOOST);$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAndTest|x64'">
+    <IncludePath>$(BOOST);$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -497,6 +514,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
+      <AdditionalOptions>/D_CRT_SECURE_NO_WARNINGS /D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>4503;</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -509,6 +530,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
+      <AdditionalOptions>/D_CRT_SECURE_NO_WARNINGS /D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>4503;</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -569,6 +594,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
+      <AdditionalOptions>/D_CRT_SECURE_NO_WARNINGS /D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>4503;</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -585,6 +614,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
+      <AdditionalOptions>/D_CRT_SECURE_NO_WARNINGS /D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
+      <DisableSpecificWarnings>4503;</DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

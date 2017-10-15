@@ -87,7 +87,7 @@ void file::read_trades_data(trades_storage_t& buffer, unsigned offset, unsigned 
 	unsigned header_size = common::storage::place_for_data<header>();
 
     // compute count to read
-    unsigned trades_to_read = header_.trades_count_ - offset;
+    uint64_t trades_to_read = header_.trades_count_ - offset;
     trades_to_read = (trades_to_read > max ? max : trades_to_read);
 
     // prepare buffer

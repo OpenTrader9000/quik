@@ -60,7 +60,7 @@ struct array_view {
         return size_ == 0 || ptr_ == nullptr;
     }
 
-    unsigned size() const { return size_; }
+    size_t size() const { return size_; }
 
     array_view_iterator<T> begin() { return array_view_iterator<T>(ptr_); }
     array_view_iterator<T> end() { return array_view_iterator<T>(ptr_ + size_); }
@@ -70,7 +70,7 @@ struct array_view {
 
  private:
     T* ptr_;
-    unsigned size_;
+    size_t size_;
 };
 } // namespace container
 } // namespace common
