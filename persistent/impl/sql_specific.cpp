@@ -38,9 +38,11 @@ int sql::create_scenario(std::string const& name) {
 }
 
 std::vector<scenario_entry_t> sql::extract_scenario_entries(std::string const& scenario_name,
-                                                            int idx,
-                                                            unsigned count,
-                                                            common::container::array_view<std::string> callbacks) {
+                                                            int                idx,
+                                                            unsigned           count,
+                                                            std::vector<std::string> const& callbacks,
+                                                            uint64_t start_date_in_ms,
+                                                            uint64_t end_date_in_ms) {
     std::vector<scenario_entry_t> result;
     
     gentab::Scenario scenario_tab{};
@@ -57,7 +59,8 @@ std::vector<scenario_entry_t> sql::extract_scenario_entries(std::string const& s
     db(sqlpp::select(sqlpp::all_of(scenario_entry_tab))
        .from(scenario_entry_tab.join(scenario_tab)
              .on(scenario_entry_tab.scenarioId == scenario_tab.id and scenario_tab.name == scenario_name))
-       .where(scenario_entry_tab.id > idx and scenario_entry_tab.name.in(sqlpp::value_list(callbacks) ))
+       .where(scenario_entry_tab.id > idx and scenario_entry_tab.name.in(sqlpp::value_list(callbacks)) and
+              scenario_entry_tab.ts > start_date_in_ms and scenario_entry_tab.ts < end_date_in_ms)
        .limit(count));
 
     // fill result

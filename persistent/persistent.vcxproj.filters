@@ -957,13 +957,19 @@
     <ClInclude Include="trade\quote\cache.hpp">
       <Filter>trade\quote</Filter>
     </ClInclude>
-    <ClInclude Include="trade\quote\deserializer.hpp">
-      <Filter>trade\quote</Filter>
-    </ClInclude>
     <ClInclude Include="trade\quote\file.hpp">
       <Filter>trade\quote</Filter>
     </ClInclude>
     <ClInclude Include="trade\quote\serializer.hpp">
+      <Filter>trade\quote</Filter>
+    </ClInclude>
+    <ClInclude Include="trade\quote\deserializer.hpp">
+      <Filter>trade\quote</Filter>
+    </ClInclude>
+    <ClInclude Include="trade\quote\player.hpp">
+      <Filter>trade\quote</Filter>
+    </ClInclude>
+    <ClInclude Include="trade\quote\order_book.hpp">
       <Filter>trade\quote</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1017,13 +1023,19 @@
     <ClCompile Include="trade\quote\cache.cpp">
       <Filter>trade\quote</Filter>
     </ClCompile>
-    <ClCompile Include="trade\quote\deserializer.cpp">
-      <Filter>trade\quote</Filter>
-    </ClCompile>
     <ClCompile Include="trade\quote\file.cpp">
       <Filter>trade\quote</Filter>
     </ClCompile>
     <ClCompile Include="trade\quote\serializer.cpp">
+      <Filter>trade\quote</Filter>
+    </ClCompile>
+    <ClCompile Include="trade\quote\deserializer.cpp">
+      <Filter>trade\quote</Filter>
+    </ClCompile>
+    <ClCompile Include="trade\quote\player.cpp">
+      <Filter>trade\quote</Filter>
+    </ClCompile>
+    <ClCompile Include="trade\quote\order_book.cpp">
       <Filter>trade\quote</Filter>
     </ClCompile>
   </ItemGroup>

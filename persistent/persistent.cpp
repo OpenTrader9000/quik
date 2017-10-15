@@ -40,10 +40,15 @@ void stop() {
     instance_.reset();
 }
 
-std::vector<scenario_t>
-extract_scenario_entries(std::string const& scenario_name, int idx, unsigned count, array_view_t<std::string> callbacks) {
+std::vector<scenario_t> extract_scenario_entries(std::string const&              scenario_name,
+                                                 int                             idx,
+                                                 unsigned                        count,
+                                                 std::vector<std::string> const& callbacks,
+                                                 uint64_t                        start_date_in_ms,
+                                                 uint64_t                        end_date_in_ms) {
     assert(instance_);
-    return instance_->sql_.extract_scenario_entries(scenario_name, idx, count, callbacks);
+    return instance_->sql_.extract_scenario_entries(scenario_name, idx, count, callbacks,
+                                                    start_date_in_ms, end_date_in_ms);
 }
 
 int start_session(std::string name) {
@@ -62,6 +67,19 @@ void push_trades(messages_view_t messages) {
 
     assert(instance_);
     instance_->trades_cache_.push_bulk(std::move_iterator<iter_t>(messages.begin()), messages.size());
+}
+
+void push_quote(message_t&& quote) {
+    if (!instance_)
+        return;
+    instance_->quotes_cache_.push(std::move(quote));
+}
+
+void push_quotes(messages_view_t messages) {
+    using iter_t = decltype(messages.begin());
+
+    assert(instance_);
+    instance_->quotes_cache_.push_bulk(std::move_iterator<iter_t>(messages.begin()), messages.size());
 }
 
 } // namespace persistent

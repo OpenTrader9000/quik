@@ -12,6 +12,7 @@ extern "C" {
 #include <common/defines.hpp>
 #include <sol/sol.hpp>
 
+#include "details/order_book_diff.hpp"
 
 namespace robot {
 namespace thread {
@@ -53,13 +54,13 @@ struct lua {
     uint64_t                          send_timestamp_;
     uint64_t                          last_timestamp_;
 
-    std::unordered_map<std::string, int>    pows_;
+    std::unordered_map<std::string, int>                      pows_;
+    std::unordered_map<std::string, details::order_book_diff> order_books_history_;
 
     // cache is differs for possible future design purposses
     std::vector<common::message::ptr> scenario_cache_;
     std::vector<common::message::ptr> trade_cache_;
-
-
+	std::vector<common::message::ptr> quote_cache_;
 
    // private:
     common::multithread_queue_t exec_queue_;

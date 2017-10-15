@@ -1,5 +1,6 @@
 #pragma once
 
+#include <assert.h>
 #include <common/numbers/bcd.hpp>
 
 namespace robot {

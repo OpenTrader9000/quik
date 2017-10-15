@@ -50,9 +50,11 @@ struct sql : public sink_mt_t {
     // \param callbacks - list of functions for an extraction
     // \return array of values
     std::vector<scenario_entry_t> extract_scenario_entries(std::string const& scenario_name,
-                                                           int idx,
-                                                           unsigned count,
-                                                           common::container::array_view<std::string> callbacks);
+                                                           int                idx,
+                                                           unsigned           count,
+                                                           std::vector<std::string> const& callbacks,
+                                                           uint64_t start_date_in_ms,
+                                                           uint64_t end_date_in_ms);
 
     // \brief create entry in session table
     // \param name - some session name

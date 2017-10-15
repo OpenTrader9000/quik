@@ -33,6 +33,8 @@ struct bcd {
 
     bool operator==(bcd const& other) const;
     bool operator!=(bcd const& other) const;
+    bool operator<(bcd const& other) const;
+    bool operator>(bcd const& other) const;
     bcd& operator+(bcd const& other);
     bcd& operator-(bcd const& other);
     bcd& operator=(bcd const& other);

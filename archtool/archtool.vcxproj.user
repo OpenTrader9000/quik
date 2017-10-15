@@ -4,7 +4,15 @@
     <LocalDebuggerCommandArguments> --format csv --file "C:\Users\Andrey\Documents\Visual Studio 2017\Projects\quik\Debug\20170920.trd"  --output out.txt</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugAndTest|Win32'">
+    <LocalDebuggerCommandArguments> --format csv --file "C:\Users\Andrey\Documents\Visual Studio 2017\Projects\quik\Debug\20170920.trd"  --output out.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LocalDebuggerCommandArguments> --format csv --file "C:\Users\Andrey\Documents\Visual Studio 2017\Projects\quik\Debug\20170920.trd"  --output out.txt</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugAndTest|x64'">
     <LocalDebuggerCommandArguments> --format csv --file "C:\Users\Andrey\Documents\Visual Studio 2017\Projects\quik\Debug\20170920.trd"  --output out.txt</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>

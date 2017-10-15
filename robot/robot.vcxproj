@@ -320,6 +320,8 @@
     <ClCompile Include="robot.cpp" />
     <ClCompile Include="thread\lua\details\datetime.cpp" />
     <ClCompile Include="thread\lua\details\lua2json.cpp" />
+    <ClCompile Include="thread\lua\details\order_book.cpp" />
+    <ClCompile Include="thread\lua\details\order_book_diff.cpp" />
     <ClCompile Include="thread\lua\details\scenario.cpp" />
     <ClCompile Include="thread\lua\lua.cpp" />
     <ClCompile Include="thread\telegram\telegram.cpp" />
@@ -355,6 +357,8 @@
     <ClCompile Include="thread\lua\details\unhandled.cpp">
       <FileType>CppCode</FileType>
     </ClCompile>
+    <ClInclude Include="thread\lua\details\order_book.hpp" />
+    <ClInclude Include="thread\lua\details\order_book_diff.hpp" />
     <ClInclude Include="thread\lua\details\order_book_element.hpp" />
     <ClInclude Include="thread\lua\lua.hpp" />
     <ClInclude Include="thread\telegram\telegram.hpp" />

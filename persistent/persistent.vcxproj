@@ -318,6 +318,8 @@
     <ClInclude Include="trade\quote\cache.hpp" />
     <ClInclude Include="trade\quote\deserializer.hpp" />
     <ClInclude Include="trade\quote\file.hpp" />
+    <ClInclude Include="trade\quote\order_book.hpp" />
+    <ClInclude Include="trade\quote\player.hpp" />
     <ClInclude Include="trade\quote\serializer.hpp" />
     <ClInclude Include="trade\trade\cache.hpp" />
     <ClInclude Include="trade\trade\deserializer.hpp" />
@@ -340,6 +342,8 @@
     <ClCompile Include="trade\quote\cache.cpp" />
     <ClCompile Include="trade\quote\deserializer.cpp" />
     <ClCompile Include="trade\quote\file.cpp" />
+    <ClCompile Include="trade\quote\order_book.cpp" />
+    <ClCompile Include="trade\quote\player.cpp" />
     <ClCompile Include="trade\quote\serializer.cpp" />
     <ClCompile Include="trade\trade\cache.cpp" />
     <ClCompile Include="trade\trade\deserializer.cpp" />

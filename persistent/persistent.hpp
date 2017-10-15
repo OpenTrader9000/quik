@@ -16,8 +16,14 @@ namespace persistent {
     void stop();
 
     // extract queries
-    std::vector<scenario_t> extract_scenario_entries(std::string const& scenario_name, int min_idx, unsigned max_count, array_view_t<std::string> callbacks);
-    
+    std::vector<scenario_t>
+    extract_scenario_entries(std::string const&              scenario_name,
+                             int                             min_idx,
+                             unsigned                        max_count,
+                             std::vector<std::string> const& callbacks,
+                             uint64_t                        start_date_in_ms = 0,
+                             uint64_t end_date_in_ms = std::numeric_limits<uint64_t>::max());
+
     int start_session(std::string name = "default");
 
     //// pretty for running version
@@ -29,6 +35,9 @@ namespace persistent {
     
     void push_trade(message_t&& trade);
     void push_trades(messages_view_t messages);
+
+	void push_quote(message_t&& quote);
+	void push_quotes(messages_view_t messages);
 
     //void push_quote(::common::message::ptr&& query_message);
 }

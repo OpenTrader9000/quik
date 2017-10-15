@@ -71,6 +71,30 @@ bool bcd::operator!=(bcd const& other) const {
     return !(*this == other);
 }
 
+bool bcd::operator<(bcd const& other) const {
+	assert(fractional_size_ == other.fractional_size_);
+	if (sign_ != other.sign_) {
+		if (sign_ == 1)
+			return true;
+		return false;
+	}
+	
+	return (sign_ == 1 ? value_ > other.value_ : value_ < other.value_);
+}
+
+bool bcd::operator>(bcd const& other) const {
+	assert(fractional_size_ == other.fractional_size_);
+	if (sign_ != other.sign_) {
+		if (sign_ == 1)
+			return false;
+		return true;
+	}
+
+	return (sign_ == 1 ? value_ < other.value_ : value_ > other.value_);
+}
+
+
+
 bcd& bcd::operator+(bcd const& other) {
     assert(fractional_size_ == other.fractional_size_);
     if (sign_ == other.sign_) {

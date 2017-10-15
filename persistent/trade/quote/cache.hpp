@@ -1,0 +1,46 @@
+#pragma once
+
+#include <common/message/base.hpp>
+#include <common/message/ptr.hpp>
+#include <common/thread/sink.hpp>
+
+#include <unordered_set>
+
+
+namespace persistent {
+namespace trade {
+namespace quote {
+
+struct cache : public common::thread::sink_mt_t {
+    
+    cache(std::string const& folder);
+    ~cache();
+
+    //void push(ptr_t&& src);
+
+    //template <typename It>
+    //void push(It iterator, size_t count);
+
+    virtual void consume(ptr_t&& message) override;
+
+private:
+    
+    std::string storage_folder_;
+
+    void flush();
+
+    std::vector<common::message::ptr>   messages_;
+    std::unordered_set<std::string>     not_finalized_files_;
+
+};
+
+
+
+//template <typename It>
+//inline void cache::push(It iterator, size_t count) {
+//    sink_mt::push(it, count);
+//}
+
+} // namespace trade
+} // namespace trade
+} // namespace persistent

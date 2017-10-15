@@ -10,7 +10,7 @@ namespace impl {
 persistent::persistent(::persistent::config const& config)
 : sql_(config.path2db_)
 , trades_cache_(config.trades_archive_folder_)
-// quote(config.quote_path_)
+, quotes_cache_(config.trades_archive_folder_)
 {}
 
 persistent::~persistent() {
@@ -19,6 +19,7 @@ persistent::~persistent() {
 void persistent::start(){
     sql_.start_sink();
     trades_cache_.start_sink();
+	quotes_cache_.start_sink();
 }
 
 void persistent::stop() {
@@ -34,7 +35,7 @@ void persistent::push_mv(ptr_t&& message) {
         // just sql for now
         sql_.push(message);
         trades_cache_.push(message);
-        
+		quotes_cache_.push(message);
     }
 }
 

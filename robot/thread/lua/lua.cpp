@@ -92,7 +92,9 @@ void lua::start(lua_State* L) {
         sol::table inst = value;
         std::string sec_code = inst["sec_code"];
         int         power    = inst["pow"];
-        pows_[sec_code]      = power;
+
+        pows_.emplace(sec_code, power);
+        order_books_history_.emplace(sec_code, power);
     });
 
     worker::dispatcher::init(config);
@@ -168,8 +170,10 @@ void lua::try_flush()
 void lua::flush() {
     persistent::push_queries(scenario_cache_);
     persistent::push_trades(trade_cache_);
+	persistent::push_quotes(quote_cache_);
     scenario_cache_.clear();
     trade_cache_.clear();
+	quote_cache_.clear();
  }
 
 void lua::on_trade(sol::table trade){
@@ -224,6 +228,9 @@ void lua::on_transaction(sol::table transaction){
 
 void lua::on_quote(char const* class_code, char const* sec_code, sol::table tab){
 
+	if (strcmp(class_code, "SPBFUT") != 0)
+		return;
+
     update_timestamp();
     
     if (common::scenario::id() != 0) {
@@ -231,6 +238,22 @@ void lua::on_quote(char const* class_code, char const* sec_code, sol::table tab)
         sprintf_s(buffer, "%s-%s", class_code, sec_code);
         dump_scenario("OnQuote", tab, buffer);
     }
+
+	auto& qdiff = order_books_history_[sec_code];
+	auto message = qdiff.mkdiff(tab);
+
+	assert(!message->quotes_.empty());
+	//if (message->quotes_.empty()) {
+	//	message = qdiff.mkdiff_last();
+	//}
+	// update lua specific info
+	message->sec_code_ = sec_code;
+	for (auto& q : message->quotes_)
+		q.machine_timestamp_ = last_timestamp_;
+
+	quote_cache_.push_back(message);
+
+
     
     try_flush();
 }
@@ -239,10 +262,10 @@ void lua::on_quote(char const* class_code, char const* sec_code, sol::table tab)
 void lua::stop(lua_State* L) {
     using namespace common::message;
 
+	flush();
+
     // first of all stop main loop
     exec_queue_.enqueue(make<event::stop>());
-
-    flush();
 
     // must flush all persistent buffers
     persistent::stop();
