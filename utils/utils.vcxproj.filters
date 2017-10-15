@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="process\platform">
+      <UniqueIdentifier>{491E5046-E56B-3C8F-BE6F-A85DBE0E590D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="process\platform\windows">
+      <UniqueIdentifier>{C14B7746-8FE8-3114-9743-E7484CBE12FB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="filesystem\platform">
+      <UniqueIdentifier>{F1F786DA-227D-3A70-9BA9-934BECC6748D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="filesystem\platform\windows">
+      <UniqueIdentifier>{FBF89167-1ADB-3077-9788-AE8DFC94778F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="reflection\lua">
+      <UniqueIdentifier>{B51E2B7E-AD6F-3AB5-97A2-9B165EDC8742}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="iostream">
+      <UniqueIdentifier>{EF9B8234-24D4-3EA6-8EC6-09FDC30A7BF1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="process">
+      <UniqueIdentifier>{5C1A1B35-B621-3E89-A51C-6763236F543D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="filesystem">
+      <UniqueIdentifier>{DD1A924C-7EE8-30DF-8313-11688C429271}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="string">
+      <UniqueIdentifier>{1AF04A55-708C-3ED9-914B-30D77EBD4222}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="reflection">
+      <UniqueIdentifier>{64EF09DB-C21C-3AB0-BF26-F3947DC9976A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="numbers">
+      <UniqueIdentifier>{01F4EF31-6656-30E6-B0B5-FF11D4A53190}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="time">
+      <UniqueIdentifier>{D60922EB-7F16-3716-830B-CDED81A6ED85}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="filesystem\platform\windows\filesystem.cpp">
+      <Filter>filesystem\platform\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="filesystem\extra.cpp">
+      <Filter>filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="iostream\datetime.cpp">
+      <Filter>iostream</Filter>
+    </ClCompile>
+    <ClCompile Include="numbers\bcd.cpp">
+      <Filter>numbers</Filter>
+    </ClCompile>
+    <ClCompile Include="numbers\int.cpp">
+      <Filter>numbers</Filter>
+    </ClCompile>
+    <ClCompile Include="process\platform\windows\process.cpp">
+      <Filter>process\platform\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="process\cli_arguments.cpp">
+      <Filter>process</Filter>
+    </ClCompile>
+    <ClCompile Include="process\process.cpp">
+      <Filter>process</Filter>
+    </ClCompile>
+    <ClCompile Include="string\sha1sum.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="string\string.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="string\string_streambuf.cpp">
+      <Filter>string</Filter>
+    </ClCompile>
+    <ClCompile Include="time\time_win.cpp">
+      <Filter>time</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="filesystem\extra.hpp">
+      <Filter>filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="filesystem\filesystem.hpp">
+      <Filter>filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="iostream\datetime.hpp">
+      <Filter>iostream</Filter>
+    </ClInclude>
+    <ClInclude Include="iostream\ostream_range.hpp">
+      <Filter>iostream</Filter>
+    </ClInclude>
+    <ClInclude Include="numbers\bcd.hpp">
+      <Filter>numbers</Filter>
+    </ClInclude>
+    <ClInclude Include="numbers\int.hpp">
+      <Filter>numbers</Filter>
+    </ClInclude>
+    <ClInclude Include="process\platform\windows\process.hpp">
+      <Filter>process\platform\windows</Filter>
+    </ClInclude>
+    <ClInclude Include="process\cli_arguments.hpp">
+      <Filter>process</Filter>
+    </ClInclude>
+    <ClInclude Include="process\process.hpp">
+      <Filter>process</Filter>
+    </ClInclude>
+    <ClInclude Include="string\build.hpp">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="string\narrow.hpp">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="string\sha1sum.hpp">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="string\size_for_output.hpp">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="string\size_for_output_containers.hpp">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="string\string.hpp">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="string\string_streambuf.hpp">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="time\time.hpp">
+      <Filter>time</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
