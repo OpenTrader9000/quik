@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="view.cpp" />
+    <ClCompile Include="imgui\imgui.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\imgui_draw.cpp">
+      <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\opengl\imgui_impl_glfw_gl3.cpp">
+      <Filter>imgui\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\opengl\run.cpp">
+      <Filter>imgui\opengl</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\opengl\gl3w\gl3w.c">
+      <Filter>imgui\opengl\gl3w</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\opengl\glfw\context.c">
+      <Filter>imgui\opengl\glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\opengl\glfw\egl_context.c">
+      <Filter>imgui\opengl\glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\opengl\glfw\init.c">
+      <Filter>imgui\opengl\glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\opengl\glfw\input.c">
+      <Filter>imgui\opengl\glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\opengl\glfw\win32_init.c">
+      <Filter>imgui\opengl\glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\opengl\glfw\win32_joystick.c">
+      <Filter>imgui\opengl\glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\opengl\glfw\win32_monitor.c">
+      <Filter>imgui\opengl\glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\opengl\glfw\win32_time.c">
+      <Filter>imgui\opengl\glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\opengl\glfw\win32_tls.c">
+      <Filter>imgui\opengl\glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\opengl\glfw\win32_window.c">
+      <Filter>imgui\opengl\glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\opengl\glfw\window.c">
+      <Filter>imgui\opengl\glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\opengl\glfw\monitor.c">
+      <Filter>imgui\opengl\glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\opengl\glfw\vulkan.c">
+      <Filter>imgui\opengl\glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui\opengl\glfw\wgl_context.c">
+      <Filter>imgui\opengl\glfw</Filter>
+    </ClCompile>
+    <ClCompile Include="view\model\model.cpp">
+      <Filter>view\model</Filter>
+    </ClCompile>
+    <ClCompile Include="view\imgui.cpp">
+      <Filter>view</Filter>
+    </ClCompile>
+    <ClCompile Include="view\static.cpp">
+      <Filter>view</Filter>
+    </ClCompile>
+    <ClCompile Include="view\model\trading.cpp">
+      <Filter>view\model</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="imgui">
+      <UniqueIdentifier>{14bd396f-eb86-44f3-bd89-05be0dc204f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\opengl">
+      <UniqueIdentifier>{7d99c697-d3b0-4f65-9aac-f083bb4a3d38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\opengl\gl3w">
+      <UniqueIdentifier>{d69e478a-6885-49b0-b3f4-e30f24ac8e77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\opengl\gl3w\GL">
+      <UniqueIdentifier>{16e9230d-2073-46f7-815c-efb9c95a10a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\opengl\glfw">
+      <UniqueIdentifier>{cf2e2286-d930-4a52-8916-2855e62e1887}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="imgui\opengl\glfw\GLFW">
+      <UniqueIdentifier>{86ad9794-e2ac-4e9d-a0d1-e0cc04f63f42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view">
+      <UniqueIdentifier>{0a8e337f-8918-4d96-8ba0-907a09903319}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\model">
+      <UniqueIdentifier>{2c4484de-4f5a-4bb6-ac15-90d3aee634d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\primitive">
+      <UniqueIdentifier>{c2f06f6b-93ab-4921-9c7e-5f8b1e28cc7e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="imgui\imconfig.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imgui_internal.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\stb_rect_pack.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\stb_textedit.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\stb_truetype.h">
+      <Filter>imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\opengl\imgui_impl_glfw_gl3.h">
+      <Filter>imgui\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\opengl\run.hpp">
+      <Filter>imgui\opengl</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\opengl\gl3w\GL\gl3w.h">
+      <Filter>imgui\opengl\gl3w\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\opengl\gl3w\GL\glcorearb.h">
+      <Filter>imgui\opengl\gl3w\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\opengl\glfw\GLFW\glfw3.h">
+      <Filter>imgui\opengl\glfw\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\opengl\glfw\GLFW\glfw3native.h">
+      <Filter>imgui\opengl\glfw\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\opengl\glfw\egl_context.h">
+      <Filter>imgui\opengl\glfw</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\opengl\glfw\internal.h">
+      <Filter>imgui\opengl\glfw</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\opengl\glfw\win32_joystick.h">
+      <Filter>imgui\opengl\glfw</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\opengl\glfw\win32_platform.h">
+      <Filter>imgui\opengl\glfw</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\opengl\glfw\wgl_context.h">
+      <Filter>imgui\opengl\glfw</Filter>
+    </ClInclude>
+    <ClInclude Include="view\model\model.hpp">
+      <Filter>view\model</Filter>
+    </ClInclude>
+    <ClInclude Include="view\imgui.hpp">
+      <Filter>view</Filter>
+    </ClInclude>
+    <ClInclude Include="view\static.hpp">
+      <Filter>view</Filter>
+    </ClInclude>
+    <ClInclude Include="view\model\trading.hpp">
+      <Filter>view\model</Filter>
+    </ClInclude>
+    <ClInclude Include="ohlc.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="imgui\LICENSE.txt">
+      <Filter>imgui</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imgui\README.md">
+      <Filter>imgui</Filter>
+    </None>
+  </ItemGroup>
+</Project>

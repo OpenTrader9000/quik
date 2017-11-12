@@ -46,7 +46,7 @@ void dispatcher::stop() {
 // TODO: This ugly code must be removed
 void dispatcher::event_loop() {
     delay_in_ms_ = 1000;
-    unsigned delay_count = 1;
+    unsigned delay_count = 15;
     unsigned counter = 0;
 
     // fabrique method)
