@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include <assert.h>
 #include <common/container/array_view.hpp>
+#include <common/numbers/cast.hpp>
 
 namespace common {
 namespace storage {
@@ -48,15 +49,15 @@ struct unsigned_encoder {
         // 10000000 10000000 10000000 00000000
         // 10000000 10000000 10000000 10000000 00000000
         enum : uint64_t {
-            ONE_BYTE_LIMIT   = (1ull << 7),
-            TWO_BYTE_LIMIT   = (1ull << 7 + 7),
-            THREE_BYTE_LIMIT = (1ull << 7 + 7 + 7),
-            FOUR_BYTE_LIMIT  = (1ull << 7 + 7 + 7 + 7),
-            FIVE_BYTE_LIMIT  = (1ull << 7 + 7 + 7 + 7 + 7),
-            SIX_BYTE_LIMIT   = (1ull << 7 + 7 + 7 + 7 + 7 + 7),
-            SEVEN_BYTE_LIMIT = (1ull << 7 + 7 + 7 + 7 + 7 + 7 + 7),
-            EIGHT_BYTE_LIMIT = (1ull << 7 + 7 + 7 + 7 + 7 + 7 + 7 + 7),
-            NINE_BYTE_LIMIT  = (1ull << 7 + 7 + 7 + 7 + 7 + 7 + 7 + 7 + 7),
+            ONE_BYTE_LIMIT   = (1ull << (7)),
+            TWO_BYTE_LIMIT   = (1ull << (7 + 7)),
+            THREE_BYTE_LIMIT = (1ull << (7 + 7 + 7)),
+            FOUR_BYTE_LIMIT  = (1ull << (7 + 7 + 7 + 7)),
+            FIVE_BYTE_LIMIT  = (1ull << (7 + 7 + 7 + 7 + 7)),
+            SIX_BYTE_LIMIT   = (1ull << (7 + 7 + 7 + 7 + 7 + 7)),
+            SEVEN_BYTE_LIMIT = (1ull << (7 + 7 + 7 + 7 + 7 + 7 + 7)),
+            EIGHT_BYTE_LIMIT = (1ull << (7 + 7 + 7 + 7 + 7 + 7 + 7 + 7)),
+            NINE_BYTE_LIMIT  = (1ull << (7 + 7 + 7 + 7 + 7 + 7 + 7 + 7 + 7)),
         };
 
         // less possible
@@ -92,7 +93,7 @@ struct unsigned_encoder {
         constexpr unsigned char mask = 128 - 1;
 
         unsigned index     = count_of_bytes_;
-        unsigned tmp_value = value;
+        uint64_t tmp_value = value;
         while (index-- != 0) {
             unsigned char v = tmp_value & mask;
             buffer_[index]  = buffer_[index] | v;
@@ -108,7 +109,7 @@ struct unsigned_encoder {
 struct unsigned_decoder {
     unsigned_decoder() {}
 
-    uint64_t decode(unsigned char*& buffer, unsigned& size) {
+    uint64_t decode_uint_impl(unsigned char*& buffer, unsigned& size) {
         enum {
             BIT  = 128, // 10000000
             MASK = 127  // 01111111
@@ -133,11 +134,10 @@ struct unsigned_decoder {
         return result;
     }
 
-    unsigned decode32(unsigned char*& buffer, unsigned& size) {
-        uint64_t dec = decode(buffer, size);
-        if (dec > std::numeric_limits<unsigned>::max())
-            throw std::runtime_error("Numer to big for convering to unsigned int");
-        return static_cast<unsigned>(dec);
+    template<typename T>
+    T decode(unsigned char*& buffer, unsigned& size) {
+        uint64_t dec = decode_uint_impl(buffer, size);
+        return numbers::integer_cast<T>(dec);
     }
 };
 } // namespace compress

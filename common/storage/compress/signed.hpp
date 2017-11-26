@@ -1,21 +1,21 @@
 #pragma once
 
-#include "unsinged.hpp"
+#include "unsigned.hpp"
 
+#include <common/numbers/cast.hpp>
 
 namespace common {
 namespace storage {
 namespace compress {
 
-struct integer_encoder : public unsigned_encoder {
+struct signed_encoder : public unsigned_encoder {
 
-    integer_encoder& compress(int64_t value) {
+    signed_encoder& compress(int64_t value) {
 
 		constexpr unsigned char sign = 64; // 01000000
 
-
         bool     is_negative  = (value < 0);
-        unsigned compressable = (is_negative ? -value : value);
+        uint64_t compressable = (is_negative ? -value : value);
 
         compute_bytes_count_and_alloc(compressable * 2); // sing bit
         compress_impl(compressable);
@@ -30,10 +30,10 @@ struct integer_encoder : public unsigned_encoder {
 };
 
 
-struct integer_decoder {
-    integer_decoder() {}
+struct signed_decoder {
+    signed_decoder() {}
 
-    int64_t decode(unsigned char*& buffer, unsigned& size) {
+    int64_t decode_impl(unsigned char*& buffer, unsigned& size) {
         enum {
             BIT  = 128, // 10000000
             MASK = 127, // 01111111,
@@ -65,12 +65,12 @@ struct integer_decoder {
         return result;
     }
 
-    int decode32(unsigned char*& buffer, unsigned& size) {
-        int64_t dec = decode(buffer, size);
-        if (dec > std::numeric_limits<int>::max() || dec < std::numeric_limits<int>::min())
-            throw std::runtime_error("Numer to big or to low for convering to int");
-        return static_cast<int>(dec);
+    template<typename T>
+    T decode(unsigned char*& buffer, unsigned size) {
+        int64_t dec = decode_impl(buffer, size);
+        return numbers::integer_cast<T>(dec);
     }
+
 };
 } // namespace compress
 } // namespace storage

@@ -10,7 +10,7 @@ namespace compress {
 
 // history decoder allways use signed integer diff which writes into buffer
 // maximum possible difference is max(uint64_t)/2
-struct unsigned_encoder_with_history : public integer_encoder {
+struct unsigned_encoder_with_history : public signed_encoder {
 
     uint64_t last_value_ = 0;
 
@@ -24,34 +24,33 @@ struct unsigned_encoder_with_history : public integer_encoder {
             throw std::runtime_error("Cannot serialize unsigned integer");
 
         int64_t diffProp = static_cast<int64_t>(diff) * (is_neg ? -1 : 1);
-        integer_encoder::compress(diffProp);
+        signed_encoder::compress(diffProp);
         last_value_ = new_value;
     }
 };
 
 
-struct unsigned_decoder_with_history : public integer_decoder {
+struct unsigned_decoder_with_history : public signed_decoder {
 
     uint64_t last_value_ = 0;
 
-    uint64_t decode(unsigned char*& buffer, unsigned& size) {
+    uint64_t decode_uint_impl(unsigned char*& buffer, unsigned& size) {
 
         // get a difference and check if sum last_value and difference is non negative
-        int64_t diff = integer_decoder::decode(buffer, size);
-        if (diff < 0 && std::abs(diff) > last_value_) {
+        int64_t diff = signed_decoder::decode_impl(buffer, size);
+        if (diff < 0 && static_cast<uint64_t>(std::abs(diff)) > last_value_) {
             throw std::runtime_error("Difference has too low value");
         }
         last_value_ += diff;
         return last_value_;
     }
 
-    unsigned decode32(unsigned char*& buffer, unsigned& size) {
-        uint64_t value = decode(buffer, size);
-        if (value > std::numeric_limits<unsigned>::max()) {
-            throw std::runtime_error("Value too big for converting to unsigned int");
-        }
-        return static_cast<unsigned>(value);
+    template<typename T>
+    T decode(unsigned char*& buffer, unsigned& size) {
+        T value = static_cast<T>(decode_uint_impl(buffer, size));
+        return common::numbers::integer_cast<T>(value);
     }
+
 };
 } // namespace compress
 } // namespace storage
