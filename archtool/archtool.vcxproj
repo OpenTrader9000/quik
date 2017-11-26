@@ -296,10 +296,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="archtool.cpp" />
+    <ClCompile Include="quote\quote.cpp" />
     <ClCompile Include="trade\csv_format.cpp" />
     <ClCompile Include="trade\trade.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="quote\quote.hpp" />
     <ClInclude Include="trade\csv_format.hpp" />
     <ClInclude Include="trade\format.hpp" />
     <ClInclude Include="trade\trade.hpp" />

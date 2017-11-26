@@ -2,6 +2,7 @@
 
 #include <utils/string/build.hpp>
 #include <persistent/trade/trade/reader.hpp>
+#include <persistent/trade/trade/writer.hpp>
 #include <iostream>
 #include <memory>
 
@@ -21,14 +22,11 @@ std::shared_ptr<format> create(std::string const& name, utils::cli_arguments con
     return nullptr;
 }
 
-void process_file(std::string const& path, utils::cli_arguments const& args) {
+void process_formated_output(std::string const& path, utils::cli_arguments const& args) {
 
     using namespace persistent::trade::trade;
 
     reader file(path);
-
-    if (!args.has_key("--format"))
-        return;
 
     std::string format = args.value("--format");
     //std::string options = args.value("--options");
@@ -40,7 +38,7 @@ void process_file(std::string const& path, utils::cli_arguments const& args) {
         std::cerr << fmt->help() << "\n";
         return;
     }
-    
+
     trades_sequence_t storage;
     file.read_all_trades(storage);
 
@@ -48,12 +46,26 @@ void process_file(std::string const& path, utils::cli_arguments const& args) {
         fmt->add(trade);
     }
     fmt->flush(output);
-    
+
     auto const& bulk_ptr = file.bulk();
 
     std::cerr << "File " << path << "\n"
-              << "sec code: " << bulk_ptr->sec_code() << "\n"
-              << "trades count: " << bulk_ptr->elements_count() << "\n";
+        << "sec code: " << bulk_ptr->sec_code() << "\n"
+        << "trades count: " << bulk_ptr->elements_count() << "\n";
+}
+
+void process_compress(std::string const& path) {
+    persistent::trade::trade::writer wr(path, "");
+    wr.compress();
+}
+
+void process_file(std::string const& path, utils::cli_arguments const& args) {
+
+    if (args.has_key("--format")) {
+        process_formated_output(path, args);
+    } else if (args.has_key("--compress")) {
+        process_compress(path);
+    }
 }
 } // namespace trade
 } // namespace archtool
