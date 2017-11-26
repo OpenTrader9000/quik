@@ -106,6 +106,9 @@
     <Filter Include="trade\quote">
       <UniqueIdentifier>{576f7362-0b7c-45eb-b938-a69d89948cd7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="third_party\zlib">
+      <UniqueIdentifier>{c3fac047-2ec0-4b86-a5d3-cce924824101}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="third_party\HinnantDate\chrono_io.h">
@@ -913,7 +916,6 @@
       <Filter>third_party\sqlite</Filter>
     </ClInclude>
     <ClInclude Include="persistent.hpp" />
-    <ClInclude Include="config.hpp" />
     <ClInclude Include="impl\persistent.hpp">
       <Filter>impl</Filter>
     </ClInclude>
@@ -945,25 +947,10 @@
       <Filter>trade\trade</Filter>
     </ClInclude>
     <ClInclude Include="pch.hpp" />
-    <ClInclude Include="trade\trade\serializer.hpp">
-      <Filter>trade\trade</Filter>
-    </ClInclude>
-    <ClInclude Include="trade\trade\file.hpp">
-      <Filter>trade\trade</Filter>
-    </ClInclude>
-    <ClInclude Include="trade\trade\deserializer.hpp">
-      <Filter>trade\trade</Filter>
-    </ClInclude>
     <ClInclude Include="trade\quote\cache.hpp">
       <Filter>trade\quote</Filter>
     </ClInclude>
     <ClInclude Include="trade\quote\file.hpp">
-      <Filter>trade\quote</Filter>
-    </ClInclude>
-    <ClInclude Include="trade\quote\serializer.hpp">
-      <Filter>trade\quote</Filter>
-    </ClInclude>
-    <ClInclude Include="trade\quote\deserializer.hpp">
       <Filter>trade\quote</Filter>
     </ClInclude>
     <ClInclude Include="trade\quote\player.hpp">
@@ -971,6 +958,63 @@
     </ClInclude>
     <ClInclude Include="trade\quote\order_book.hpp">
       <Filter>trade\quote</Filter>
+    </ClInclude>
+    <ClInclude Include="config.hpp">
+      <Filter>third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\zlib\crc32.h">
+      <Filter>third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\zlib\deflate.h">
+      <Filter>third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\zlib\gzguts.h">
+      <Filter>third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\zlib\inffast.h">
+      <Filter>third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\zlib\inffixed.h">
+      <Filter>third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\zlib\inflate.h">
+      <Filter>third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\zlib\inftrees.h">
+      <Filter>third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\zlib\trees.h">
+      <Filter>third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\zlib\zconf.h">
+      <Filter>third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\zlib\zlib.h">
+      <Filter>third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\zlib\zutil.h">
+      <Filter>third_party\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="trade\quote\reader.hpp">
+      <Filter>trade\quote</Filter>
+    </ClInclude>
+    <ClInclude Include="trade\quote\writer.hpp">
+      <Filter>trade\quote</Filter>
+    </ClInclude>
+    <ClInclude Include="trade\quote\bulk.hpp">
+      <Filter>trade\quote</Filter>
+    </ClInclude>
+    <ClInclude Include="trade\trade\reader.hpp">
+      <Filter>trade\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="trade\trade\bulk.hpp">
+      <Filter>trade\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="trade\trade\writer.hpp">
+      <Filter>trade\trade</Filter>
+    </ClInclude>
+    <ClInclude Include="trade\trade\file.hpp">
+      <Filter>trade\trade</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1011,25 +1055,10 @@
     <ClCompile Include="trade\trade\cache.cpp">
       <Filter>trade\trade</Filter>
     </ClCompile>
-    <ClCompile Include="trade\trade\serializer.cpp">
-      <Filter>trade\trade</Filter>
-    </ClCompile>
-    <ClCompile Include="trade\trade\file.cpp">
-      <Filter>trade\trade</Filter>
-    </ClCompile>
-    <ClCompile Include="trade\trade\deserializer.cpp">
-      <Filter>trade\trade</Filter>
-    </ClCompile>
     <ClCompile Include="trade\quote\cache.cpp">
       <Filter>trade\quote</Filter>
     </ClCompile>
     <ClCompile Include="trade\quote\file.cpp">
-      <Filter>trade\quote</Filter>
-    </ClCompile>
-    <ClCompile Include="trade\quote\serializer.cpp">
-      <Filter>trade\quote</Filter>
-    </ClCompile>
-    <ClCompile Include="trade\quote\deserializer.cpp">
       <Filter>trade\quote</Filter>
     </ClCompile>
     <ClCompile Include="trade\quote\player.cpp">
@@ -1037,6 +1066,72 @@
     </ClCompile>
     <ClCompile Include="trade\quote\order_book.cpp">
       <Filter>trade\quote</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\zlib\adler32.c">
+      <Filter>third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\zlib\compress.c">
+      <Filter>third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\zlib\crc32.c">
+      <Filter>third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\zlib\deflate.c">
+      <Filter>third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\zlib\gzclose.c">
+      <Filter>third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\zlib\gzlib.c">
+      <Filter>third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\zlib\gzread.c">
+      <Filter>third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\zlib\gzwrite.c">
+      <Filter>third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\zlib\infback.c">
+      <Filter>third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\zlib\inffast.c">
+      <Filter>third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\zlib\inflate.c">
+      <Filter>third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\zlib\inftrees.c">
+      <Filter>third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\zlib\trees.c">
+      <Filter>third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\zlib\uncompr.c">
+      <Filter>third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\zlib\zutil.c">
+      <Filter>third_party\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="trade\quote\reader.cpp">
+      <Filter>trade\quote</Filter>
+    </ClCompile>
+    <ClCompile Include="trade\quote\writer.cpp">
+      <Filter>trade\quote</Filter>
+    </ClCompile>
+    <ClCompile Include="trade\quote\bulk.cpp">
+      <Filter>trade\quote</Filter>
+    </ClCompile>
+    <ClCompile Include="trade\trade\reader.cpp">
+      <Filter>trade\trade</Filter>
+    </ClCompile>
+    <ClCompile Include="trade\trade\bulk.cpp">
+      <Filter>trade\trade</Filter>
+    </ClCompile>
+    <ClCompile Include="trade\trade\writer.cpp">
+      <Filter>trade\trade</Filter>
+    </ClCompile>
+    <ClCompile Include="trade\trade\file.cpp">
+      <Filter>trade\trade</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

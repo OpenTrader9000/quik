@@ -78,6 +78,12 @@
     <ClCompile Include="time\time_win.cpp">
       <Filter>time</Filter>
     </ClCompile>
+    <ClCompile Include="filesystem\mappedfile.c">
+      <Filter>filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="filesystem\filesystem.cpp">
+      <Filter>filesystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="filesystem\extra.hpp">
@@ -130,6 +136,12 @@
     </ClInclude>
     <ClInclude Include="time\time.hpp">
       <Filter>time</Filter>
+    </ClInclude>
+    <ClInclude Include="filesystem\mapped_file.hpp">
+      <Filter>filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="filesystem\mappedfile.h">
+      <Filter>filesystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

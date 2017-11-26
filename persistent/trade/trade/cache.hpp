@@ -5,7 +5,7 @@
 #include <common/thread/sink.hpp>
 
 #include <unordered_set>
-
+#include <unordered_map>
 
 namespace persistent {
 namespace trade {
@@ -29,8 +29,27 @@ private:
 
     void flush();
 
-    std::vector<common::message::ptr>   messages_;
-    std::unordered_set<std::string>     not_finalized_files_;
+    // key must be a [sec_code, date] because trades are inpredictable
+    struct trade_cache_key {
+        std::string sec_code_;
+        uint64_t    day_start_;
+
+        trade_cache_key(std::string const& sec_code, uint64_t time);
+
+        bool operator==(trade_cache_key const& other) const;
+        
+    };
+
+    struct trade_cache_key_hash {
+        size_t operator()(const trade_cache_key &k) const;
+    };
+
+    using messages_t = std::vector<common::message::ptr>;
+    using message_storage_t = std::unordered_map<trade_cache_key, messages_t, trade_cache_key_hash>;
+
+    message_storage_t                   messages_;
+
+    //std::unordered_set<std::string>     not_finalized_files_;
 
 };
 

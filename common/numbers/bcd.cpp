@@ -244,7 +244,7 @@ uint64_t bcd::as_uint64_t() const
 void bcd::from_uint64_t(uint64_t value)
 {
     sign_ = (value >> 63);
-    fractional_size_ = (value_ >> 59) & 0xF;
+    fractional_size_ = (value >> 59) & 0xF;
     value_ = value & 0x07FFFFFFFFFFFFFF;
 }
 

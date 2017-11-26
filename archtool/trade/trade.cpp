@@ -1,7 +1,7 @@
 #include "trade.hpp"
 
 #include <utils/string/build.hpp>
-#include <persistent/trade/trade/file.hpp>
+#include <persistent/trade/trade/reader.hpp>
 #include <iostream>
 #include <memory>
 
@@ -25,12 +25,7 @@ void process_file(std::string const& path, utils::cli_arguments const& args) {
 
     using namespace persistent::trade::trade;
 
-    file file(path);
-    if (!file.open()) {
-        std::cerr << "Cannot open trade file " << path << "\n";
-        return;
-    }
-
+    reader file(path);
 
     if (!args.has_key("--format"))
         return;
@@ -46,18 +41,19 @@ void process_file(std::string const& path, utils::cli_arguments const& args) {
         return;
     }
     
-    file::trades_storage_t storage;
-    file.read_trades(storage);
+    trades_sequence_t storage;
+    file.read_all_trades(storage);
 
     for (auto& trade : storage) {
         fmt->add(trade);
     }
     fmt->flush(output);
+    
+    auto const& bulk_ptr = file.bulk();
 
     std::cerr << "File " << path << "\n"
-              << "sec code: " << file.file_header().sec_code_ << "\n"
-              << "trades count: " << file.file_header().trades_count_ << "\n"
-              << "file version: " << file.file_header().version_ << "\n";
+              << "sec code: " << bulk_ptr->sec_code() << "\n"
+              << "trades count: " << bulk_ptr->elements_count() << "\n";
 }
 } // namespace trade
 } // namespace archtool

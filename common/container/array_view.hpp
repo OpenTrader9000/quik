@@ -25,7 +25,7 @@ struct array_view_iterator {
         return *this;
     }
 
-    array_view_iterator& operator++(int) {
+    array_view_iterator operator++(int) {
         ++ptr_;
         return array_view_iterator(ptr_ - 1);
     }
@@ -35,6 +35,38 @@ struct array_view_iterator {
  private:
     T* ptr_;
 };
+
+// TODO: test it
+template <typename T>
+struct array_view_reverse_iterator {
+	typedef ptrdiff_t difference_type;
+	typedef std::forward_iterator_tag iterator_category;
+	typedef T* pointer;
+	typedef T& reference;
+	typedef T value_type;
+
+	array_view_reverse_iterator(T* ptr)
+		: ptr_(ptr) {}
+
+	bool operator!=(array_view_reverse_iterator const& other) const { return ptr_ != other.ptr_; }
+	bool operator==(array_view_reverse_iterator const& other) const { return ptr_ == other.ptr_; }
+
+	array_view_iterator& operator++() {
+		--ptr_;
+		return *this;
+	}
+
+	array_view_iterator operator++(int) {
+		--ptr_;
+		return array_view_reverse_iterator(ptr_ + 1);
+	}
+
+	T& operator*() const { return *ptr_; }
+
+private:
+	T* ptr_;
+};
+
 
 template <typename T>
 struct array_view {
@@ -54,6 +86,10 @@ struct array_view {
         size_ = other.size_;
     }
 
+    array_view()
+    : ptr_(nullptr)
+    , size_(0) {}
+
     ~array_view() {}
 
     bool empty() const {
@@ -67,6 +103,17 @@ struct array_view {
 
     array_view_iterator<const T> begin() const { return array_view_iterator<const T>(ptr_); }
     array_view_iterator<const T> end() const { return array_view_iterator<const T>(ptr_ + size_); }
+
+    array_view_reverse_iterator<T> rbegin() { return array_view_iterator<T>(ptr_ + size_ - 1); }
+    array_view_reverse_iterator<T> rend() { return array_view_iterator<T>(ptr_ - 1); }
+
+    array_view_reverse_iterator<const T> rbegin() const {
+        return array_view_iterator<const T>(ptr_ + size_ - 1);
+    }
+    array_view_reverse_iterator<const T> rend() const {
+        return array_view_iterator<const T>(ptr_ - 1);
+    }
+
 
  private:
     T* ptr_;

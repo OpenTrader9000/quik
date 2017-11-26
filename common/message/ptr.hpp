@@ -20,6 +20,7 @@ struct ptr {
     }
 
     ptr& operator=(ptr const& other);
+    ptr& operator=(ptr&& other) = default;
 
     base* operator->() {
         return ptr_;
@@ -39,6 +40,8 @@ struct ptr {
     template<typename T>
     T* cast();
 
+    template<typename T>
+    T const* cast() const;
 
     void reset();
 
@@ -49,6 +52,22 @@ struct ptr {
     base* ptr_;
 };
 
+template <typename T>
+inline T* ptr::cast() {
+    assert(T::code == ptr_->code_);
+    return reinterpret_cast<T*>(ptr_);
+}
+
+template<typename T>
+inline T const* ptr::cast() const {
+    assert(T::code == ptr_->code_);
+    return reinterpret_cast<const T*>(ptr_);
+}
+
+
+/*
+   \brief special class for an extraction and using variariable
+*/
 template <typename T>
 struct ptr_concrete : public ptr {
 
@@ -71,9 +90,8 @@ struct ptr_concrete : public ptr {
 };
 
 
-template<typename T>
-inline ptr_concrete<T> ptr::extract()
-{
+template <typename T>
+inline ptr_concrete<T> ptr::extract() {
     ptr_concrete<T> result;
 
     assert(T::code == ptr_->code_);
@@ -82,13 +100,6 @@ inline ptr_concrete<T> ptr::extract()
     result.ptr_ = ptr_;
     ptr_ = nullptr;
     return result;
-}
-
-template<typename T>
-inline T * ptr::cast()
-{
-    assert(T::code == ptr_->code_);
-    return reinterpret_cast<T*>(ptr_);
 }
 
 template <typename MessageType, typename... Args>

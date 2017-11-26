@@ -37,6 +37,9 @@
     <Filter Include="storage\compress">
       <UniqueIdentifier>{36ba9978-76eb-44c6-8ac8-83558ad1deca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="session">
+      <UniqueIdentifier>{8e44c915-174c-4105-b481-08c81cae24f7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="numbers\bcd.cpp">
@@ -63,7 +66,9 @@
     <ClCompile Include="scenario\scenario.cpp">
       <Filter>scenario</Filter>
     </ClCompile>
-    <ClCompile Include="session\session.cpp" />
+    <ClCompile Include="session\session.cpp">
+      <Filter>session</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="numbers\bcd.hpp">
@@ -132,7 +137,6 @@
     </ClInclude>
     <ClInclude Include="..\message\event\start.hpp" />
     <ClInclude Include="..\message\storage\event.hpp" />
-    <ClInclude Include="session\session.hpp" />
     <ClInclude Include="storage\trade.hpp">
       <Filter>storage</Filter>
     </ClInclude>
@@ -160,9 +164,6 @@
     <ClInclude Include="storage\compress\integer.hpp">
       <Filter>storage\compress</Filter>
     </ClInclude>
-    <ClInclude Include="storage\compress\unsinged.hpp">
-      <Filter>storage\compress</Filter>
-    </ClInclude>
     <ClInclude Include="storage\compress\signed.hpp">
       <Filter>storage\compress</Filter>
     </ClInclude>
@@ -170,6 +171,30 @@
       <Filter>storage\compress</Filter>
     </ClInclude>
     <ClInclude Include="storage\compress\signed_history.hpp">
+      <Filter>storage\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="storage\compress\traits.hpp">
+      <Filter>storage\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="storage\compress\make.hpp">
+      <Filter>storage\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="storage\compress\single_byte.hpp">
+      <Filter>storage\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="storage\compress\compress.hpp">
+      <Filter>storage\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="numbers\cast.hpp">
+      <Filter>numbers</Filter>
+    </ClInclude>
+    <ClInclude Include="session\session.hpp">
+      <Filter>session</Filter>
+    </ClInclude>
+    <ClInclude Include="storage\compress\bcd.hpp">
+      <Filter>storage\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="storage\compress\unsigned.hpp">
       <Filter>storage\compress</Filter>
     </ClInclude>
   </ItemGroup>

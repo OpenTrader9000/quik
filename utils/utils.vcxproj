@@ -288,6 +288,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="filesystem\extra.cpp" />
+    <ClCompile Include="filesystem\filesystem.cpp" />
+    <ClCompile Include="filesystem\mappedfile.c" />
     <ClCompile Include="filesystem\platform\windows\filesystem.cpp" />
     <ClCompile Include="iostream\datetime.cpp" />
     <ClCompile Include="numbers\bcd.cpp" />
@@ -303,6 +305,8 @@
   <ItemGroup>
     <ClInclude Include="filesystem\extra.hpp" />
     <ClInclude Include="filesystem\filesystem.hpp" />
+    <ClInclude Include="filesystem\mappedfile.h" />
+    <ClInclude Include="filesystem\mapped_file.hpp" />
     <ClInclude Include="iostream\datetime.hpp" />
     <ClInclude Include="iostream\ostream_range.hpp" />
     <ClInclude Include="numbers\bcd.hpp" />

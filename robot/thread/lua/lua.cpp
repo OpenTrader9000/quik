@@ -228,8 +228,8 @@ void lua::on_transaction(sol::table transaction){
 
 void lua::on_quote(char const* class_code, char const* sec_code, sol::table tab){
 
-	//if (strcmp(class_code, "SPBFUT") != 0)
-	//	return;
+	if (strcmp(class_code, "SPBFUT") != 0)
+		return;
 
     update_timestamp();
     

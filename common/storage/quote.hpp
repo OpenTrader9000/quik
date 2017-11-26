@@ -2,6 +2,8 @@
 
 #include <common/numbers/bcd.hpp>
 #include <tuple>
+#include <common/storage/compress/make.hpp>
+
 
 namespace common {
 namespace storage {
@@ -17,8 +19,15 @@ struct quote {
     bool is_bid() const { return (flags_ & (1 << BID)) != 0; }
     bool is_offer() const { return (flags_ & (1 << BID)) == 0; }
 
-    static auto fields() {
+    static constexpr auto fields() {
         return std::make_tuple(&quote::flags_, &quote::price_, &quote::quantity_diff_, &quote::machine_timestamp_);
+    }
+
+    static auto make_compressor() {
+        using namespace common::storage::compress;
+        return std::make_tuple(compressor(&quote::flags_), history_compressor(&quote::price_),
+                               compressor(&quote::quantity_diff_),
+                               history_compressor(&quote::machine_timestamp_));
     }
 
     unsigned char flags_;

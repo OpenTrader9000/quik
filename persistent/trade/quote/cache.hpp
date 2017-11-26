@@ -5,6 +5,7 @@
 #include <common/thread/sink.hpp>
 
 #include <unordered_set>
+#include <unordered_map>
 
 
 namespace persistent {
@@ -28,9 +29,12 @@ private:
     std::string storage_folder_;
 
     void flush();
+     
+    using messages_sequence_t = std::vector<common::message::ptr>;
+    using messages_storage_t = std::unordered_map<std::string, messages_sequence_t>; // seq_code->seq
 
-    std::vector<common::message::ptr>   messages_;
-    std::unordered_set<std::string>     not_finalized_files_;
+    messages_storage_t                  messages_;
+    //std::unordered_set<std::string>     not_finalized_files_;
 
 };
 

@@ -1,7 +1,8 @@
 #include "cache.hpp"
-#include "serializer.hpp"
+//#include "serializer.hpp"
 #include <common/message/trade/trade.hpp>
 #include <unordered_map>
+#include "writer.hpp"
 
 namespace persistent {
 namespace trade {
@@ -18,12 +19,33 @@ cache::~cache() {
     assert(messages_.empty());
 }
 
+cache::trade_cache_key::trade_cache_key(std::string const& sec_code, uint64_t time)
+    : sec_code_(sec_code) {
+    constexpr uint64_t day_in_ms = 24 * 60 * 60 * 1000;
+    constexpr uint64_t moscow_ts = 3 * 60 * 60 * 1000;
+    uint64_t local_time = (time - moscow_ts);
+    day_start_ = local_time - local_time % day_in_ms;
+}
+
+bool cache::trade_cache_key::operator==(trade_cache_key const & other) const {
+    return (sec_code_ == other.sec_code_) && (day_start_ == other.day_start_);
+}
+
+size_t cache::trade_cache_key_hash::operator()(const trade_cache_key & k) const {
+    // all days in a single bucket
+    return std::hash<std::string>()(k.sec_code_);
+}
+
+
 void cache::consume(ptr_t&& message) {
 
     using namespace common::message;
 
     if (message.is_code(codes::TRADE)) {
-        messages_.push_back(std::move(message));
+        auto trade = message.cast<common::message::trade::trade>();
+        trade_cache_key key(trade->sec_code_, trade->server_timestamp());
+
+        messages_[key].push_back(std::move(message));
     } else if (message.is_code(codes::FLUSH)) {
         flush();
     } else
@@ -35,42 +57,17 @@ void cache::flush() {
 
     using trade_t = common::message::trade::trade;
 
-    std::unordered_map<std::string, unsigned> count_map;
-
-    uint64_t min_ts    = std::numeric_limits<uint64_t>::max();
-    uint64_t max_ts    = 0;
-    uint64_t day_in_ms = 24 * 60 * 60 * 1000;
-    uint64_t moscow_ts = 3 * 60 * 60 * 1000;
-
     // compute basic parameters
     for (auto& m : messages_) {
-        trade_t* trd = m.cast<trade_t>();
-        count_map[trd->sec_code_]++;
-        min_ts = std::min(min_ts, trd->server_timestamp());
-        max_ts = std::max(max_ts, trd->server_timestamp());
+
+        auto& key = m.first;
+        //auto& messages = m.second;
+
+        auto p = path(key.sec_code_, storage_folder_, key.day_start_);
+        writer w(p, key.sec_code_);
+        w.serialize(m.second);
     }
-
-    // walk throught all days for all messages
-    // The most possible scenario that all messages are fit in one day.
-    auto start_day_ts = min_ts - min_ts % day_in_ms - moscow_ts;
-    while (start_day_ts < max_ts) {
-        // walk every sec_code
-        for (auto& pair : count_map) {
-            serializer ser(pair.first, storage_folder_, start_day_ts, start_day_ts + day_in_ms);
-            ser.serialize(messages_, pair.second );
-        }
-        start_day_ts += day_in_ms;
-    }
-
-    auto have_not_handled_messages = [this]() {
-        for (auto& mes : messages_) {
-            if (mes)
-                return true;
-        }
-        return false;
-    };
-    assert(!have_not_handled_messages());
-
+    
     messages_.clear();
 }
 
