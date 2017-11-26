@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="catch2">
+      <UniqueIdentifier>{1021480e-3505-4ae2-bcfe-83a2be0392e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{5ba92fde-4b6a-4ec1-983c-1f515c771d7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common\storage">
+      <UniqueIdentifier>{ee7f4af0-13e9-4adf-8499-bb0f2194263f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="test.cpp">
+      <Filter>catch2</Filter>
+    </ClCompile>
+    <ClCompile Include="common\storage\compress.cpp">
+      <Filter>common\storage</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="catch.hpp">
+      <Filter>catch2</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
