@@ -17,15 +17,20 @@ struct imgui {
     imgui(model_ptr_t model, coordinate_t width = 0, coordinate_t height = 0);
     ~imgui();
 
+	void show();
     void render();
     void resize(coordinate_t width, coordinate_t height);
 
  private:
 	 // all OpenGL functions are maked here
     void process_rendering();
-	ImVec2 compute_image_move() ;
+	//ImVec2 compute_image_move() ;
+
+    // true if mouse will is active
+    bool check_process_mouse_wheel();
 
 	std::vector<unsigned char>	render_image_in_skia();
+    ImVec2                      compute_image_move();
 
     model_ptr_t model_;
     GLuint      texture_id_;
@@ -38,5 +43,6 @@ struct imgui {
     // mouse state
     ImVec2 last_mouse_position_;
 	bool   is_mouse_was_pressed_;
+    float   zoom_multiplier_;
 };
 } // namespace view

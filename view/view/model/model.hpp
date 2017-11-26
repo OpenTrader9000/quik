@@ -47,8 +47,14 @@ public:
 
 	properties_t const&  properties() const;
 
+    virtual void init(coordinate_t width, coordinate_t height, coordinate_t& x, coordinate_t& y) = 0;
     virtual void draw(SkCanvas* canvas, coordinate_t width, coordinate_t height, coordinate_t& x,
-                      coordinate_t& y)                                          = 0;
+                      coordinate_t& y) = 0;
+
+    // zoom affects axis
+    virtual void zoom(float& multiplier, coordinate_t width, coordinate_t height, coordinate_t& x,
+                      coordinate_t& y) = 0;
+
     virtual void set_property(std::string const& key, std::string const& value) = 0;
     virtual bool new_data_availiable() const;
 };
@@ -56,4 +62,4 @@ public:
 } // namespace model
 
 using model_ptr_t = std::shared_ptr<model::model>;
-} // namespace view
+} // namespace view  

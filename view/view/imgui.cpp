@@ -15,22 +15,30 @@ imgui::imgui(model_ptr_t model, coordinate_t width, coordinate_t height)
 , width_(width)
 , height_(height)
 , last_mouse_position_{}
-, is_mouse_was_pressed_(false) {
+, is_mouse_was_pressed_(false)
+, zoom_multiplier_(1.0) {
     assert(model_);
+    model_->init(width_, height_, x_, y_);
+	//process_rendering();
 }
 
 imgui::~imgui() {}
 
 void imgui::render() {
-	ImVec2 diff = compute_image_move();
-    if (texture_id_ == 0 || diff.x != 0 || diff.y != 0) {
-		x_ += diff.x;
-		y_ += diff.y;
-        process_rendering();
+	process_rendering();
+}
+
+void imgui::show() {
+
+    auto move = compute_image_move();
+	if (texture_id_ == 0 || move.x  != 0 || move.y != 0 || check_process_mouse_wheel()) {
+        x_ -= (move.x > x_ ? x_ : move.x);
+        y_ -= (move.y > y_ ? y_ : move.y);
+		process_rendering();
 	}
 
-    ImVec2 dimensions = { static_cast<float>(width_), static_cast<float>(height_) };
-    ImGui::Image((void*)texture_id_, dimensions);
+	ImVec2 dimensions = { static_cast<float>(width_), static_cast<float>(height_) };
+	ImGui::Image((void*)texture_id_, dimensions);
 }
 
 void imgui::resize(coordinate_t width, coordinate_t height){
@@ -44,7 +52,6 @@ void imgui::process_rendering(){
     }
 
 	auto image_data = render_image_in_skia();
-
 
     // Write data to OpenGL texture
     glGenTextures(1, &texture_id_);
@@ -92,15 +99,30 @@ ImVec2 imgui::compute_image_move()
 	return result;
 }
 
+bool imgui::check_process_mouse_wheel()
+{
+    bool result = false;
+    if (ImGui::GetIO().MouseWheel > 0) {
+        zoom_multiplier_ -= 0.05;
+        result = true;
+    }
+    else if (ImGui::GetIO().MouseWheel < 0) {
+        zoom_multiplier_ += 0.05;
+        result = true;
+    }
+    if (result) {
+        model_->zoom(zoom_multiplier_, width_, height_, x_, y_);
+    }
+    return result;
+}
+
 std::vector<unsigned char> imgui::render_image_in_skia() {
 
 	std::vector<unsigned char> image_data(width_ * height_ * 4);
 	memset(image_data.data(), 0, width_ * height_ * 4);
 
-
 	SkImageInfo canvas_info = SkImageInfo::MakeN32(width_, height_, kPremul_SkAlphaType);
 	SkPixmap    dst_pixmap(canvas_info, (void*)image_data.data(), width_ * 4);
-
 
     // generating image in skia
     sk_sp<SkSurface> raster_surface = SkSurface::MakeRasterN32Premul(width_, height_);

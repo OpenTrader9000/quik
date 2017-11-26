@@ -71,6 +71,9 @@
     <ClCompile Include="view\model\trading.cpp">
       <Filter>view\model</Filter>
     </ClCompile>
+    <ClCompile Include="primitive\bar.cpp">
+      <Filter>view\primitive</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="imgui">
@@ -166,6 +169,9 @@
       <Filter>view\model</Filter>
     </ClInclude>
     <ClInclude Include="ohlc.hpp" />
+    <ClInclude Include="primitive\bar.hpp">
+      <Filter>view\primitive</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="imgui\LICENSE.txt">

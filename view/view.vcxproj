@@ -76,7 +76,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)/imgui/opengl/gl3w;$(SKIA_INCLUDE)/config;$(SKIA_INCLUDE);$(ProjectDir);$(ProjectDir)\imgui\opengl\gl3w;$(ProjectDir)\imgui\opengl\glfw;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir);$(ProjectDir)/imgui/opengl/gl3w;$(SKIA_INCLUDE)/config;$(SKIA_INCLUDE);$(ProjectDir);$(ProjectDir)\imgui\opengl\gl3w;$(ProjectDir)\imgui\opengl\glfw;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -84,7 +84,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)/imgui/opengl/gl3w;$(SKIA_INCLUDE)/config;$(SKIA_INCLUDE);$(ProjectDir);$(ProjectDir)\imgui\opengl\gl3w;$(ProjectDir)\imgui\opengl\glfw;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir);$(ProjectDir)/imgui/opengl/gl3w;$(SKIA_INCLUDE)/config;$(SKIA_INCLUDE);$(ProjectDir);$(ProjectDir)\imgui\opengl\gl3w;$(ProjectDir)\imgui\opengl\glfw;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -171,6 +171,7 @@
     <ClCompile Include="imgui\opengl\glfw\window.c" />
     <ClCompile Include="imgui\opengl\imgui_impl_glfw_gl3.cpp" />
     <ClCompile Include="imgui\opengl\run.cpp" />
+    <ClCompile Include="primitive\bar.cpp" />
     <ClCompile Include="view.cpp" />
     <ClCompile Include="view\model\model.cpp" />
     <ClCompile Include="view\model\trading.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="imgui\stb_textedit.h" />
     <ClInclude Include="imgui\stb_truetype.h" />
     <ClInclude Include="ohlc.hpp" />
+    <ClInclude Include="primitive\bar.hpp" />
     <ClInclude Include="view\model\model.hpp" />
     <ClInclude Include="view\model\trading.hpp" />
     <ClInclude Include="view\static.hpp" />

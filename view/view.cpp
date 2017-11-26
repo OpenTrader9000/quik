@@ -15,10 +15,14 @@
 #include <view/model/trading.hpp>
 #include <view/imgui.hpp>
 
+#include "ohlc.hpp"
+
 float g_width = 1024;
 float g_height = 480;
 
-view::imgui global_view(std::make_shared<view::model::trading>(), g_width, g_height);
+auto ds_ptr = std::make_shared<view::model::datasource>(ohlc_values);
+
+view::imgui global_view(std::make_shared<view::model::trading>(ds_ptr), g_width, g_height);
 
 bool show_window = true;
 bool show_image  = true;
@@ -28,7 +32,7 @@ void render(void* device) {
 
         ImGui::BeginChild("Image window", ImVec2{ g_width + 20, g_height + 20 }, true,
                           ImGuiWindowFlags_HorizontalScrollbar);
-        global_view.render();
+        global_view.show();
         ImGui::EndChild();
 
         // ImGui::Text(
