@@ -2,7 +2,7 @@
 
 #include <common/message/base.hpp>
 #include <common/message/ptr.hpp>
-#include <common/thread/sink.hpp>
+#include <common/thread/sink_with_logging.hpp>
 
 #include <unordered_set>
 #include <unordered_map>
@@ -11,7 +11,7 @@ namespace persistent {
 namespace trade {
 namespace trade {
 
-struct cache : public common::thread::sink_mt_t {
+struct cache : public common::thread::sink_with_logging_mt_t {
     
     cache(std::string const& folder);
     ~cache();
@@ -21,9 +21,10 @@ struct cache : public common::thread::sink_mt_t {
     //template <typename It>
     //void push(It iterator, size_t count);
 
-    virtual void consume(ptr_t&& message) override;
+    void         consume(ptr_t&& message);
+    virtual void consume(std::vector<ptr_t>& messages) override;
 
-private:
+ private:
     
     std::string storage_folder_;
 

@@ -87,6 +87,11 @@ void lua::start(lua_State* L) {
     config.persistent_.path2db_               = persistent["path2db"];
     config.persistent_.trades_archive_folder_ = persistent["trades_archive"];
 
+    /*LOAD LOG CONFIG*/
+    auto log          = config_table["log"];
+    config.log_.path_ = log["path"];
+    config.log_.parse_level(log["level"]);
+
     sol::table instruments = config_table["instruments"];
     instruments.for_each([&](sol::object const&, sol::object const& value) {
         sol::table inst = value;

@@ -3,14 +3,14 @@
 #include "writer.hpp"
 #include <common/message/trade/quotes.hpp>
 #include <unordered_map>
-#include "..\trade\cache.hpp"
 
 namespace persistent {
 namespace trade {
 namespace quote {
 
 cache::cache(std::string const& folder)
-: storage_folder_(folder) {}
+    : sink_with_logging("trade")
+    , storage_folder_(folder) {}
 
 cache::~cache() {
 
@@ -19,6 +19,12 @@ cache::~cache() {
     flush();
 
     assert(messages_.empty());
+}
+
+void cache::consume(std::vector<ptr_t>& messages) {
+    for (auto& mes : messages) {
+        consume(std::move(mes));
+    }
 }
 
 void cache::consume(ptr_t&& message) {

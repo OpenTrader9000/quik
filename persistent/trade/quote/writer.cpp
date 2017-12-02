@@ -79,11 +79,17 @@ void writer::serialize( messages_view_t messages) {
     using quote_t = common::message::trade::quote;
     using quotes_t = common::message::trade::quotes;
 
-    std::vector<char> quotes_raw_data;
-    quotes_raw_data.reserve(place_for_quote * messages.size());
 
     // File contains many valuable data
     open();
+
+    // no throw no anything - just exit
+    if (is_file_compressed())
+        return;
+
+
+    std::vector<char> quotes_raw_data;
+    quotes_raw_data.reserve(place_for_quote * messages.size());
 
     size_t quotes_count = 0;
     for (auto& p : messages) {

@@ -2,7 +2,7 @@
 
 #include <common/message/message.hpp>
 
-#include <common/thread/sink.hpp>
+#include <common/thread/sink_with_logging.hpp>
 #include <common/storage/scenario_entry.hpp>
 #include <common/container/array_view.hpp>
 
@@ -22,10 +22,10 @@ using scenario_entry_t = common::storage::scenario_entry;
 
 //using sqlite_conn_t      = sqlpp::sqlite3::connection;
 //using sqlite_conn_conf_t = sqlpp::sqlite3::connection_config;
-using sink_mt_t          = common::thread::sink_mt_t;
+//using sink_mt_t          = common::thread::sink_mt_t;
 
 // sql must be accessible from a multiple threads
-struct sql : public sink_mt_t {
+struct sql : public common::thread::sink_with_logging_mt_t {
 
     sql(std::string const& path2db);
     ~sql();
@@ -37,7 +37,8 @@ struct sql : public sink_mt_t {
     //template <typename It>
     //void push(It iterator, size_t count);
 
-    virtual void consume(ptr_t&& message) override;
+    void         consume(ptr_t&& message);
+    virtual void consume(std::vector<ptr_t>& messages) override;
 
     // function create new scenario id
     // \return scenarion_id in database

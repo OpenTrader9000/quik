@@ -11,6 +11,7 @@ template <typename QueueType>
 struct sink {
 
     using ptr_t = ::common::message::ptr;
+    using bulk_t = std::vector<ptr_t>;
 
     sink();
     virtual ~sink();
@@ -37,7 +38,16 @@ struct sink {
     }
 
     // client messaging
-    virtual void consume(::common::message::ptr&&) = 0;
+    //virtual void consume(::common::message::ptr&&) = 0;
+    
+    // consumer thread owns all messages
+    virtual void consume(bulk_t&) = 0;
+
+    // event messaging
+    virtual void on_start_thread()                  = 0;
+    virtual void on_end_thread()                    = 0;
+    virtual void on_handle_messages()               = 0;
+    virtual void on_error(std::string const& error) = 0;
 
     bool sink_stopped_ = false;
     std::thread thread_;

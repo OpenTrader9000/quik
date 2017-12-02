@@ -19,7 +19,8 @@ using namespace common::message;
 
 
 sql::sql(std::string const& path2db)
-: path2db_(path2db) {
+    : sink_with_logging("SQL")
+    , path2db_(path2db) {
     connect();
 }
 
@@ -92,7 +93,13 @@ void sql::flush() {
 
 
     cache_.clear();
- }
+}
+
+void sql::consume(std::vector<ptr_t>& messages) {
+    for (auto& mes : messages) {
+        consume(std::move(mes));
+    }
+}
 
 void sql::consume(ptr_t&& message) {
 

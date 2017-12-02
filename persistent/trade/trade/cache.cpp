@@ -8,7 +8,8 @@ namespace persistent {
 namespace trade {
 namespace trade {
 cache::cache(std::string const& folder)
-: storage_folder_(folder) {}
+    : sink_with_logging("quote")
+    , storage_folder_(folder) {}
 
 cache::~cache() {
 
@@ -36,6 +37,11 @@ size_t cache::trade_cache_key_hash::operator()(const trade_cache_key & k) const 
     return std::hash<std::string>()(k.sec_code_);
 }
 
+void cache::consume(std::vector<ptr_t>& messages) {
+    for (auto& mes : messages) {
+        consume(std::move(mes));
+    }
+}
 
 void cache::consume(ptr_t&& message) {
 
@@ -51,7 +57,6 @@ void cache::consume(ptr_t&& message) {
     } else
         assert(false);
 }
-
 
 void cache::flush() {
 

@@ -231,12 +231,16 @@ void writer::serialize(messages_view_t messages) {
 
     //std::vector<common::storage::trade> trades;
     //trades.reserve(count);
+    
+    // File contains many valuable data
+    open();
+
+    // no throw no anything - just exit
+    if (is_file_compressed())
+        return;
 
     std::vector<char> trades_buffer;
     trades_buffer.reserve(place_for_trade*messages.size());
-
-    // File contains many valuable data
-    open();
 
     for (auto& p : messages) {
         // trade exist, trade has proper time

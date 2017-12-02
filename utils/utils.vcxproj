@@ -153,7 +153,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ATOMIC_QUEUE;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
       <AdditionalOptions>/D_CRT_SECURE_NO_WARNINGS /D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
@@ -168,7 +168,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ATOMIC_QUEUE;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
       <AdditionalOptions>/D_CRT_SECURE_NO_WARNINGS /D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
@@ -183,7 +183,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ATOMIC_QUEUE;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
       <AdditionalOptions>/D_CRT_SECURE_NO_WARNINGS /D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
@@ -198,7 +198,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ATOMIC_QUEUE;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
       <AdditionalOptions>/D_CRT_SECURE_NO_WARNINGS /D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
@@ -215,7 +215,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ATOMIC_QUEUE;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
       <AdditionalOptions>/D_CRT_SECURE_NO_WARNINGS /D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
@@ -234,7 +234,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ATOMIC_QUEUE;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
       <AdditionalOptions>/D_CRT_SECURE_NO_WARNINGS /D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
@@ -253,7 +253,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ATOMIC_QUEUE;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
       <AdditionalOptions>/D_CRT_SECURE_NO_WARNINGS /D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
@@ -272,7 +272,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ATOMIC_QUEUE;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
       <AdditionalOptions>/D_CRT_SECURE_NO_WARNINGS /D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
@@ -292,6 +292,7 @@
     <ClCompile Include="filesystem\mappedfile.c" />
     <ClCompile Include="filesystem\platform\windows\filesystem.cpp" />
     <ClCompile Include="iostream\datetime.cpp" />
+    <ClCompile Include="log\log.cpp" />
     <ClCompile Include="numbers\bcd.cpp" />
     <ClCompile Include="numbers\int.cpp" />
     <ClCompile Include="process\cli_arguments.cpp" />
@@ -300,6 +301,8 @@
     <ClCompile Include="string\sha1sum.cpp" />
     <ClCompile Include="string\string.cpp" />
     <ClCompile Include="string\string_streambuf.cpp" />
+    <ClCompile Include="threading\sync_op.cpp" />
+    <ClCompile Include="threading\sync_op_impl.cpp" />
     <ClCompile Include="time\time_win.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -309,6 +312,7 @@
     <ClInclude Include="filesystem\mapped_file.hpp" />
     <ClInclude Include="iostream\datetime.hpp" />
     <ClInclude Include="iostream\ostream_range.hpp" />
+    <ClInclude Include="log\log.hpp" />
     <ClInclude Include="numbers\bcd.hpp" />
     <ClInclude Include="numbers\int.hpp" />
     <ClInclude Include="process\cli_arguments.hpp" />
@@ -321,6 +325,12 @@
     <ClInclude Include="string\size_for_output_containers.hpp" />
     <ClInclude Include="string\string.hpp" />
     <ClInclude Include="string\string_streambuf.hpp" />
+    <ClInclude Include="threading\block_queue.hpp" />
+    <ClInclude Include="threading\block_queue_lock.hpp" />
+    <ClInclude Include="threading\sync_op.hpp" />
+    <ClInclude Include="threading\sync_op_impl.hpp" />
+    <ClInclude Include="threading\third_party\blockingconcurrentqueue.h" />
+    <ClInclude Include="threading\third_party\concurrentqueue.h" />
     <ClInclude Include="time\time.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

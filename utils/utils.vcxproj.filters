@@ -37,6 +37,15 @@
     <Filter Include="time">
       <UniqueIdentifier>{D60922EB-7F16-3716-830B-CDED81A6ED85}</UniqueIdentifier>
     </Filter>
+    <Filter Include="threading">
+      <UniqueIdentifier>{928340b1-2f58-4bff-ae20-f68e6a9b0937}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="threading\third_party">
+      <UniqueIdentifier>{225bae26-034b-45a3-9202-b039dbbf75c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="log">
+      <UniqueIdentifier>{d16b019f-ad97-43a0-9c06-f5af2b4468bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -83,6 +92,15 @@
     </ClCompile>
     <ClCompile Include="filesystem\filesystem.cpp">
       <Filter>filesystem</Filter>
+    </ClCompile>
+    <ClCompile Include="threading\sync_op.cpp">
+      <Filter>threading</Filter>
+    </ClCompile>
+    <ClCompile Include="threading\sync_op_impl.cpp">
+      <Filter>threading</Filter>
+    </ClCompile>
+    <ClCompile Include="log\log.cpp">
+      <Filter>log</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +160,27 @@
     </ClInclude>
     <ClInclude Include="filesystem\mappedfile.h">
       <Filter>filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="threading\block_queue.hpp">
+      <Filter>threading</Filter>
+    </ClInclude>
+    <ClInclude Include="threading\block_queue_lock.hpp">
+      <Filter>threading</Filter>
+    </ClInclude>
+    <ClInclude Include="threading\sync_op.hpp">
+      <Filter>threading</Filter>
+    </ClInclude>
+    <ClInclude Include="threading\sync_op_impl.hpp">
+      <Filter>threading</Filter>
+    </ClInclude>
+    <ClInclude Include="threading\third_party\blockingconcurrentqueue.h">
+      <Filter>threading\third_party</Filter>
+    </ClInclude>
+    <ClInclude Include="threading\third_party\concurrentqueue.h">
+      <Filter>threading\third_party</Filter>
+    </ClInclude>
+    <ClInclude Include="log\log.hpp">
+      <Filter>log</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
