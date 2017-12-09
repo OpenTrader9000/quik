@@ -30,6 +30,7 @@ struct bulk {
 
     uint64_t           elements_count() const { return elements_count_; }
     std::string const& sec_code() const { return sec_code_; }
+    size_t             data_size() const { return bulk_storage_.size(); }
 
  private:
 
@@ -49,9 +50,9 @@ template <typename FunctionType>
 inline void bulk::walk_throught(FunctionType&& callback) {
     auto compressor = common::storage::trade::make_compressor();
 
-    unsigned char* begin = bulk_storage_.data();
-    unsigned char* end   = begin + bulk_storage_.size();
-    unsigned       size  = static_cast<unsigned>(bulk_storage_.size());
+    unsigned char const* begin = bulk_storage_.data();
+    unsigned char const* end   = begin + bulk_storage_.size();
+    unsigned             size  = static_cast<unsigned>(bulk_storage_.size());
 
     while (begin != end) {
         common::storage::trade value;

@@ -13,6 +13,9 @@ struct order_book_element {
 };
 
 struct order_book {
+
+    using iterator_t = std::vector<order_book_element>::iterator;
+
 	std::vector<order_book_element>		bid_;
 	std::vector<order_book_element>		offer_;
 };
