@@ -21,15 +21,19 @@ struct signed_encoder_with_history : public signed_encoder {
 
 struct signed_decoder_with_history : public signed_decoder {
     int64_t last_value_ = 0;
-    int64_t decode_impl(unsigned char*& buffer, unsigned& size) {
+    int64_t decode_impl(unsigned char const*& buffer, unsigned& size) {
         last_value_ += signed_decoder::decode_impl(buffer, size);
         return last_value_;
     }
 
     template<typename T>
-    T decode(unsigned char*& buffer, unsigned& size) {
+    T decode(unsigned char const*& buffer, unsigned& size) {
         int64_t value = decode_impl(buffer, size);
         return common::numbers::integer_cast<T>(value);
+    }
+
+    void setup(int64_t value) {
+        last_value_ = value;
     }
 };
 } // namespace compress

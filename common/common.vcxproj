@@ -287,6 +287,8 @@
     <ClCompile Include="numbers\integer.cpp" />
     <ClCompile Include="scenario\scenario.cpp" />
     <ClCompile Include="session\session.cpp" />
+    <ClCompile Include="storage\compress\signed.cpp" />
+    <ClCompile Include="storage\compress\unsigned.cpp" />
     <ClCompile Include="thread\sink_with_logging.hpp" />
     <ClCompile Include="thread\run.cpp" />
     <ClCompile Include="thread\sink.cpp" />
@@ -298,6 +300,7 @@
     <ClInclude Include="container\container.hpp" />
     <ClInclude Include="container\quotes.hpp" />
     <ClInclude Include="container\small_vector.hpp" />
+    <ClInclude Include="debug\value.hpp" />
     <ClInclude Include="defines.hpp" />
     <ClInclude Include="message\alloc.hpp" />
     <ClInclude Include="message\base.hpp" />

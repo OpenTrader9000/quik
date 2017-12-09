@@ -12,7 +12,7 @@ struct char_decenc {
 
     void compress(unsigned char value) { value_ = value; }
 
-    unsigned char decode_impl(unsigned char*& buffer, unsigned& size) {
+    unsigned char decode_impl(unsigned char const*& buffer, unsigned& size) {
         value_ = *buffer;
         ++buffer;
         --size;
@@ -20,7 +20,7 @@ struct char_decenc {
     }
 
     template <typename T>
-    T decode(unsigned char*& buffer, unsigned& size) {
+    T decode(unsigned char const*& buffer, unsigned& size) {
         return static_cast<T>(decode_impl(buffer, size));
     }
 
@@ -28,6 +28,11 @@ struct char_decenc {
         *buffer = value_;
         ++buffer;
         --to_end;
+    }
+
+    template<typename CharType>
+    void setup(CharType value) {
+        value_ = static_cast<unsigned char>(value);
     }
 };
 

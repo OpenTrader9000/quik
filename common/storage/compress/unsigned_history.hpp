@@ -34,7 +34,7 @@ struct unsigned_decoder_with_history : public signed_decoder {
 
     uint64_t last_value_ = 0;
 
-    uint64_t decode_uint_impl(unsigned char*& buffer, unsigned& size) {
+    uint64_t decode_uint_impl(unsigned char const*& buffer, unsigned& size) {
 
         // get a difference and check if sum last_value and difference is non negative
         int64_t diff = signed_decoder::decode_impl(buffer, size);
@@ -46,9 +46,13 @@ struct unsigned_decoder_with_history : public signed_decoder {
     }
 
     template<typename T>
-    T decode(unsigned char*& buffer, unsigned& size) {
+    T decode(unsigned char const*& buffer, unsigned& size) {
         T value = static_cast<T>(decode_uint_impl(buffer, size));
         return common::numbers::integer_cast<T>(value);
+    }
+
+    void setup(uint64_t value) {
+        last_value_ = value;
     }
 
 };

@@ -21,7 +21,7 @@ struct compressor_inst_t {
         : pointer_to_member_(ptr) {}
 
     // write to a field of the class
-    void decode(Class& instance, unsigned char*& buffer, unsigned& size) {
+    void decode(Class& instance, unsigned char const*& buffer, unsigned& size) {
         instance.*pointer_to_member_ = decoder_.decode<Type>(buffer, size);
     }
 
@@ -29,6 +29,10 @@ struct compressor_inst_t {
     void encode(Class const& instance, unsigned char*& buffer, unsigned& size) {
         encoder_.compress(instance.*pointer_to_member_);
         encoder_.write(buffer, size);
+    }
+
+    void setup(Class const& instance) {
+        decoder_.setup(instance.*pointer_to_member_);
     }
 };
 

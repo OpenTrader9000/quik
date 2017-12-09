@@ -40,6 +40,9 @@
     <Filter Include="session">
       <UniqueIdentifier>{8e44c915-174c-4105-b481-08c81cae24f7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="debug">
+      <UniqueIdentifier>{f6e6db90-f849-4001-b605-eaef3d3b58cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="numbers\bcd.cpp">
@@ -71,6 +74,12 @@
     </ClCompile>
     <ClCompile Include="thread\sink_with_logging.hpp">
       <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="storage\compress\signed.cpp">
+      <Filter>storage\compress</Filter>
+    </ClCompile>
+    <ClCompile Include="storage\compress\unsigned.cpp">
+      <Filter>storage\compress</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +208,9 @@
     </ClInclude>
     <ClInclude Include="storage\compress\unsigned.hpp">
       <Filter>storage\compress</Filter>
+    </ClInclude>
+    <ClInclude Include="debug\value.hpp">
+      <Filter>debug</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
