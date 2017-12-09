@@ -57,8 +57,8 @@ TEST_CASE("Compress", "Check compression and decompression"){
     }
 
     std::vector<compressable_struct> other;
-    unsigned char* begin = compressed_data.data();
-    unsigned char* end = begin + compressed_data.size();
+    unsigned char const* begin = compressed_data.data();
+    unsigned char const* end = begin + compressed_data.size();
     unsigned size = static_cast<unsigned>(compressed_data.size());
 
     while (begin != end) {

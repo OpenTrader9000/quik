@@ -326,13 +326,14 @@
     <ClInclude Include="third_party\zlib\zconf.h" />
     <ClInclude Include="third_party\zlib\zlib.h" />
     <ClInclude Include="third_party\zlib\zutil.h" />
+    <ClInclude Include="trade\symbol_storage.hpp" />
     <ClInclude Include="trade\quote\bulk.hpp" />
     <ClInclude Include="trade\quote\cache.hpp" />
     <ClInclude Include="trade\quote\file.hpp" />
     <ClInclude Include="trade\quote\reader.hpp" />
     <ClInclude Include="trade\quote\writer.hpp" />
     <ClInclude Include="trade\quote\order_book.hpp" />
-    <ClInclude Include="trade\quote\player.hpp" />
+    <ClInclude Include="trade\quote\order_book_constructor.hpp" />
     <ClInclude Include="trade\trade\bulk.hpp" />
     <ClInclude Include="trade\trade\cache.hpp" />
     <ClInclude Include="trade\trade\file.hpp" />
@@ -373,7 +374,8 @@
     <ClCompile Include="trade\quote\reader.cpp" />
     <ClCompile Include="trade\quote\writer.cpp" />
     <ClCompile Include="trade\quote\order_book.cpp" />
-    <ClCompile Include="trade\quote\player.cpp" />
+    <ClCompile Include="trade\quote\order_book_constructor.cpp" />
+    <ClCompile Include="trade\symbol_storage.cpp" />
     <ClCompile Include="trade\trade\bulk.cpp" />
     <ClCompile Include="trade\trade\cache.cpp" />
     <ClCompile Include="trade\trade\file.cpp" />

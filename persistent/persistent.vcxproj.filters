@@ -953,9 +953,6 @@
     <ClInclude Include="trade\quote\file.hpp">
       <Filter>trade\quote</Filter>
     </ClInclude>
-    <ClInclude Include="trade\quote\player.hpp">
-      <Filter>trade\quote</Filter>
-    </ClInclude>
     <ClInclude Include="trade\quote\order_book.hpp">
       <Filter>trade\quote</Filter>
     </ClInclude>
@@ -1016,6 +1013,12 @@
     <ClInclude Include="trade\trade\file.hpp">
       <Filter>trade\trade</Filter>
     </ClInclude>
+    <ClInclude Include="trade\symbol_storage.hpp">
+      <Filter>trade</Filter>
+    </ClInclude>
+    <ClInclude Include="trade\quote\order_book_constructor.hpp">
+      <Filter>trade\quote</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="third_party\HinnantDate\tz.cpp">
@@ -1059,9 +1062,6 @@
       <Filter>trade\quote</Filter>
     </ClCompile>
     <ClCompile Include="trade\quote\file.cpp">
-      <Filter>trade\quote</Filter>
-    </ClCompile>
-    <ClCompile Include="trade\quote\player.cpp">
       <Filter>trade\quote</Filter>
     </ClCompile>
     <ClCompile Include="trade\quote\order_book.cpp">
@@ -1132,6 +1132,12 @@
     </ClCompile>
     <ClCompile Include="trade\trade\file.cpp">
       <Filter>trade\trade</Filter>
+    </ClCompile>
+    <ClCompile Include="trade\symbol_storage.cpp">
+      <Filter>trade</Filter>
+    </ClCompile>
+    <ClCompile Include="trade\quote\order_book_constructor.cpp">
+      <Filter>trade\quote</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
