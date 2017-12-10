@@ -13,12 +13,12 @@ order_book_constructor::~order_book_constructor()
 {
 }
 
-order_book_shaper_state const & order_book_constructor::book() const
+order_book_state const & order_book_constructor::book() const
 {
     return current_state_;
 }
 
-order_book_shaper_state const& order_book_constructor::next_ts() {
+order_book_state const& order_book_constructor::next_ts() {
 
     if (is_end())
         return current_state_;
@@ -47,7 +47,7 @@ order_book_shaper_state const& order_book_constructor::next_ts() {
     return current_state_;
 }
 
-order_book_shaper_state const& order_book_constructor::to_ts(uint64_t ts) {
+order_book_state const& order_book_constructor::to_ts(uint64_t ts) {
     
     // helper for arounding cases when low value is higher high value
     auto diff = [](uint64_t higher_ts, uint64_t lower_ts) {
@@ -57,7 +57,7 @@ order_book_shaper_state const& order_book_constructor::to_ts(uint64_t ts) {
     };
 
     // find the nearest order book for this timestamp
-    order_book_shaper_state* nearest_element = &current_state_;
+    order_book_state* nearest_element = &current_state_;
     uint64_t min_diff = diff(ts, current_state_.timestamp());
     for (auto& stat : cache_) {
         auto cur_diff = diff(ts, stat.timestamp());
@@ -114,14 +114,13 @@ void order_book_constructor::make_index(){
     }
 }
 
-void order_book_constructor::clear()
-{
+void order_book_constructor::clear(){
     init();
 }
 
 void order_book_constructor::init()
 {
-    current_state_ = order_book_shaper_state{};
+    current_state_ = order_book_state{};
 
     // read all order book
     next_ts(); // read first element from buffer

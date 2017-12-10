@@ -3,6 +3,7 @@
 #include "quote/bulk.hpp"
 #include "trade/bulk.hpp"
 #include "quote/order_book.hpp"
+#include "quote/order_book_constructor.hpp"
 
 #include <functional>
 
@@ -16,10 +17,11 @@ namespace trade {
 
 using trades_bulk_ptr_t = trade::bulk_ptr_t;
 using quotes_bulk_ptr_t = quote::bulk_ptr_t;
+using ob_constructor_ptr_t  = std::unique_ptr<quote::order_book_constructor>;
 
 struct day {
-    trades_bulk_ptr_t   trades_;
-    quotes_bulk_ptr_t   quotes_;
+    trades_bulk_ptr_t    trades_;
+    ob_constructor_ptr_t quotes_;
 
     uint64_t start_day_in_ms() const;
     uint64_t end_day_in_ms() const;
@@ -55,10 +57,13 @@ struct series {
     period              period_;
 };
 
+struct data_visitor {
+    virtual void on_trade(common::storage::trade const&) = 0;
+    virtual void on_order_book(quote::order_book const&) = 0;
+};
+
 // all info about symbol stores in this class
 struct symbol_storage {
-
-    using walk_callback_ft = std::function<void(common::storage::trade const& trd, common::storage::quote const& quot)>;
 
     static constexpr uint64_t year2286 = 10000000000000;
     
@@ -68,11 +73,12 @@ struct symbol_storage {
     void load(std::string const& path2folder, std::string const& symbol, load_mode mode = load_mode::TRADE,
               uint64_t start_timestamp = 0, uint64_t end_timestamp = year2286);
 
-    void concrete_data(uint64_t start, uint64_t end, walk_callback_ft callback);
+    void concrete_data(uint64_t start, uint64_t end, data_visitor* callback) const;
 
-    series extract(uint64_t start, uint64_t end);
+    series extract(uint64_t start, uint64_t end, period per, int64_t shift) const;
 
-    quote::order_book extract_order_book_by_timestamp(uint64_t timestamp);
+    // here might be return const reference but have to have thrown an exception in case when timestamp doesn't found
+    quote::order_book_state extract_order_book_by_timestamp(uint64_t timestamp) const;
 
     /*
     TODO: make extract for quotes. Something like this
