@@ -11,6 +11,29 @@
 namespace persistent {
 namespace trade {
 
+uint64_t period_in_ms(period p) {
+    // choose time
+    switch (p) {
+    case period::p1min:
+        return 60 * 1000;
+    case period::p5min:
+        return 300 * 1000;
+    case period::p10min:
+        return 600 * 1000;
+    case period::p15min:
+        return 900 * 1000;
+    case period::p30min:
+        return 1800 * 1000;
+    case period::p60min:
+        return 3600 * 1000;
+    case period::pday:
+        return 24 * 3600 * 1000;
+    case period::pweek:
+        return 7 * 24 * 7 * 1000;
+    }
+    return 0;
+}
+
 symbol_storage::symbol_storage()
      {}
 
@@ -44,14 +67,16 @@ uint64_t YMD_to_ms(std::string const& str_date) {
     return static_cast<uint64_t>(std::mktime(&t))*1000;
 }
 
-void symbol_storage::load(std::string const& path2folder, std::string const& symbol, load_mode mode,
+bool symbol_storage::load(std::string const& path2folder, std::string const& symbol, load_mode mode,
                           uint64_t start_timestamp, uint64_t end_timestamp) {
 
     // every time symbol is subfolder of the year
     auto symbol_folder_path = utils::build_string(path2folder, '/', symbol);
     if (!utils::fs::exists(symbol_folder_path)) {
-        return;
+        return false;
     }
+
+    sec_code_ = symbol;
 
     auto trades = utils::fs::files_in_directory(utils::build_string(symbol_folder_path, "/*.trd"));
     auto quotes = utils::fs::files_in_directory(utils::build_string(symbol_folder_path, "/*.ob"));
@@ -97,6 +122,8 @@ void symbol_storage::load(std::string const& path2folder, std::string const& sym
 
     // wait all make_index tasks
     std::for_each(tasks.begin(), tasks.end(), std::mem_fn(&std::future<void>::wait));
+
+    return true;
 }
 
 void symbol_storage::concrete_data(uint64_t start, uint64_t end, data_visitor* callback) const {
@@ -120,10 +147,28 @@ void symbol_storage::concrete_data(uint64_t start, uint64_t end, data_visitor* c
             });
         }
     }
-    
 }
 
 series symbol_storage::extract(uint64_t start, uint64_t end, period per, int64_t shift) const{
+
+    series result;
+
+    result.series_.reserve((end - start) / period_in_ms(per));
+    result.sec_code_ = sec_code_;
+    for (auto const& day : data_) {
+        
+        // find out intersection of incoming range and day
+        auto low  = std::max(start, day.start_day_in_ms());
+        auto high = std::min(end, day.end_day_in_ms());
+        if (low > high)
+            continue;
+
+        ohlcv res{};
+
+        day.trades_->walk_period(low + shift, high, [&](common::storage::trade const& t) {
+            // TODO: Implement. Change logic in operators of bcd numbers for this
+        });
+    }
 
     return series();
 }
@@ -144,6 +189,18 @@ uint64_t day::start_day_in_ms() const {
 
 uint64_t day::end_day_in_ms() const {
     return start_day_ + 24 * 60 * 60 * 1000;
+}
+
+uint64_t series::start() const {
+    if (series_.empty())
+        return 0;
+    return series_.front().open_timestamp_;
+}
+
+uint64_t series::end() const {
+    if (series_.empty())
+        return 0;
+    return series_.back().open_timestamp_ + period_in_ms(period_);
 }
 
 } // namespace trade

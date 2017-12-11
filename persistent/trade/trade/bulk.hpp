@@ -79,7 +79,7 @@ inline void bulk::walk_period(uint64_t start_ts, uint64_t end_ts, FunctionType&&
         common::storage::compress::decode(value, compressor, begin, size);
     }
 
-    while (begin != end && value.server_timestamp_ > end_ts) {
+    while (begin != end && value.server_timestamp_ < end_ts) {
         common::storage::compress::decode(value, compressor, begin, size);
         callback(value);
     }

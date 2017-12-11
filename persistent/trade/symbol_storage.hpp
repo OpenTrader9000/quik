@@ -37,6 +37,7 @@ struct ohlcv {
     unibcd_t close_;
     unsigned volume_;
     int      open_interest_diff_;
+    uint64_t open_timestamp_;
 };
 
 enum period {
@@ -47,14 +48,18 @@ enum period {
     p30min = 5,
     p60min = 6,
     pday   = 7,
+    pweek  = 8,
 };
+
+uint64_t period_in_ms(period p);
 
 struct series {
     std::string         sec_code_;
     std::vector<ohlcv>  series_;
-    uint64_t            start_timestamp_;
-    int64_t             shift_;
     period              period_;
+
+    uint64_t start() const;
+    uint64_t end() const;
 };
 
 struct data_visitor {
@@ -70,7 +75,7 @@ struct symbol_storage {
     symbol_storage();
     ~symbol_storage();
 
-    void load(std::string const& path2folder, std::string const& symbol, load_mode mode = load_mode::TRADE,
+    bool load(std::string const& path2folder, std::string const& symbol, load_mode mode = load_mode::TRADE,
               uint64_t start_timestamp = 0, uint64_t end_timestamp = year2286);
 
     void concrete_data(uint64_t start, uint64_t end, data_visitor* callback) const;
@@ -88,6 +93,7 @@ struct symbol_storage {
  private:
     
      std::vector<day>    data_;
+     std::string         sec_code_;
     
 };
 
