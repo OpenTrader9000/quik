@@ -482,27 +482,35 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(BOOST);$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugAndTest|Win32'">
     <IncludePath>$(BOOST);$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(BOOST);$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAndTest|Win32'">
     <IncludePath>$(BOOST);$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugAndTest|x64'">
     <IncludePath>$(BOOST);$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(BOOST);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(BOOST);$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(BOOST);$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAndTest|x64'">
     <IncludePath>$(BOOST);$(SolutionDir);$(ProjectDir)/third_party/HinnantDate;$(ProjectDir)/third_party/sqlite;$(ProjectDir)/third_party;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

@@ -129,17 +129,21 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir);$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);$(SolutionDir)/third_party\readerwriterqueue;$(SolutionDir)/third_party\concurrentqueue;$(SolutionDir)\tgbot-cpp\include;$(SolutionDir)/calculations/;$(BOOST);$(OPENSSL32);$(LUA_DEV);$(LUA_DEV)/include;$(SolutionDir)/third_party/sol2/single</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(BOOST)\x86\lib;$(OPENSSL32)\lib\VC\static;$(OutDir)</LibraryPath>
+    <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugAndTest|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir);$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);$(SolutionDir)/third_party\readerwriterqueue;$(SolutionDir)/third_party\concurrentqueue;$(SolutionDir)\tgbot-cpp\include;$(SolutionDir)/calculations/;$(BOOST);$(OPENSSL32);$(LUA_DEV);$(LUA_DEV)/include;$(SolutionDir)/third_party/sol2/single</IncludePath>
     <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(BOOST)\x86\lib;$(OPENSSL32)\lib\VC\static;$(OutDir);$(LUA_DEV)/lib/ol</LibraryPath>
+    <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugAndTest|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -148,6 +152,7 @@
     <LibraryWPath>$(WindowsSDK_MetadataPath);</LibraryWPath>
     <ExcludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(MSBuild_ExecutablePath);$(VC_LibraryPath_x86);</ExcludePath>
     <ExecutablePath>$(VC_ExecutablePath_x86);$(WindowsSDK_ExecutablePath);$(VS_ExecutablePath);$(MSBuild_ExecutablePath);$(SystemRoot)\SysWow64;$(FxCopDir);$(PATH);</ExecutablePath>
+    <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAndTest|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -156,12 +161,15 @@
     <LibraryWPath>$(WindowsSDK_MetadataPath);</LibraryWPath>
     <ExcludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(MSBuild_ExecutablePath);$(VC_LibraryPath_x86);</ExcludePath>
     <ExecutablePath>$(VC_ExecutablePath_x86);$(WindowsSDK_ExecutablePath);$(VS_ExecutablePath);$(MSBuild_ExecutablePath);$(SystemRoot)\SysWow64;$(FxCopDir);$(PATH);</ExecutablePath>
+    <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAndTest|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
