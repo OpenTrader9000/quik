@@ -13,7 +13,7 @@ namespace quote {
 // structure write all values in the file and compress them in the end
 struct writer {
 
-    writer(std::string const& path, std::string const& sec_code); // constructor for read operations
+    writer(std::string const& path, std::string const& sec_code = ""); // constructor for read operations
     writer(const writer&) = default;
     writer(writer&&) = default;
     ~writer();

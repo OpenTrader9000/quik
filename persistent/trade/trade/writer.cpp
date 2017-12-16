@@ -207,6 +207,7 @@ bool writer::compress() {
     // move compressed file on it's place
     utils::fs::move(new_path, path_);
 
+    return true;
 }
 
 void writer::read_header() {

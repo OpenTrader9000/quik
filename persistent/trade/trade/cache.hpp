@@ -29,6 +29,7 @@ struct cache : public common::thread::sink_with_logging_mt_t {
     std::string storage_folder_;
 
     void flush();
+    void compress();
 
     // key must be a [sec_code, date] because trades are inpredictable
     struct trade_cache_key {
@@ -50,7 +51,7 @@ struct cache : public common::thread::sink_with_logging_mt_t {
 
     message_storage_t                   messages_;
 
-    //std::unordered_set<std::string>     not_finalized_files_;
+    std::unordered_set<std::string>     not_finalized_files_;
 
 };
 

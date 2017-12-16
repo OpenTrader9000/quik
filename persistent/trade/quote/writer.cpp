@@ -38,6 +38,11 @@ bool writer::open(){
 
     bool existed = utils::fs::exists(path_);
     if (!existed) {
+
+        if (sec_code_.empty()) {
+            throw std::runtime_error("Empty sec_code is not allowed for a new file");
+        }
+
         utils::fs::mkdir_for_file(path_);
 
         // init header

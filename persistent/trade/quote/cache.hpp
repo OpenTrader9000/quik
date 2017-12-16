@@ -29,12 +29,13 @@ struct cache : public common::thread::sink_with_logging_mt_t {
     std::string storage_folder_;
 
     void flush();
+    void compress();
      
     using messages_sequence_t = std::vector<common::message::ptr>;
     using messages_storage_t = std::unordered_map<std::string, messages_sequence_t>; // seq_code->seq
 
     messages_storage_t                  messages_;
-    //std::unordered_set<std::string>     not_finalized_files_;
+    std::unordered_set<std::string>     not_finalized_files_;
 
 };
 
