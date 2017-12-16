@@ -263,12 +263,12 @@ bcd parse_bcd(char const* value, int power) {
 
 bcd min_bcd(bcd const& b){
     bcd result{};
-    result.value_ = std::numeric_limits<decltype(result.value_)>::max();
     result.fractional_size_ = b.fractional_size_;
     return result;
 }
 bcd max_bcd(bcd const& b){
     bcd result{};
+    result.value_ = std::numeric_limits<decltype(result.value_)>::max();
     result.fractional_size_ = b.fractional_size_;
     return result;
 }
