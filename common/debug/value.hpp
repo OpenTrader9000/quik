@@ -11,7 +11,7 @@ struct value {
     value(T value) {
 #ifdef _DEBUG
         value_ = value;
-#elif
+#else
         (void)value;
 #endif
     }
@@ -19,7 +19,7 @@ struct value {
     long long diff(T other) {
 #ifdef _DEBUG
         return other - value_;
-#elif
+#else
         return 0;
 #endif
     }
@@ -27,7 +27,7 @@ struct value {
     long long reverse_diff(T other) {
 #ifdef _DEBUG
         return value_ - other;
-#elif
+#else
         return 0;
 #endif
     }

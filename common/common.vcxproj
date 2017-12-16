@@ -313,6 +313,7 @@
     <ClInclude Include="message\alloc.hpp" />
     <ClInclude Include="message\base.hpp" />
     <ClInclude Include="message\codes.hpp" />
+    <ClInclude Include="message\event\compress.hpp" />
     <ClInclude Include="message\event\flush.hpp" />
     <ClInclude Include="message\event\stop.hpp" />
     <ClInclude Include="message\general\exec.hpp" />

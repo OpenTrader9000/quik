@@ -34,6 +34,7 @@ enum class codes {
     // ON_TRANS_REPLY,
     STOP,
     START,
+    COMPRESS,
     UNHANDLED = SQL_CODE,
     SCENARIO_ENTRY,
     EVENT,

@@ -212,5 +212,8 @@
     <ClInclude Include="debug\value.hpp">
       <Filter>debug</Filter>
     </ClInclude>
+    <ClInclude Include="message\event\compress.hpp">
+      <Filter>message\event</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
