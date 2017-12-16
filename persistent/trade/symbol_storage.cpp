@@ -34,6 +34,12 @@ uint64_t period_in_ms(period p) {
     return 0;
 }
 
+
+// functions helpers for parsing an interval
+void on_interval_start(ohlcv& updatable, common::storage::trade const& trade);
+void on_interval_update(ohlcv& updatable, common::storage::trade const& trade);
+void on_interval_end(ohlcv& updatable, common::storage::trade const& trade);
+
 symbol_storage::symbol_storage()
      {}
 
@@ -97,24 +103,27 @@ bool symbol_storage::load(std::string const& path2folder, std::string const& sym
     for (std::string const& trade_path : trades) {
 
         // check bounds
-        if (compare(trade_path, low_ts_str) > 0 || compare(trade_path, high_ts_str) < 0) {
+        if (compare(trade_path, low_ts_str) < 0 || compare(trade_path, high_ts_str) > 0) {
             continue;
         }
 
         day d;
-
+        
         // load trades
-        d.trades_ = trade::reader(trade_path).bulk();
+        d.trades_ = trade::reader(symbol_folder_path + "/" + trade_path).bulk();
+
+        d.start_day_= YMD_to_ms(trade_path.substr(0, 8));
 
         // find compatible quote
-        while (load_quotes && (compare(trade_path, *q_it) > 0) && q_it != q_end) {
+        while (load_quotes && q_it != q_end && (compare(trade_path, *q_it) > 0)) {
             ++q_it;
         }
 
         // load quote
         if (load_quotes && (q_it != q_end) && (compare(trade_path, *q_it) == 0)) {
-            d.quotes_ = std::make_unique<quote::order_book_constructor>(quote::reader(*q_it).bulk());
-            tasks.push_back(std::async(std::launch::async, [&]() { d.quotes_->make_index(); }));
+            auto quotes_ptr = std::make_shared<quote::order_book_constructor>(quote::reader(symbol_folder_path + "/" + *q_it).bulk());
+            tasks.push_back(std::async(std::launch::async, [=]() { quotes_ptr->make_index(); }));
+            d.quotes_ = quotes_ptr;
         }
 
         data_.push_back(std::move(d));
@@ -155,6 +164,9 @@ series symbol_storage::extract(uint64_t start, uint64_t end, period per, int64_t
 
     result.series_.reserve((end - start) / period_in_ms(per));
     result.sec_code_ = sec_code_;
+    result.period_   = per;
+    result.shift_    = shift;
+
     for (auto const& day : data_) {
         
         // find out intersection of incoming range and day
@@ -163,14 +175,21 @@ series symbol_storage::extract(uint64_t start, uint64_t end, period per, int64_t
         if (low > high)
             continue;
 
-        ohlcv res{};
-
-        day.trades_->walk_period(low + shift, high, [&](common::storage::trade const& t) {
-            // TODO: Implement. Change logic in operators of bcd numbers for this
-        });
+        ohlcv ohlc;
+        day.trades_->walk_period_by_interval(low, high, shift, period_in_ms(per),
+                                             [&](common::storage::trade const& t) {
+                                                 on_interval_start(ohlc, t);
+                                             },
+                                             [&](common::storage::trade const& t) {
+                                                 on_interval_update(ohlc, t);
+                                             },
+                                             [&](common::storage::trade const& t) {
+                                                 on_interval_end(ohlc, t);
+                                                 result.series_.push_back(ohlc);
+                                             });
     }
 
-    return series();
+    return result;
 }
 
 quote::order_book_state symbol_storage::extract_order_book_by_timestamp(uint64_t timestamp) const {
@@ -201,6 +220,35 @@ uint64_t series::end() const {
     if (series_.empty())
         return 0;
     return series_.back().open_timestamp_ + period_in_ms(period_);
+}
+
+void on_interval_start(ohlcv& updatable, common::storage::trade const& t) {
+    updatable.open_               = t.price_;
+    updatable.open_timestamp_     = t.server_timestamp_;
+    updatable.volume_             = 0;
+    updatable.low_                = t.price_;
+    updatable.high_               = t.price_;
+    updatable.start_open_interest_ = t.open_interest_;
+    on_interval_update(updatable,t);
+}
+
+void on_interval_update(ohlcv& updatable, common::storage::trade const& t) {
+
+    updatable.volume_ += t.quantity_;
+
+    if (t.price_ < updatable.low_) {
+        updatable.low_ = t.price_;
+    }
+
+    if (t.price_ > updatable.high_) {
+        updatable.high_ = t.price_;
+    }
+}
+
+void on_interval_end(ohlcv& updatable, common::storage::trade const & t)
+{
+    updatable.end_open_interest_ = t.open_interest_;
+    updatable.close_ = t.price_;
 }
 
 } // namespace trade

@@ -1019,6 +1019,9 @@
     <ClInclude Include="trade\quote\order_book_constructor.hpp">
       <Filter>trade\quote</Filter>
     </ClInclude>
+    <ClInclude Include="trade\quote\restorer.hpp">
+      <Filter>trade\quote</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="third_party\HinnantDate\tz.cpp">
@@ -1137,6 +1140,9 @@
       <Filter>trade</Filter>
     </ClCompile>
     <ClCompile Include="trade\quote\order_book_constructor.cpp">
+      <Filter>trade\quote</Filter>
+    </ClCompile>
+    <ClCompile Include="trade\quote\restorer.cpp">
       <Filter>trade\quote</Filter>
     </ClCompile>
   </ItemGroup>

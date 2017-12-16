@@ -326,6 +326,7 @@
     <ClInclude Include="third_party\zlib\zconf.h" />
     <ClInclude Include="third_party\zlib\zlib.h" />
     <ClInclude Include="third_party\zlib\zutil.h" />
+    <ClInclude Include="trade\quote\restorer.hpp" />
     <ClInclude Include="trade\symbol_storage.hpp" />
     <ClInclude Include="trade\quote\bulk.hpp" />
     <ClInclude Include="trade\quote\cache.hpp" />
@@ -372,6 +373,7 @@
     <ClCompile Include="trade\quote\cache.cpp" />
     <ClCompile Include="trade\quote\file.cpp" />
     <ClCompile Include="trade\quote\reader.cpp" />
+    <ClCompile Include="trade\quote\restorer.cpp" />
     <ClCompile Include="trade\quote\writer.cpp" />
     <ClCompile Include="trade\quote\order_book.cpp" />
     <ClCompile Include="trade\quote\order_book_constructor.cpp" />

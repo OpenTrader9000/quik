@@ -10,6 +10,9 @@
     <Filter Include="common\storage">
       <UniqueIdentifier>{ee7f4af0-13e9-4adf-8499-bb0f2194263f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{0095bc53-2a25-494e-afdd-f348128763d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp">
@@ -17,6 +20,9 @@
     </ClCompile>
     <ClCompile Include="common\storage\compress.cpp">
       <Filter>common\storage</Filter>
+    </ClCompile>
+    <ClCompile Include="utils\filesystem.cpp">
+      <Filter>utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

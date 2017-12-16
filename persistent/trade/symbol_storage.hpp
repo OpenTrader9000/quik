@@ -17,7 +17,7 @@ namespace trade {
 
 using trades_bulk_ptr_t = trade::bulk_ptr_t;
 using quotes_bulk_ptr_t = quote::bulk_ptr_t;
-using ob_constructor_ptr_t  = std::unique_ptr<quote::order_book_constructor>;
+using ob_constructor_ptr_t  = std::shared_ptr<quote::order_book_constructor>;
 
 struct day {
     trades_bulk_ptr_t    trades_;
@@ -26,7 +26,7 @@ struct day {
     uint64_t start_day_in_ms() const;
     uint64_t end_day_in_ms() const;
 
-private:
+//private:
     uint64_t    start_day_;
 };
 
@@ -36,9 +36,12 @@ struct ohlcv {
     unibcd_t low_;
     unibcd_t close_;
     unsigned volume_;
-    int      open_interest_diff_;
+    unsigned start_open_interest_;
+    unsigned end_open_interest_;
     uint64_t open_timestamp_;
+
 };
+
 
 enum period {
     p1min  = 1,
@@ -57,6 +60,7 @@ struct series {
     std::string         sec_code_;
     std::vector<ohlcv>  series_;
     period              period_;
+    uint64_t            shift_;
 
     uint64_t start() const;
     uint64_t end() const;
