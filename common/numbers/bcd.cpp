@@ -51,7 +51,6 @@ bcd::operator float() const {
 bcd::operator double() const {
     return to_double();
 }
-
 double bcd::to_double() const {
     double value = static_cast<double>(value_);
     return static_cast<double>(value / pow10[fractional_size_]) * (sign_ == 1 ? -1 : 1);
@@ -261,5 +260,18 @@ bcd parse_bcd(char const* value, int power) {
     result.parse(value, power);
     return result;
 }
+
+bcd min_bcd(bcd const& b){
+    bcd result{};
+    result.value_ = std::numeric_limits<decltype(result.value_)>::max();
+    result.fractional_size_ = b.fractional_size_;
+    return result;
+}
+bcd max_bcd(bcd const& b){
+    bcd result{};
+    result.fractional_size_ = b.fractional_size_;
+    return result;
+}
+
 } // namespace numbers
 } // namespace common

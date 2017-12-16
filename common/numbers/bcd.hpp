@@ -23,6 +23,7 @@ struct bcd {
 
     operator float() const;
     operator double() const;
+    //explicit operator bool() const { return value_ != 0;}
 
     double to_double() const;
     float to_float() const;
@@ -38,6 +39,7 @@ struct bcd {
     bcd& operator+(bcd const& other);
     bcd& operator-(bcd const& other);
     bcd& operator=(bcd const& other);
+
 
     template <typename IntegerType>
     bcd& operator*(IntegerType multiplier);
@@ -68,8 +70,14 @@ inline bcd& bcd::operator/(IntegerType divider) {
 bcd parse_bcd(char const* value);
 bcd parse_bcd(char const* value, int power);
 
+// functions generate bcd with max and min values with the same fractional_size
+bcd min_bcd(bcd const& b);
+bcd max_bcd(bcd const& b);
+
 } // namespace numbers
 } // namespace common
+
+
 using unibcd_t = common::numbers::bcd;
 inline unibcd_t parse_bcd(char const* value) {
     return common::numbers::parse_bcd(value);
@@ -77,3 +85,11 @@ inline unibcd_t parse_bcd(char const* value) {
 inline unibcd_t parse_bcd(char const* value, int power) {
     return common::numbers::parse_bcd(value, power);
 }
+
+//inline unibcd_t max_bcd(unibcd_t const& b) {
+//    return common::numbers::max_bcd(b);
+//}
+//inline unibcd_t min_bcd(unibcd_t const& b) {
+//    return common::numbers::min_bcd(b);
+//}
+//
