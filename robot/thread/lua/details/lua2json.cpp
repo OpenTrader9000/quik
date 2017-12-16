@@ -81,7 +81,13 @@ static void serialize_array(sol::table tab, std::ostream& os, std::string& buffe
 // \param buffer - string from ostream (for removing dot =)) )
 static void serialize_object(sol::table tab, std::ostream& os, std::string& buffer) {
 
+    if (tab == sol::nil) {
+        os << "null";
+        return;
+    }
+
     os << '{';
+
     tab.for_each([&](sol::object const& key, sol::object const& value) {
         serialize_key(key, os, buffer);
         os << " : ";

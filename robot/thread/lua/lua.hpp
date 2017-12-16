@@ -42,17 +42,24 @@ struct lua {
     void on_trade(sol::table trade);
     void on_transaction(sol::table transaction);
     void on_quote(char const* class_code, char const* sec_code, sol::table tab);
+    void on_clean_up();
+
     void setup_scenario(char const* name);
     void dump_scenario(char const* name, sol::table, char const* info = ""); // default is functions
 
     void update_timestamp();
     void try_flush();
     void flush();
+    void check_new_day();
+    void clear_order_books();
+
+    bool allow_parse_order_book(char const* sec_code);
 
     bool                              is_test_;
 
     uint64_t                          send_timestamp_;
     uint64_t                          last_timestamp_;
+    uint64_t                          day_end_timestamp_;
 
     std::unordered_map<std::string, int>                      pows_;
     std::unordered_map<std::string, details::order_book_diff> order_books_history_;

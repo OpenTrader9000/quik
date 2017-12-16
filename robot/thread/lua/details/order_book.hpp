@@ -18,7 +18,9 @@ struct order_book {
 	order_book(int fractional_size = 0);
 	~order_book();
 
-	void extract(sol::table tab);
+    bool empty() const { return bid_.empty() && offer_.empty(); }
+
+    void extract(sol::table tab);
 };
 
 } // namespace details

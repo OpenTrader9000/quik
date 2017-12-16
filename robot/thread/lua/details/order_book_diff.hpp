@@ -23,6 +23,8 @@ struct order_book_diff {
     result_t mkdiff(sol::table ob);
     result_t mkdiff_last();
 
+    void clear();
+
     order_book& current();
     order_book& old();
 

@@ -9,6 +9,8 @@
 #include <worker/run.hpp>
 #include <common/message/general/unhandled.hpp>
 #include <common/message/scenario/entry.hpp>
+#include <common/message/event/compress.hpp>
+#include <common/message/event/flush.hpp>
 #include <common/scenario/scenario.hpp>
 #include <persistent/persistent.hpp>
 #include <utils/time/time.hpp>
@@ -25,6 +27,7 @@ std::unique_ptr<lua> lua::instance_;
 
 lua::lua()
 : is_test_(false)
+, day_end_timestamp_(0)
 , send_timestamp_(utils::time::timestamp_in_ms()) {}
 
 lua::~lua() {
@@ -68,6 +71,8 @@ void lua::start(lua_State* L) {
     .set_function("on_quote", [this](char const* class_code, char const* sec_code,
                                      sol::table tab) { on_quote(class_code, sec_code, tab); })
     .set_function("on_transaction", [this](sol::table transaction) { on_transaction(transaction); })
+    .set_function("on_clean_up",  [this]() {on_clean_up(); })
+    .set_function("allow_parse_order_book", [this] (char const* sec_code) { return allow_parse_order_book(sec_code); })
     .set_function("setup_scenario",
                   [this](char const* scenario_name) { setup_scenario(scenario_name); });
 
@@ -110,6 +115,7 @@ void lua::start(lua_State* L) {
 void lua::dump(char const* function, sol::table tab) {
 
     update_timestamp();
+    check_new_day();
     
     using unhandled_t = common::message::general::unhandled;
 
@@ -130,22 +136,25 @@ void lua::setup_scenario(char const* name) {
 }
 
 
-void lua::dump_scenario(char const * name, sol::table tab, char const* info )
-{
-    using scenario_entry_t = common::message::scenario::entry;
-
-    auto mes = common::message::make<scenario_entry_t>();
-
-    mes->set_type_function();
-    mes->name() = name;
-    mes->timestamp() = last_timestamp_;
-    mes->info() = info;
-    mes->scenario_id() = common::scenario::id();
-
-    details::deserialize(tab, mes);
-
-    scenario_cache_.push_back(std::move(mes));
-}
+//void lua::dump_scenario(char const * name, sol::table tab, char const* info )
+//{
+//    using scenario_entry_t = common::message::scenario::entry;
+//
+//    update_timestamp();
+//    check_new_day();
+//
+//    auto mes = common::message::make<scenario_entry_t>();
+//
+//    mes->set_type_function();
+//    mes->name()        = name;
+//    mes->timestamp()   = last_timestamp_;
+//    mes->info()        = info;
+//    mes->scenario_id() = common::scenario::id();
+//
+//    details::deserialize(tab, mes);
+//
+//    scenario_cache_.push_back(std::move(mes));
+//}
 
 void lua::update_timestamp() {
 
@@ -181,51 +190,89 @@ void lua::flush() {
 	quote_cache_.clear();
  }
 
-void lua::on_trade(sol::table trade){
+ void lua::check_new_day() {
 
-    update_timestamp();
+     namespace mes = common::message;
 
-    //auto dum = stackDump(trade.lua_state());
+     if (last_timestamp_ > day_end_timestamp_) { // very unlikely
 
-    if (common::scenario::id() != 0) {
-        dump_scenario("OnAllTrade", trade);
-    }
+         //TODO: make functions for all this time
+         uint64_t day_in_ms = 3600 * 24 * 1000;
+         day_end_timestamp_ = (last_timestamp_ - last_timestamp_ % day_in_ms) + day_in_ms;
+         clear_order_books();
 
-    std::string sec_code = trade["sec_code"];
+         // flush all previous data
+         flush();
 
-    auto message                 = common::message::make<common::message::trade::trade>();
-    message->sec_code_           = trade["sec_code"];
-    message->machine_timestamp() = last_timestamp_;
-    message->server_timestamp()  = details::timestamp(trade["datetime"]);
-    message->open_interest()     = trade["open_interest"];
-    message->quantity()          = trade["qty"];
-    message->price()             = common::numbers::bcd(trade["price"], pows_[sec_code]);
-	message->trade_number()		 = trade["trade_num"];
+         auto flush1 = mes::make<mes::event::flush>();
+         auto flush2 = mes::make<mes::event::flush>();
+         persistent::push_trade(std::move(flush1));
+         persistent::push_quote(std::move(flush2));
 
-    //message->price().parse((char*)trade["price"]);
 
-    // parse bid
-    int flags = trade["flags"];
-    bool is_offer = ((flags & 1) != 0);
-    bool is_bid = ((flags & 2) != 0);
-    assert(is_bid || is_offer);
+         auto mes1 = mes::make<mes::event::compress>();
+         auto mes2 = mes::make<mes::event::compress>();
+         persistent::push_trade(std::move(mes1));
+         persistent::push_quote(std::move(mes2));
+     }
+ }
 
-    if (is_bid) {
-        message->trade_.set_bid();
-    }
-    else  {
-        message->trade_.set_offer();
-    }
+ void lua::clear_order_books() {
+     // clear all order books
+     for (auto& sec_order_book : order_books_history_) {
+         sec_order_book.second.clear();
+     }
+ }
 
-    trade_cache_.push_back(std::move(message));
+ bool lua::allow_parse_order_book(char const * sec_code)
+ {
+     return order_books_history_.find(sec_code) != order_books_history_.end();
+ }
 
-    try_flush();
+ void lua::on_trade(sol::table trade) {
+
+     update_timestamp();
+     check_new_day();
+
+     // auto dum = stackDump(trade.lua_state());
+
+     //if (common::scenario::id() != 0) {
+     //    dump_scenario("OnAllTrade", trade);
+     //}
+
+     std::string sec_code = trade["sec_code"];
+
+     auto message                 = common::message::make<common::message::trade::trade>();
+     message->price()             = common::numbers::bcd(trade["price"], pows_[sec_code]);
+     message->server_timestamp()  = details::timestamp(trade["datetime"]);
+     message->sec_code_           = trade["sec_code"];
+     message->open_interest()     = trade["open_interest"];
+     message->quantity()          = trade["qty"];
+     message->trade_number()      = trade["trade_num"];
+     message->machine_timestamp() = last_timestamp_;
+
+     // message->price().parse((char*)trade["price"]);
+
+     // parse bid
+     int  flags    = trade["flags"];
+     bool is_offer = ((flags & 1) != 0);
+     bool is_bid   = ((flags & 2) != 0);
+     assert(is_bid || is_offer);
+
+     if (is_bid) {
+         message->trade_.set_bid();
+     } else {
+         message->trade_.set_offer();
+     }
+
+     trade_cache_.push_back(std::move(message));
+
+     try_flush();
 
 }
 
 void lua::on_transaction(sol::table transaction){
     update_timestamp();
-
 
     // 
     try_flush();
@@ -233,34 +280,72 @@ void lua::on_transaction(sol::table transaction){
 
 void lua::on_quote(char const* class_code, char const* sec_code, sol::table tab){
 
-	if (strcmp(class_code, "SPBFUT") != 0)
-		return;
+	//if (strcmp(class_code, "SPBFUT") != 0)
+	//	return;
 
     update_timestamp();
-    
-    if (common::scenario::id() != 0) {
-        char buffer[65] = {};
-        sprintf_s(buffer, "%s-%s", class_code, sec_code);
-        dump_scenario("OnQuote", tab, buffer);
-    }
+    check_new_day();
+
+    //if (common::scenario::id() != 0) {
+    //    char buffer[65] = {};
+    //    sprintf_s(buffer, "%s-%s", class_code, sec_code);
+    //    dump_scenario("OnQuote", tab, buffer);
+    //}
 
 	auto& qdiff = order_books_history_[sec_code];
 	auto message = qdiff.mkdiff(tab);
 
 	assert(!message->quotes_.empty());
-	//if (message->quotes_.empty()) {
-	//	message = qdiff.mkdiff_last();
-	//}
-	// update lua specific info
+
+    // update lua specific info
 	message->sec_code_ = sec_code;
 	for (auto& q : message->quotes_)
 		q.machine_timestamp_ = last_timestamp_;
 
 	quote_cache_.push_back(message);
-
-
-    
+        
     try_flush();
+}
+
+void lua::on_clean_up() {
+    update_timestamp();
+    check_new_day();
+
+    // generate message for flushing
+    for (auto& sec_code_ob : order_books_history_) {
+
+        auto const& ob = sec_code_ob.second.current();
+
+        // empty order book
+        if (ob.empty())
+            continue;
+
+        auto q_ptr = common::message::make<common::message::trade::quotes>();
+        q_ptr->sec_code_ = sec_code_ob.first;
+
+        // zero order book in file
+        for (auto& bid : ob.bid_) {
+            common::storage::quote q;
+            q.set_bid();
+            q.price_             = bid.price_;
+            q.quantity_diff_     = -bid.quantity_;
+            q.machine_timestamp_ = last_timestamp_;
+            q_ptr->quotes_.push_back(q);
+        }
+
+        for (auto& offer : ob.offer_) {
+            common::storage::quote q;
+            q.set_offer();
+            q.price_             = offer.price_;
+            q.quantity_diff_     = -offer.quantity_;
+            q.machine_timestamp_ = last_timestamp_;
+            q_ptr->quotes_.push_back(q);
+        }
+
+        quote_cache_.push_back(q_ptr);
+    }
+
+    clear_order_books();
 }
 
 

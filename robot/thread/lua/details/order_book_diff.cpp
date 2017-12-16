@@ -130,6 +130,13 @@ order_book_diff::result_t order_book_diff::mkdiff_last() {
     return mkdiff_impl();
 }
 
+void order_book_diff::clear() {
+    ob1_.bid_.clear();
+    ob1_.offer_.clear();
+    ob2_.bid_.clear();
+    ob2_.offer_.clear();
+}
+
 } // namespace details
 } // namespace lua
 } // namespace thread
