@@ -1022,6 +1022,9 @@
     <ClInclude Include="trade\quote\restorer.hpp">
       <Filter>trade\quote</Filter>
     </ClInclude>
+    <ClInclude Include="trade\data.hpp">
+      <Filter>trade</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="third_party\HinnantDate\tz.cpp">
@@ -1144,6 +1147,9 @@
     </ClCompile>
     <ClCompile Include="trade\quote\restorer.cpp">
       <Filter>trade\quote</Filter>
+    </ClCompile>
+    <ClCompile Include="trade\data.cpp">
+      <Filter>trade</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

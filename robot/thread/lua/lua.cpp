@@ -218,6 +218,41 @@ void lua::flush() {
  }
 
  void lua::clear_order_books() {
+
+     // generate messages for flushing
+     for (auto& sec_code_ob : order_books_history_) {
+
+         auto const& ob = sec_code_ob.second.current();
+
+         // empty order book
+         if (ob.empty())
+             continue;
+
+         auto q_ptr = common::message::make<common::message::trade::quotes>();
+         q_ptr->sec_code_ = sec_code_ob.first;
+
+         // zero order book in file
+         for (auto& bid : ob.bid_) {
+             common::storage::quote q;
+             q.set_bid();
+             q.price_ = bid.price_;
+             q.quantity_diff_ = -bid.quantity_;
+             q.machine_timestamp_ = ob.timestamp_ + 1; // timestamp must differs
+             q_ptr->quotes_.push_back(q);
+         }
+
+         for (auto& offer : ob.offer_) {
+             common::storage::quote q;
+             q.set_offer();
+             q.price_ = offer.price_;
+             q.quantity_diff_ = -offer.quantity_;
+             q.machine_timestamp_ = ob.timestamp_ + 1;// timestamp must differs
+             q_ptr->quotes_.push_back(q);
+         }
+
+         quote_cache_.push_back(q_ptr);
+     }
+
      // clear all order books
      for (auto& sec_order_book : order_books_history_) {
          sec_order_book.second.clear();
@@ -278,19 +313,11 @@ void lua::on_transaction(sol::table transaction){
     try_flush();
 }
 
+// TODO: Add timestamp for order book. 
 void lua::on_quote(char const* class_code, char const* sec_code, sol::table tab){
-
-	//if (strcmp(class_code, "SPBFUT") != 0)
-	//	return;
 
     update_timestamp();
     check_new_day();
-
-    //if (common::scenario::id() != 0) {
-    //    char buffer[65] = {};
-    //    sprintf_s(buffer, "%s-%s", class_code, sec_code);
-    //    dump_scenario("OnQuote", tab, buffer);
-    //}
 
 	auto& qdiff = order_books_history_[sec_code];
 	auto message = qdiff.mkdiff(tab);
@@ -301,49 +328,17 @@ void lua::on_quote(char const* class_code, char const* sec_code, sol::table tab)
 	message->sec_code_ = sec_code;
 	for (auto& q : message->quotes_)
 		q.machine_timestamp_ = last_timestamp_;
+    qdiff.current().timestamp_ = last_timestamp_;
 
 	quote_cache_.push_back(message);
         
     try_flush();
 }
 
+// proper way to clear state. Also this code clears order books in files.
 void lua::on_clean_up() {
     update_timestamp();
     check_new_day();
-
-    // generate message for flushing
-    for (auto& sec_code_ob : order_books_history_) {
-
-        auto const& ob = sec_code_ob.second.current();
-
-        // empty order book
-        if (ob.empty())
-            continue;
-
-        auto q_ptr = common::message::make<common::message::trade::quotes>();
-        q_ptr->sec_code_ = sec_code_ob.first;
-
-        // zero order book in file
-        for (auto& bid : ob.bid_) {
-            common::storage::quote q;
-            q.set_bid();
-            q.price_             = bid.price_;
-            q.quantity_diff_     = -bid.quantity_;
-            q.machine_timestamp_ = last_timestamp_;
-            q_ptr->quotes_.push_back(q);
-        }
-
-        for (auto& offer : ob.offer_) {
-            common::storage::quote q;
-            q.set_offer();
-            q.price_             = offer.price_;
-            q.quantity_diff_     = -offer.quantity_;
-            q.machine_timestamp_ = last_timestamp_;
-            q_ptr->quotes_.push_back(q);
-        }
-
-        quote_cache_.push_back(q_ptr);
-    }
 
     clear_order_books();
 }
@@ -351,6 +346,8 @@ void lua::on_clean_up() {
 
 void lua::stop(lua_State* L) {
     using namespace common::message;
+
+    clear_order_books();
 
 	flush();
 
@@ -374,7 +371,8 @@ void start(lua_State* L) {
 
 // every possible static/global class must be cleans here
 void stop(lua_State* L) {
-    // stopping
+
+    // stop events from dispatcher
     worker::dispatcher::stop();
     lua::instance_->stop(L);
 

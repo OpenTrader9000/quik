@@ -36,14 +36,15 @@ void dispatcher::init(config const& conf) {
 
 void dispatcher::clear() {
     dispatcher::instance_.reset();
+
+    // end of everything
+    utils::log::destroy();
 }
 
 void dispatcher::stop() {
     instance_->run_ = false;
     if (instance_->event_loop_.joinable())
         instance_->event_loop_.join();
-
-    utils::log::destroy();
 }
 
 

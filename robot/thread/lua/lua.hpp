@@ -45,7 +45,6 @@ struct lua {
     void on_clean_up();
 
     void setup_scenario(char const* name);
-    void dump_scenario(char const* name, sol::table, char const* info = ""); // default is functions
 
     void update_timestamp();
     void try_flush();

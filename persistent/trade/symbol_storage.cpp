@@ -11,30 +11,6 @@
 namespace persistent {
 namespace trade {
 
-uint64_t period_in_ms(period p) {
-    // choose time
-    switch (p) {
-    case period::p1min:
-        return 60 * 1000;
-    case period::p5min:
-        return 300 * 1000;
-    case period::p10min:
-        return 600 * 1000;
-    case period::p15min:
-        return 900 * 1000;
-    case period::p30min:
-        return 1800 * 1000;
-    case period::p60min:
-        return 3600 * 1000;
-    case period::pday:
-        return 24 * 3600 * 1000;
-    case period::pweek:
-        return 7 * 24 * 7 * 1000;
-    }
-    return 0;
-}
-
-
 // functions helpers for parsing an interval
 void on_interval_start(ohlcv& updatable, common::storage::trade const& trade);
 void on_interval_update(ohlcv& updatable, common::storage::trade const& trade);
@@ -112,7 +88,7 @@ bool symbol_storage::load(std::string const& path2folder, std::string const& sym
         // load trades
         d.trades_ = trade::reader(symbol_folder_path + "/" + trade_path).bulk();
 
-        d.start_day_= YMD_to_ms(trade_path.substr(0, 8));
+        d.day_start_= YMD_to_ms(trade_path.substr(0, 8));
 
         // find compatible quote
         while (load_quotes && q_it != q_end && (compare(trade_path, *q_it) > 0)) {
@@ -193,9 +169,13 @@ series symbol_storage::extract(uint64_t start, uint64_t end, period per, int64_t
 }
 
 quote::order_book_state symbol_storage::extract_order_book_by_timestamp(uint64_t timestamp) const {
+
+    // moscow time to utc
+    uint64_t utc_timestamp = timestamp - 3600 * 1000 * 3;
+
     for (auto const& day : data_) {
-        if (timestamp <= day.end_day_in_ms() && timestamp >= day.start_day_in_ms()) {
-            return day.quotes_->to_ts(timestamp);
+        if (utc_timestamp <= day.end_day_in_ms() && utc_timestamp >= day.start_day_in_ms()) {
+            return day.quotes_->to_ts(utc_timestamp);
         }
     }
     
@@ -203,23 +183,11 @@ quote::order_book_state symbol_storage::extract_order_book_by_timestamp(uint64_t
 }
 
 uint64_t day::start_day_in_ms() const {
-    return start_day_ ;
+    return day_start_ ;
 }
 
 uint64_t day::end_day_in_ms() const {
-    return start_day_ + 24 * 60 * 60 * 1000;
-}
-
-uint64_t series::start() const {
-    if (series_.empty())
-        return 0;
-    return series_.front().open_timestamp_;
-}
-
-uint64_t series::end() const {
-    if (series_.empty())
-        return 0;
-    return series_.back().open_timestamp_ + period_in_ms(period_);
+    return day_start_ + 24 * 60 * 60 * 1000;
 }
 
 void on_interval_start(ohlcv& updatable, common::storage::trade const& t) {
@@ -245,10 +213,10 @@ void on_interval_update(ohlcv& updatable, common::storage::trade const& t) {
     }
 }
 
-void on_interval_end(ohlcv& updatable, common::storage::trade const & t)
-{
+void on_interval_end(ohlcv& updatable, common::storage::trade const& t) {
     updatable.end_open_interest_ = t.open_interest_;
-    updatable.close_ = t.price_;
+    updatable.close_             = t.price_;
+    updatable.close_timestamp_   = t.server_timestamp_;
 }
 
 } // namespace trade

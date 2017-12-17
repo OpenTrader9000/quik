@@ -5,15 +5,17 @@
 #include "quote/order_book.hpp"
 #include "quote/order_book_constructor.hpp"
 
+#include "data.hpp"
+
 #include <functional>
 
 namespace persistent {
 namespace trade {
 
-    enum load_mode {
-        TRADE = 1,
-        ALL = 2
-    };
+enum load_mode {
+    TRADE = 1,
+    ALL   = 2,
+};
 
 using trades_bulk_ptr_t = trade::bulk_ptr_t;
 using quotes_bulk_ptr_t = quote::bulk_ptr_t;
@@ -27,49 +29,9 @@ struct day {
     uint64_t end_day_in_ms() const;
 
 //private:
-    uint64_t    start_day_;
+    uint64_t    day_start_;
 };
 
-struct ohlcv {
-    unibcd_t open_;
-    unibcd_t high_;
-    unibcd_t low_;
-    unibcd_t close_;
-    unsigned volume_;
-    unsigned start_open_interest_;
-    unsigned end_open_interest_;
-    uint64_t open_timestamp_;
-
-};
-
-
-enum period {
-    p1min  = 1,
-    p5min  = 2,
-    p10min = 3,
-    p15min = 4,
-    p30min = 5,
-    p60min = 6,
-    pday   = 7,
-    pweek  = 8,
-};
-
-uint64_t period_in_ms(period p);
-
-struct series {
-    std::string         sec_code_;
-    std::vector<ohlcv>  series_;
-    period              period_;
-    uint64_t            shift_;
-
-    uint64_t start() const;
-    uint64_t end() const;
-};
-
-struct data_visitor {
-    virtual void on_trade(common::storage::trade const&) = 0;
-    virtual void on_order_book(quote::order_book const&) = 0;
-};
 
 // all info about symbol stores in this class
 struct symbol_storage {
@@ -77,6 +39,7 @@ struct symbol_storage {
     static constexpr uint64_t year2286 = 10000000000000;
     
     symbol_storage();
+    symbol_storage(symbol_storage&&) = default;
     ~symbol_storage();
 
     bool load(std::string const& path2folder, std::string const& symbol, load_mode mode = load_mode::TRADE,
