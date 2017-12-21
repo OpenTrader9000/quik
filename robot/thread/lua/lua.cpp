@@ -127,7 +127,9 @@ void lua::dump(char const* function, sol::table tab) {
 
     details::deserialize(tab, mes);
 
-    persistent::push_query(std::move(mes));
+    query_cache_.push_back(std::move(mes));
+
+    //persistent::push_query(std::move(mes));
 }
 
 void lua::setup_scenario(char const* name) {
@@ -182,10 +184,10 @@ void lua::try_flush()
 }
 
 void lua::flush() {
-    persistent::push_queries(scenario_cache_);
+    persistent::push_queries(query_cache_);
     persistent::push_trades(trade_cache_);
 	persistent::push_quotes(quote_cache_);
-    scenario_cache_.clear();
+    query_cache_.clear();
     trade_cache_.clear();
 	quote_cache_.clear();
  }

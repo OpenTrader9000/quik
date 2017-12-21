@@ -64,7 +64,7 @@ struct lua {
     std::unordered_map<std::string, details::order_book_diff> order_books_history_;
 
     // cache is differs for possible future design purposses
-    std::vector<common::message::ptr> scenario_cache_;
+    std::vector<common::message::ptr> query_cache_;
     std::vector<common::message::ptr> trade_cache_;
 	std::vector<common::message::ptr> quote_cache_;
 
