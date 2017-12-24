@@ -13,7 +13,7 @@ using namespace common::message::general;
 template <>
 void deserialize<unhandled>(sol::table tab, unhandled& reply) {
 
-    reply.body().resize(2048);
+    reply.body().reserve(2048);
     utils::string_streambuf sb(reply.body());
     std::ostream os(&sb);
 

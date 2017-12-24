@@ -25,7 +25,33 @@ uint64_t period_in_ms(period p) {
     case period::pweek:
         return 7 * 24 * 7 * 1000;
     }
+    assert(false);
     return 0;
+}
+
+char const * period_str(period p)
+{
+    // choose time
+    switch (p) {
+    case period::p1min:
+        return "min";
+    case period::p5min:
+        return "5 min";
+    case period::p10min:
+        return "10 min";
+    case period::p15min:
+        return "15 min";
+    case period::p30min:
+        return "30 min";
+    case period::p60min:
+        return "hour";
+    case period::pday:
+        return "day";
+    case period::pweek:
+        return "week";
+    }
+    assert(false);
+    return "";
 }
 
 uint64_t series::start() const {
@@ -37,7 +63,7 @@ uint64_t series::start() const {
 uint64_t series::end() const {
     if (series_.empty())
         return 0;
-    return series_.back().open_timestamp_ + period_in_ms(period_);
+    return series_.back().open_timestamp_ + period_in_ms(description_.period_);
 }
 
 

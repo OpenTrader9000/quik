@@ -6,6 +6,7 @@
 #include <string>
 #include <memory>
 #include <functional>
+#include <limits>
 
 #include <common/storage/compress/compress.hpp>
 
@@ -17,16 +18,16 @@ struct reader;
 
 struct bulk_state {
     // end of buffer will be maximum value of position
-    unsigned                   position_in_buffer_ = 0;
+    size_t                     position_in_buffer_ = 0;
     common::storage::quote     quote_ = {};
 
     bulk_state(){}
-    bulk_state(unsigned position, common::storage::quote q)
+    bulk_state(size_t position, common::storage::quote q)
         : position_in_buffer_(position)
         , quote_(q) {}
 
     bool is_end_reached() const {
-        return position_in_buffer_ == std::numeric_limits<unsigned>::max();
+        return position_in_buffer_ == std::numeric_limits<size_t>::max();
     }
 };
 

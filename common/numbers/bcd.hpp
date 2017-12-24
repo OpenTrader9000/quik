@@ -50,6 +50,8 @@ struct bcd {
     void clear();
     void parse(char const* str, int power = -1);
 
+    uint64_t power() const;
+
 };
 
 template <typename IntegerType>

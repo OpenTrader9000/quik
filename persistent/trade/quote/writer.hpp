@@ -26,6 +26,8 @@ struct writer {
     void serialize(messages_view_t messages);
 
     bool is_file_compressed() const;
+
+    // false - operation doesn't required
     bool compress();
 	
 	

@@ -57,6 +57,9 @@ public:
 
     virtual void set_property(std::string const& key, std::string const& value) = 0;
     virtual bool new_data_availiable() const;
+
+    virtual std::string const& name() const = 0;
+
 };
 
 } // namespace model

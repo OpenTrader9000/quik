@@ -16,8 +16,11 @@ void on_interval_start(ohlcv& updatable, common::storage::trade const& trade);
 void on_interval_update(ohlcv& updatable, common::storage::trade const& trade);
 void on_interval_end(ohlcv& updatable, common::storage::trade const& trade);
 
-symbol_storage::symbol_storage()
-     {}
+symbol_storage::symbol_storage(std::string const& path2folder, std::string const& symbol)
+    : path_to_folder_(path2folder)
+    , sec_code_(symbol) {
+    scan_days();
+}
 
 symbol_storage::~symbol_storage() {}
 
@@ -49,67 +52,48 @@ uint64_t YMD_to_ms(std::string const& str_date) {
     return static_cast<uint64_t>(std::mktime(&t))*1000;
 }
 
-bool symbol_storage::load(std::string const& path2folder, std::string const& symbol, load_mode mode,
-                          uint64_t start_timestamp, uint64_t end_timestamp) {
+void symbol_storage::scan_days() {
+
+    constexpr unsigned str_timestamp_size = 8;
 
     // every time symbol is subfolder of the year
-    auto symbol_folder_path = utils::build_string(path2folder, '/', symbol);
+    auto symbol_folder_path = utils::build_string(path_to_folder_, '/', sec_code_);
     if (!utils::fs::exists(symbol_folder_path)) {
-        return false;
+        return;
     }
-
-    sec_code_ = symbol;
-
+        
     auto trades = utils::fs::files_in_directory(utils::build_string(symbol_folder_path, "/*.trd"));
     auto quotes = utils::fs::files_in_directory(utils::build_string(symbol_folder_path, "/*.ob"));
-
-    bool load_quotes = (mode == load_mode::ALL);
+    
     auto q_it = quotes.begin();
     auto q_end = quotes.end();
-
-    std::string low_ts_str  = ms_to_YMD(start_timestamp);
-    std::string high_ts_str = ms_to_YMD(end_timestamp);
-
-    auto compare = [](std::string const& lhs, std::string const& rhs) {
-        return strncmp(lhs.c_str(), rhs.c_str(), 8);
+    
+    auto compare = [str_timestamp_size](std::string const& lhs, std::string const& rhs) {
+        return strncmp(lhs.c_str(), rhs.c_str(), str_timestamp_size);
     };
-
-    std::vector<std::future<void>> tasks;
     
     for (std::string const& trade_path : trades) {
-
-        // check bounds
-        if (compare(trade_path, low_ts_str) < 0 || compare(trade_path, high_ts_str) > 0) {
-            continue;
-        }
-
-        day d;
-        
-        // load trades
-        d.trades_ = trade::reader(symbol_folder_path + "/" + trade_path).bulk();
-
-        d.day_start_= YMD_to_ms(trade_path.substr(0, 8));
+   
+        day d{};
+                    
+        auto cur_str_ts = trade_path.substr(0, str_timestamp_size);
+        d.day_start_= YMD_to_ms(cur_str_ts);
+        d.flags_ |= day::HAS_TRADES;
 
         // find compatible quote
-        while (load_quotes && q_it != q_end && (compare(trade_path, *q_it) > 0)) {
+        while ((q_it != q_end) && (compare(trade_path, *q_it) > 0)) {
             ++q_it;
         }
-
+    
         // load quote
-        if (load_quotes && (q_it != q_end) && (compare(trade_path, *q_it) == 0)) {
-            auto quotes_ptr = std::make_shared<quote::order_book_constructor>(quote::reader(symbol_folder_path + "/" + *q_it).bulk());
-            tasks.push_back(std::async(std::launch::async, [=]() { quotes_ptr->make_index(); }));
-            d.quotes_ = quotes_ptr;
+        if ((q_it != q_end) && (compare(trade_path, *q_it) == 0)) {
+            d.flags_ |= day::HAS_QUOTES;
         }
-
+    
         data_.push_back(std::move(d));
     }
-
-    // wait all make_index tasks
-    std::for_each(tasks.begin(), tasks.end(), std::mem_fn(&std::future<void>::wait));
-
-    return true;
 }
+
 
 void symbol_storage::concrete_data(uint64_t start, uint64_t end, data_visitor* callback) const {
 
@@ -126,7 +110,7 @@ void symbol_storage::concrete_data(uint64_t start, uint64_t end, data_visitor* c
     }
 
     for (auto const& day : data_) {
-        if (end <= day.end_day_in_ms() && start>= day.start_day_in_ms()) {
+        if (end <= day.day_end_in_ms() && start>= day.day_start_in_ms()) {
             day.trades_->walk_period(start, end, [callback](common::storage::trade const& value) {
                 callback->on_trade(value);
             });
@@ -134,22 +118,36 @@ void symbol_storage::concrete_data(uint64_t start, uint64_t end, data_visitor* c
     }
 }
 
-series symbol_storage::extract(uint64_t start, uint64_t end, period per, int64_t shift) const{
+series symbol_storage::extract(uint64_t start, uint64_t end, period per, int64_t shift) {
 
+    // TODO: make indexed cache of series. Extract series from it here
     series result;
 
-    result.series_.reserve((end - start) / period_in_ms(per));
-    result.sec_code_ = sec_code_;
-    result.period_   = per;
-    result.shift_    = shift;
 
-    for (auto const& day : data_) {
+    result.description_.sec_code_ = sec_code_;
+    result.description_.period_   = per;
+    result.description_.shift_    = shift;
+
+    // intersection
+    uint64_t low_ts = std::max(start, data_.front().day_start_in_ms());
+    uint64_t high_ts = std::min(end, data_.back().day_end_in_ms());
+
+
+    if (data_.empty() || low_ts > high_ts) {
+        return result;
+    }
+
+    result.series_.reserve((high_ts - low_ts) / period_in_ms(per));
+
+    for (auto& day : data_) {
         
         // find out intersection of incoming range and day
-        auto low  = std::max(start, day.start_day_in_ms());
-        auto high = std::min(end, day.end_day_in_ms());
+        auto low  = std::max(start, day.day_start_in_ms());
+        auto high = std::min(end, day.day_end_in_ms());
         if (low > high)
             continue;
+
+        load_trades(day);
 
         ohlcv ohlc;
         day.trades_->walk_period_by_interval(low, high, shift, period_in_ms(per),
@@ -168,13 +166,14 @@ series symbol_storage::extract(uint64_t start, uint64_t end, period per, int64_t
     return result;
 }
 
-quote::order_book_state symbol_storage::extract_order_book_by_timestamp(uint64_t timestamp) const {
+quote::order_book_state symbol_storage::extract_order_book_by_timestamp(uint64_t timestamp) {
 
     // moscow time to utc
     uint64_t utc_timestamp = timestamp - 3600 * 1000 * 3;
 
-    for (auto const& day : data_) {
-        if (utc_timestamp <= day.end_day_in_ms() && utc_timestamp >= day.start_day_in_ms()) {
+    for (auto& day : data_) {
+        if (utc_timestamp <= day.day_end_in_ms() && utc_timestamp >= day.day_start_in_ms()) {
+            load_quotes(day);
             return day.quotes_->to_ts(utc_timestamp);
         }
     }
@@ -182,11 +181,56 @@ quote::order_book_state symbol_storage::extract_order_book_by_timestamp(uint64_t
     return quote::order_book_state();
 }
 
-uint64_t day::start_day_in_ms() const {
+
+void symbol_storage::load_trades(day& d) {
+
+    constexpr uint64_t moscow_shift = 3 * 60 * 60 * 1000;
+
+    if (d.trades_)
+        return;
+
+    
+    auto trade_file_path =
+        utils::build_string(path_to_folder_, "/", sec_code_, "/", ms_to_YMD(d.day_start_ + moscow_shift), ".trd");
+
+    d.trades_ = trade::reader(trade_file_path).bulk();
+}
+
+void symbol_storage::load_quotes(day& d) {
+
+    constexpr uint64_t moscow_shift = 3 * 60 * 60 * 1000;
+
+    if (d.quotes_)
+        return;
+
+    auto quote_file_path =
+        utils::build_string(path_to_folder_, "/", sec_code_, "/", ms_to_YMD(d.day_start_ + moscow_shift), ".ob");
+
+    auto bulk = quote::reader(quote_file_path).bulk();
+    d.quotes_ = std::make_shared<quote::order_book_constructor>(bulk);
+
+    // make index in this place
+    // TODO: store index in index files
+    d.quotes_->make_index();
+}
+
+uint64_t symbol_storage::start_timestamp() const {
+    if (data_.empty())
+        return std::numeric_limits<uint64_t>::max();
+    return data_.front().day_start_in_ms();
+}
+
+uint64_t symbol_storage::end_timestamp() const {
+    if (data_.empty())
+        return std::numeric_limits<uint64_t>::max();
+    return data_.back().day_end_in_ms();
+}
+
+uint64_t day::day_start_in_ms() const {
     return day_start_ ;
 }
 
-uint64_t day::end_day_in_ms() const {
+uint64_t day::day_end_in_ms() const {
     return day_start_ + 24 * 60 * 60 * 1000;
 }
 

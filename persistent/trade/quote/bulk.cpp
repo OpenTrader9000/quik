@@ -1,5 +1,7 @@
 #include "bulk.hpp"
 
+#include <common/numbers/cast.hpp>
+
 namespace persistent {
 namespace trade {
 namespace quote {
@@ -13,7 +15,7 @@ bulk_state bulk::walk(bulk_state state, std::function<bool(quote_t const&)> call
 {
     assert(state.position_in_buffer_ <= bulk_storage_.size());
 
-    unsigned position = state.position_in_buffer_;
+    unsigned position = common::numbers::integer_cast<size_t>(state.position_in_buffer_);
     
     unsigned char const* begin = bulk_storage_.data() + position;
     unsigned char const* end   = bulk_storage_.data() + bulk_storage_.size();
@@ -34,7 +36,7 @@ bulk_state bulk::walk(bulk_state state, std::function<bool(quote_t const&)> call
         return bulk_state{ std::numeric_limits<unsigned>::max(), quote_t{} };
     }
 
-    return bulk_state{ bulk_storage_.size() - size_to_end , value };
+    return bulk_state{ bulk_storage_.size() - static_cast<size_t>(size_to_end) , value };
 }
 
 } // namespace quote

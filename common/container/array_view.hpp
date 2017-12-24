@@ -98,6 +98,29 @@ struct array_view {
 
     size_t size() const { return size_; }
 
+    T& operator[](int index) { return *(ptr_ + index); }
+    T const& operator[](int index) const { return *(ptr_ + index); }
+
+    T& front() {
+        assert(ptr_ != nullptr);
+        return *ptr_;
+    }
+
+    T const& front() const{
+        assert(ptr_ != nullptr);
+        return *ptr_;
+    }
+
+    T& back() {
+        assert(ptr_ != nullptr);
+        return *(ptr_ + size - 1);
+    }
+    
+    T const& back() const {
+        assert(ptr_ != nullptr);
+        return *(ptr_ + size - 1);
+    }
+
     array_view_iterator<T> begin() { return array_view_iterator<T>(ptr_); }
     array_view_iterator<T> end() { return array_view_iterator<T>(ptr_ + size_); }
 

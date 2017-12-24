@@ -1,6 +1,7 @@
 #pragma once
 
 #include "model.hpp"
+#include "datasource.hpp"
 
 #include <ohlc.hpp>
 #include <common/container/array_view.hpp>
@@ -9,31 +10,31 @@
 namespace view {
 namespace model {
 
-struct datasource {
-
-	// TODO: Move it to persistent or common
-	using ohlc_array_t = std::vector<ohlc>;
-	datasource(ohlc_array_t const& values);
-	~datasource();
-
-	// function return bars by parameters
-	// count - count of extracted elements
-	common::container::array_view<ohlc> get_elements(unsigned start_index, unsigned count);
-    common::container::array_view<ohlc> get_elements_starts_with_index(unsigned start_index);
-
-    size_t count_of_elements() {
-        return values_.size();
-    }
-
-private:
-	ohlc_array_t values_;
-};
+//struct datasource {
+//
+//	// TODO: Move it to persistent or common
+//	using ohlc_array_t = std::vector<ohlc>;
+//	datasource(ohlc_array_t const& values);
+//	~datasource();
+//
+//	// function return bars by parameters
+//	// count - count of extracted elements
+//	common::container::array_view<ohlc> get_elements(unsigned start_index, unsigned count);
+//    common::container::array_view<ohlc> get_elements_starts_with_index(unsigned start_index);
+//
+//    size_t count_of_elements() {
+//        return values_.size();
+//    }
+//
+//private:
+//	ohlc_array_t values_;
+//};
 
 using datasource_ptr_t = std::shared_ptr<datasource>;
 
 struct trading : public model {
 
-	trading(datasource_ptr_t source);
+	trading(std::string const& sec_code, period_t per);
 	~trading();
 
     virtual void draw(SkCanvas* canvas, coordinate_t width, coordinate_t height, coordinate_t& x,
@@ -44,8 +45,11 @@ struct trading : public model {
     virtual void set_property(std::string const& key, std::string const& value) override;
     virtual void zoom(float& multiplier, coordinate_t width, coordinate_t height, coordinate_t& x,
                       coordinate_t& y) override;
+    virtual std::string const& name() const override;
 
  private:
+
+     void compute_window_name();
 
     // TODO: Remove with structured binding frame_info
 
@@ -55,11 +59,11 @@ struct trading : public model {
         unsigned bars_count_;
         float    start_position_;
 
-        double                            min_price_;
-        double                            max_price_;
-        double                              y_step_;
-        double                              y_max_;
-        common::container::array_view<ohlc> values_view_;
+        unibcd_t      min_price_;
+        unibcd_t      max_price_;
+        double        y_step_; // step of one integer change value in pixels
+        unibcd_t      y_max_;
+        ohlc_view_t   values_view_;
     };
 
     frame_info compute_frame(coordinate_t width, coordinate_t height, coordinate_t& x, coordinate_t& y);
@@ -72,12 +76,20 @@ struct trading : public model {
 
     float bar_width() { return bar_width_ * zoom_multiplier_; }
 
-    // first parameter step
-    // second parameter is first position
-    std::pair<unsigned,unsigned> legend_info_for_y(frame_info const& info, coordinate_t height);
-    std::pair<unsigned,unsigned> legend_info_for_x(frame_info const& info, coordinate_t width);
+    // special info for y coordinate show price and it importance
+    struct y_axis_info {
 
-    
+        enum importance {
+            REGULAR   = 0,
+            IMPORTANT = 1,
+            LEVEL     = 2,
+        };
+
+        unibcd_t   price_;
+        importance importance_;
+    };
+
+    std::vector<y_axis_info> legend_info_for_y(frame_info const& info, coordinate_t height);    
 
     // coordinates start and end
     coordinate_t     x_left_shift_;
@@ -87,6 +99,10 @@ struct trading : public model {
     datasource_ptr_t datasource_;
     float            bar_width_;
     float            zoom_multiplier_;
+
+    std::string     sec_code_;
+    period_t        period_;
+    std::string     window_name_;
 };
 
 } // namespace model

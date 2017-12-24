@@ -2,6 +2,7 @@
 
 #include "controller/controller.hpp"
 #include "model/model.hpp"
+#include "render.hpp"
 
 #include <imgui/imgui.h>
 #include <imgui/opengl/gl3w/GL/glcorearb.h>
@@ -10,15 +11,17 @@
 
 namespace view {
 // view + controller
-struct imgui {
+struct plot_controller : public render_client {
 
     using coordinate_t = model::model::coordinate_t;
 
-    imgui(model_ptr_t model, coordinate_t width = 0, coordinate_t height = 0);
-    ~imgui();
+    plot_controller(model_ptr_t model, coordinate_t width = 0, coordinate_t height = 0);
+    ~plot_controller();
 
-	void show();
-    void render();
+    virtual void render() override;
+    virtual bool close() override;
+    virtual std::string window_name() override;
+
     void resize(coordinate_t width, coordinate_t height);
 
  private:
@@ -42,7 +45,9 @@ struct imgui {
 
     // mouse state
     ImVec2 last_mouse_position_;
-	bool   is_mouse_was_pressed_;
-    float   zoom_multiplier_;
+    bool   is_mouse_was_pressed_;
+    float  zoom_multiplier_;
+
+    bool    show_;
 };
 } // namespace view

@@ -62,9 +62,6 @@
     <ClCompile Include="view\model\model.cpp">
       <Filter>view\model</Filter>
     </ClCompile>
-    <ClCompile Include="view\imgui.cpp">
-      <Filter>view</Filter>
-    </ClCompile>
     <ClCompile Include="view\static.cpp">
       <Filter>view</Filter>
     </ClCompile>
@@ -73,6 +70,21 @@
     </ClCompile>
     <ClCompile Include="primitive\bar.cpp">
       <Filter>view\primitive</Filter>
+    </ClCompile>
+    <ClCompile Include="view\model\datasource.cpp">
+      <Filter>view\model</Filter>
+    </ClCompile>
+    <ClCompile Include="view\model\persistent_datasource.cpp">
+      <Filter>view\model</Filter>
+    </ClCompile>
+    <ClCompile Include="view\plot_controller.cpp">
+      <Filter>view</Filter>
+    </ClCompile>
+    <ClCompile Include="view\view.cpp">
+      <Filter>view</Filter>
+    </ClCompile>
+    <ClCompile Include="view\render.cpp">
+      <Filter>view</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -159,9 +171,6 @@
     <ClInclude Include="view\model\model.hpp">
       <Filter>view\model</Filter>
     </ClInclude>
-    <ClInclude Include="view\imgui.hpp">
-      <Filter>view</Filter>
-    </ClInclude>
     <ClInclude Include="view\static.hpp">
       <Filter>view</Filter>
     </ClInclude>
@@ -170,6 +179,24 @@
     </ClInclude>
     <ClInclude Include="ohlc.hpp" />
     <ClInclude Include="primitive\bar.hpp">
+      <Filter>view\primitive</Filter>
+    </ClInclude>
+    <ClInclude Include="view\model\datasource.hpp">
+      <Filter>view\model</Filter>
+    </ClInclude>
+    <ClInclude Include="view\model\persistent_datasource.hpp">
+      <Filter>view\model</Filter>
+    </ClInclude>
+    <ClInclude Include="view\plot_controller.hpp">
+      <Filter>view</Filter>
+    </ClInclude>
+    <ClInclude Include="view\view.hpp">
+      <Filter>view</Filter>
+    </ClInclude>
+    <ClInclude Include="view\render.hpp">
+      <Filter>view</Filter>
+    </ClInclude>
+    <ClInclude Include="view\primitive\x_axis.hpp">
       <Filter>view\primitive</Filter>
     </ClInclude>
   </ItemGroup>

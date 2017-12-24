@@ -25,11 +25,16 @@ struct day {
     trades_bulk_ptr_t    trades_;
     ob_constructor_ptr_t quotes_;
 
-    uint64_t start_day_in_ms() const;
-    uint64_t end_day_in_ms() const;
+    uint64_t day_start_in_ms() const;
+    uint64_t day_end_in_ms() const;
 
-//private:
-    uint64_t    day_start_;
+    enum {
+        HAS_TRADES = 1,
+        HAS_QUOTES = 2,
+    };
+
+    unsigned flags_;
+    uint64_t day_start_;
 };
 
 
@@ -38,19 +43,25 @@ struct symbol_storage {
 
     static constexpr uint64_t year2286 = 10000000000000;
     
-    symbol_storage();
+    symbol_storage(std::string const& path2folder, std::string const& symbol);
     symbol_storage(symbol_storage&&) = default;
     ~symbol_storage();
 
-    bool load(std::string const& path2folder, std::string const& symbol, load_mode mode = load_mode::TRADE,
-              uint64_t start_timestamp = 0, uint64_t end_timestamp = year2286);
+    symbol_storage& operator=(symbol_storage&&) = default;
+
+    // loads concrete days for concrete purposes
+    void load_trades(day& d);
+    void load_quotes(day& d);
+    
+    uint64_t start_timestamp() const;
+    uint64_t end_timestamp() const;
 
     void concrete_data(uint64_t start, uint64_t end, data_visitor* callback) const;
 
-    series extract(uint64_t start, uint64_t end, period per, int64_t shift) const;
+    series extract(uint64_t start, uint64_t end, period per, int64_t shift);
 
     // here might be return const reference but have to have thrown an exception in case when timestamp doesn't found
-    quote::order_book_state extract_order_book_by_timestamp(uint64_t timestamp) const;
+    quote::order_book_state extract_order_book_by_timestamp(uint64_t timestamp);
 
     /*
     TODO: make extract for quotes. Something like this
@@ -58,9 +69,13 @@ struct symbol_storage {
     */
 
  private:
-    
-     std::vector<day>    data_;
-     std::string         sec_code_;
+    // function doesn't create structure for days. It just scan all possible days in folder
+    void scan_days();
+
+    std::string path_to_folder_;
+    std::string sec_code_;
+
+    std::vector<day> data_;
     
 };
 

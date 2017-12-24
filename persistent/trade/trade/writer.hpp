@@ -23,6 +23,7 @@ struct writer {
 
     bool open( );
 	
+    // false - operation doesn't required
 	bool compress();
 
     header const& file_header() const { return header_; }

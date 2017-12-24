@@ -11,7 +11,6 @@ namespace persistent {
 namespace trade {
 namespace trade {
 
-static const unsigned place_for_header = common::storage::place_for_data<header>();
 
 
 reader::reader(std::string const& path) {
@@ -23,6 +22,7 @@ reader::~reader() {}
 void reader::load_file_content(std::string const& path) {
     utils::fs::mapped_file file(path.c_str());
 
+    unsigned const place_for_header = common::storage::place_for_data<header>();
     unsigned uncompressed_size_position = place_for_header;
     unsigned data_position              = place_for_header + sizeof(unsigned);
 

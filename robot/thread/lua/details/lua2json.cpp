@@ -1,5 +1,9 @@
 #include "lua2json.hpp"
 
+// workaround for lua 5.3+
+#ifndef luaL_getn
+#define luaL_getn(L,i)          ((int)lua_objlen(L, i))
+#endif
 
 namespace robot {
 namespace thread {

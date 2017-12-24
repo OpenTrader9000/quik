@@ -127,28 +127,32 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir);$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);$(SolutionDir)/third_party\readerwriterqueue;$(SolutionDir)/third_party\concurrentqueue;$(SolutionDir)\tgbot-cpp\include;$(SolutionDir)/calculations/;$(BOOST);$(OPENSSL32);$(LUA_DEV);$(LUA_DEV)/include;$(SolutionDir)/third_party/sol2/single</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(BOOST)\x86\lib;$(OPENSSL32)\lib\VC\static;$(OutDir)</LibraryPath>
+    <IncludePath>$(SolutionDir);$(VC_IncludePath);;$(WindowsSDK_IncludePath);$(ProjectDir);$(SolutionDir)/third_party\readerwriterqueue;$(SolutionDir)/third_party\concurrentqueue;$(SolutionDir)\tgbot-cpp\include;$(SolutionDir)/calculations/;$(BOOST);$(OPENSSL32);$(LUA_DEV);$(LUA_DEV)/include;$(SolutionDir)/third_party/sol2/single</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(OPENSSL32)\lib\VC\static;$(OutDir);</LibraryPath>
     <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugAndTest|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir);$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);$(SolutionDir)/third_party\readerwriterqueue;$(SolutionDir)/third_party\concurrentqueue;$(SolutionDir)\tgbot-cpp\include;$(SolutionDir)/calculations/;$(BOOST);$(OPENSSL32);$(LUA_DEV);$(LUA_DEV)/include;$(SolutionDir)/third_party/sol2/single</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(BOOST)\x86\lib;$(OPENSSL32)\lib\VC\static;$(OutDir);$(LUA_DEV)/lib/ol</LibraryPath>
+    <IncludePath>$(SolutionDir);$(VC_IncludePath);;$(WindowsSDK_IncludePath);$(ProjectDir);$(SolutionDir)/third_party\readerwriterqueue;$(SolutionDir)/third_party\concurrentqueue;$(SolutionDir)\tgbot-cpp\include;$(SolutionDir)/calculations/;$(BOOST);$(OPENSSL32);$(LUA_DEV);$(LUA_DEV)/include;$(SolutionDir)/third_party/sol2/single</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(OPENSSL32)\lib\VC\static;$(OutDir);$(LUA_DEV)/lib/ol</LibraryPath>
     <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>D:\lib\lua\include;$(SolutionDir);$(VC_IncludePath);;$(SolutionDir)/third_party/sol2/single;$(WindowsSDK_IncludePath);$(ProjectDir);$(SolutionDir)/third_party\readerwriterqueue;$(SolutionDir)/third_party\concurrentqueue;$(SolutionDir)\tgbot-cpp\include;$(SolutionDir)/calculations/;$(BOOST);$(OPENSSL32);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>D:\lib\lua\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);;$(NETFXKitsDir)Lib\um\x86;$(OutDir);$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugAndTest|x64'">
     <LinkIncremental>true</LinkIncremental>
     <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>D:\lib\lua\include;$(SolutionDir);$(VC_IncludePath);;$(SolutionDir)/third_party/sol2/single;$(WindowsSDK_IncludePath);$(ProjectDir);$(SolutionDir)/third_party\readerwriterqueue;$(SolutionDir)/third_party\concurrentqueue;$(SolutionDir)\tgbot-cpp\include;$(SolutionDir)/calculations/;$(BOOST);$(OPENSSL32);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>D:\lib\lua\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x86;$(OutDir);$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir);$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);$(SolutionDir)/third_party\readerwriterqueue;$(SolutionDir)/third_party\concurrentqueue;$(SolutionDir)\tgbot-cpp\include;$(SolutionDir)/calculations/;$(BOOST);$(OPENSSL32);$(LUA_DEV)/include;$(SolutionDir)/third_party/sol2/single</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(BOOST)\x86\lib;$(OPENSSL32)\lib\VC\static;$(OutDir)</LibraryPath>
+    <IncludePath>$(SolutionDir);$(VC_IncludePath);;$(WindowsSDK_IncludePath);$(ProjectDir);$(SolutionDir)/third_party\readerwriterqueue;$(SolutionDir)/third_party\concurrentqueue;$(SolutionDir)\tgbot-cpp\include;$(SolutionDir)/calculations/;$(BOOST);$(OPENSSL32);$(LUA_DEV)/include;$(SolutionDir)/third_party/sol2/single</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(OPENSSL32)\lib\VC\static;$(OutDir);</LibraryPath>
     <LibraryWPath>$(WindowsSDK_MetadataPath);</LibraryWPath>
     <ExcludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(MSBuild_ExecutablePath);$(VC_LibraryPath_x86);</ExcludePath>
     <ExecutablePath>$(VC_ExecutablePath_x86);$(WindowsSDK_ExecutablePath);$(VS_ExecutablePath);$(MSBuild_ExecutablePath);$(SystemRoot)\SysWow64;$(FxCopDir);$(PATH);</ExecutablePath>
@@ -156,8 +160,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAndTest|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir);$(VC_IncludePath);$(WindowsSDK_IncludePath);$(ProjectDir);$(SolutionDir)/third_party\readerwriterqueue;$(SolutionDir)/third_party\concurrentqueue;$(SolutionDir)\tgbot-cpp\include;$(SolutionDir)/calculations/;$(BOOST);$(OPENSSL32);$(LUA_DEV)/include;$(SolutionDir)/third_party/sol2/single</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(BOOST)\x86\lib;$(OPENSSL32)\lib\VC\static;$(OutDir);;$(LUA_DEV)/lib/ol</LibraryPath>
+    <IncludePath>$(SolutionDir);$(VC_IncludePath);;$(WindowsSDK_IncludePath);$(ProjectDir);$(SolutionDir)/third_party\readerwriterqueue;$(SolutionDir)/third_party\concurrentqueue;$(SolutionDir)\tgbot-cpp\include;$(SolutionDir)/calculations/;$(BOOST);$(OPENSSL32);$(LUA_DEV)/include;$(SolutionDir)/third_party/sol2/single</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;$(OPENSSL32)\lib\VC\static;$(OutDir);;$(LUA_DEV)/lib/ol</LibraryPath>
     <LibraryWPath>$(WindowsSDK_MetadataPath);</LibraryWPath>
     <ExcludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(MSBuild_ExecutablePath);$(VC_LibraryPath_x86);</ExcludePath>
     <ExecutablePath>$(VC_ExecutablePath_x86);$(WindowsSDK_ExecutablePath);$(VS_ExecutablePath);$(MSBuild_ExecutablePath);$(SystemRoot)\SysWow64;$(FxCopDir);$(PATH);</ExecutablePath>
@@ -166,10 +170,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>D:\lib\lua\include;$(SolutionDir);$(VC_IncludePath);;$(SolutionDir)/third_party/sol2/single;$(WindowsSDK_IncludePath);$(ProjectDir);$(SolutionDir)/third_party\readerwriterqueue;$(SolutionDir)/third_party\concurrentqueue;$(SolutionDir)\tgbot-cpp\include;$(SolutionDir)/calculations/;$(BOOST);$(OPENSSL32);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>D:\lib\lua\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x86;$(OutDir);$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAndTest|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IntDir>$(SolutionDir)build_files\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>D:\lib\lua\include;$(SolutionDir);$(VC_IncludePath);;$(SolutionDir)/third_party/sol2/single;$(WindowsSDK_IncludePath);$(ProjectDir);$(SolutionDir)/third_party\readerwriterqueue;$(SolutionDir)/third_party\concurrentqueue;$(SolutionDir)\tgbot-cpp\include;$(SolutionDir)/calculations/;$(BOOST);$(OPENSSL32);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>D:\lib\lua\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x86;$(OutDir);$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -210,11 +218,13 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;ROBOT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_TEST;_DEBUG;_WINDOWS;_USRDLL;ROBOT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-D_WIN32_WINNT=0x0601 /D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>common.lib;persistent.lib;lua5.1.5-static.lib;utils.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugAndTest|x64'">
@@ -223,11 +233,12 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;ROBOT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_TEST;_DEBUG;_WINDOWS;_USRDLL;ROBOT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-D_WIN32_WINNT=0x0601 /D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
+      <AdditionalDependencies>common.lib;persistent.lib;lua5.1.5-static.lib;utils.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -277,13 +288,15 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;ROBOT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_TEST;NDEBUG;_WINDOWS;_USRDLL;ROBOT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-D_WIN32_WINNT=0x0601 /D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>common.lib;persistent.lib;lua5.1.5-static.lib;utils.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseAndTest|x64'">
@@ -294,13 +307,14 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;ROBOT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_TEST;NDEBUG;_WINDOWS;_USRDLL;ROBOT_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>-D_WIN32_WINNT=0x0601 /D_SCL_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>common.lib;persistent.lib;lua5.1.5-static.lib;utils.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -15,7 +15,7 @@ using namespace common::message::scenario;
 template <>
 void deserialize<entry>(sol::table tab, entry& reply) {
 
-    reply.body().resize(2048);
+    reply.body().reserve(2048);
     utils::string_streambuf sb(reply.body());
     std::ostream os(&sb);
 

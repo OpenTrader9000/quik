@@ -188,6 +188,9 @@ void bcd::parse(char const* str, int power) {
     }
 }
 
+uint64_t bcd::power() const {
+    return pow10[fractional_size_];
+}
 
 inline char extract_char(uint64_t& value) {
     auto new_value = value / 10;

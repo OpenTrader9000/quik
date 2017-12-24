@@ -90,7 +90,7 @@ bool writer::compress() {
     });
 
     if (is_file_compressed())
-        return true;
+        return false;
 
     // **********************
     //   READING QUOTES

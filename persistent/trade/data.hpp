@@ -22,6 +22,7 @@ enum period {
 };
 
 uint64_t period_in_ms(period p);
+char const* period_str(period p);
 
 struct ohlcv {
     unibcd_t open_;
@@ -35,11 +36,40 @@ struct ohlcv {
     uint64_t close_timestamp_;
 };
 
+struct series_description {
+    period      period_;
+    std::string sec_code_;
+    uint64_t    shift_;
+
+    struct equals {
+        bool operator()(series_description const& lhs, series_description const& rhs) const {
+            return (lhs.period_ == rhs.period_) && (lhs.sec_code_ == rhs.sec_code_) &&
+                   (lhs.shift_ == rhs.shift_);
+        }
+    };
+
+    struct hash {
+        size_t operator()(series_description const& value) const {
+            return std::hash<std::string>()(value.sec_code_) +
+                   std::hash<int>()(static_cast<int>(value.period_)) + std::hash<uint64_t>()(value.shift_);
+        }
+    };
+
+    static series_description make_empty() {
+        series_description result{};
+
+        // use probably the most unused period for an empty key
+        result.period_ = period::pweek;
+
+        return result;
+    }
+};
+
+
 struct series {
-    std::string        sec_code_;
+
+    series_description description_; // or key
     std::vector<ohlcv> series_;
-    period             period_;
-    uint64_t           shift_;
 
     uint64_t start() const;
     uint64_t end() const;
