@@ -1,6 +1,10 @@
 
 #include "trading.hpp"
 
+#include <time.h>
+
+#include <iomanip>
+
 #include <view/primitive/bar.hpp>
 #include <boost/container/flat_set.hpp>
 
@@ -246,15 +250,102 @@ std::vector<trading::y_axis_info> trading::legend_info_for_y(frame_info const & 
     return result;
 }
 
+std::vector<trading::x_axis_info> trading::legend_info_for_x(frame_info const & info, coordinate_t width)
+{
+    namespace trd = persistent::trade;
+
+    std::vector<x_axis_info> result;
+
+    uint64_t msk_diff                   = 3 * 60 * 60 * 1000;
+    //uint64_t place_for_mark             = 10;
+    uint64_t place_for_mark_with_legend = 30;
+
+    uint64_t count_of_legends = (info.values_view_.size() * bar_width()) / place_for_mark_with_legend;
+
+    uint64_t start_time_msk = info.values_view_.front().open_timestamp_ + msk_diff;
+    uint64_t end_time_msk   = info.values_view_.back().close_timestamp_ + msk_diff;
+    uint64_t diff           = end_time_msk - start_time_msk;
+
+    uint64_t period_day  = trd::period_in_ms(period_t::pday);
+    uint64_t period_hour = trd::period_in_ms(period_t::p60min);
+    uint64_t days_count  = diff / period_day;
+    uint64_t hours_count = diff / period_hour;
+    //uint64_t current_period = trd::period_in_ms(period_);
+
+    bool fit_days  = (days_count < count_of_legends);
+    bool fit_hour  = (hours_count < count_of_legends);
+    bool fit_30min = (hours_count * 2 < count_of_legends);
+    bool fit_15min = (hours_count * 4 < count_of_legends);
+    bool fit_10min = (hours_count * 6 < count_of_legends);
+    bool fit_5min  = (hours_count * 12 < count_of_legends);
+    bool fit_1min  = (hours_count * 60 < count_of_legends);
+
+    uint64_t period_in_ms = trd::period_in_ms(period_t::pweek);
+
+    if (fit_1min) {
+        period_in_ms = trd::period_in_ms(period_t::p1min);
+    } else if (fit_5min) {
+        period_in_ms = trd::period_in_ms(period_t::p5min);
+    } else if (fit_10min) {
+        period_in_ms = trd::period_in_ms(period_t::p10min);
+    } else if (fit_15min && period_ != period_t::p10min) { // 15 not divided by 10
+        period_in_ms = trd::period_in_ms(period_t::p15min);
+    } else if (fit_30min) {
+        period_in_ms = trd::period_in_ms(period_t::p30min);
+    } else if (fit_hour) {
+        period_in_ms = trd::period_in_ms(period_t::p60min);
+    } else if (fit_days) {
+        period_in_ms = trd::period_in_ms(period_t::pday);
+    } else {
+        period_in_ms = trd::period_in_ms(period_t::pweek);
+    }
+
+    uint64_t bar_timestamp = (start_time_msk / period_in_ms) * period_in_ms;
+    for (unsigned bar_idx = 0; bar_idx < info.values_view_.size(); bar_idx++) {
+        uint64_t ts_msk = info.values_view_[bar_idx].open_timestamp_ + msk_diff;
+        if (ts_msk >= bar_timestamp) {
+            x_axis_info info{};
+            info.time_              = bar_timestamp;
+            info.bar_index_in_view_ = bar_idx;
+
+            uint64_t prev_day = (bar_timestamp - period_in_ms) / period_day;
+            uint64_t curr_day = bar_timestamp / period_day;
+
+            uint64_t prev_hour = (bar_timestamp - period_in_ms) / period_hour;
+            uint64_t curr_hour = bar_timestamp / period_hour;
+
+            if (prev_day != curr_day || result.empty()) {
+                info.ts_type_ = x_axis_info::day;
+            }
+            else if (prev_hour != curr_hour) {
+                info.ts_type_ = x_axis_info::hour;
+            }
+
+            result.push_back(info);
+
+            bar_timestamp += period_in_ms;
+
+        }
+    }
+
+
+    return result;
+}
+
 
 void trading::draw_coordinates(SkCanvas* canvas, frame_info const & info, coordinate_t width,
                                coordinate_t height, coordinate_t& x, coordinate_t& y) {
     auto vals = datasource_->get_elements(series_key(sec_code_, period_), info.start_index_, info.bars_count_);
     
-    SkPaint paint, regular_cell_paint, important_cell_paint;
+    SkPaint paint, regular_cell_paint;
     paint.setColor(SK_ColorBLACK);
     regular_cell_paint.setColor(SK_ColorLTGRAY);
-    important_cell_paint.setColor(SK_ColorGRAY);
+   // important_cell_paint.setColor(SK_ColorGRAY);    
+    paint.setAntiAlias(true);
+    regular_cell_paint.setAntiAlias(true);
+    regular_cell_paint.setStrokeWidth(1);
+    regular_cell_paint.setStyle(SkPaint::kStroke_Style);
+   // important_cell_paint.setAntiAlias(true);
 
     unsigned line_length_by_importance[] = { 2,3,6 };
     
@@ -277,7 +368,7 @@ void trading::draw_coordinates(SkCanvas* canvas, frame_info const & info, coordi
 
         bool is_regular   = (scale.importance_ == y_axis_info::REGULAR);
         bool is_important = (scale.importance_ == y_axis_info::IMPORTANT);
-        canvas->drawLine(0, y_pos, x_position_of_y_axis, y_pos, (is_regular || is_important ? regular_cell_paint : important_cell_paint));
+        canvas->drawLine(0, y_pos, x_position_of_y_axis, y_pos, regular_cell_paint );
 
         if (is_regular) {
             continue;
@@ -290,6 +381,46 @@ void trading::draw_coordinates(SkCanvas* canvas, frame_info const & info, coordi
 
     // drawing axis x
     canvas->drawLine(0, y_position_of_x_axis, x_position_of_y_axis, y_position_of_x_axis, paint); // axis x
+
+    auto x_legend = legend_info_for_x(info, width);
+    for (auto& scale : x_legend) {
+        auto     position  = bar_width() * scale.bar_index_in_view_ + info.start_position_;
+        uint64_t ts_in_sec = (scale.time_ / (1000));
+
+        canvas->drawLine(position, 0, position, y_position_of_x_axis,
+                         regular_cell_paint); // grey line
+        canvas->drawLine(position, y_position_of_x_axis, position, y_position_of_x_axis + 3, paint);
+
+        std::string legend;
+
+        // temprorary solution for alignment of the time legend
+        unsigned shift_left = 0;
+        
+        switch (scale.ts_type_) {
+        case x_axis_info::minute: {
+            uint64_t time_in_hour = (ts_in_sec / 60) % 60;
+            legend                = std::to_string(time_in_hour);
+            shift_left            = 6;
+        } break;
+        case x_axis_info::hour: {
+            uint64_t time = (ts_in_sec / 3600) % 24;
+            legend        = utils::build_string(time, ":00");
+            shift_left    = 14;
+        } break;
+        case x_axis_info::day: {
+            struct tm t;
+            time_t    time = static_cast<time_t>(ts_in_sec);
+
+            // allready moscow time
+            ::gmtime_s(&t, &time);
+            legend     = utils::build_string(std::setw(2), std::setfill('0'), t.tm_mon + 1, ".",
+                                         std::setw(2), std::setfill('0'), t.tm_mday);
+            shift_left = 14;
+        } break;
+        }
+
+        canvas->drawText(legend.c_str(), legend.size(), position - shift_left, y_position_of_x_axis + 15, paint);
+    }
 }
 
 

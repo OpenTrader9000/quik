@@ -76,6 +76,8 @@ struct trading : public model {
 
     float bar_width() { return bar_width_ * zoom_multiplier_; }
 
+    // TODO: Move coordinate drawing in another translation module
+
     // special info for y coordinate show price and it importance
     struct y_axis_info {
 
@@ -89,7 +91,23 @@ struct trading : public model {
         importance importance_;
     };
 
-    std::vector<y_axis_info> legend_info_for_y(frame_info const& info, coordinate_t height);    
+    std::vector<y_axis_info> legend_info_for_y(frame_info const& info, coordinate_t height);
+
+    struct x_axis_info {
+        enum ts_type {
+            minute = 0,
+            hour   = 1,
+            day    = 2,
+           // week   = 3,
+        };
+
+        uint64_t   time_;
+        ts_type    ts_type_;
+        unsigned   bar_index_in_view_;
+    };
+
+    std::vector<x_axis_info> legend_info_for_x(frame_info const& info, coordinate_t width);
+
 
     // coordinates start and end
     coordinate_t     x_left_shift_;

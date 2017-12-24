@@ -34,6 +34,7 @@ void plot_controller::render() {
         ImVec2 dimensions = { static_cast<float>(width_), static_cast<float>(height_) };
         ImGui::Image((void*)texture_id_, dimensions);
 
+        // process move
         int f = static_cast<int>(x_);
         ImGui::DragInt(model_->name().c_str(), &f, -1);
         if (static_cast<unsigned>(f) != x_) {

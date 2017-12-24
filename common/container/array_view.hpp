@@ -113,12 +113,12 @@ struct array_view {
 
     T& back() {
         assert(ptr_ != nullptr);
-        return *(ptr_ + size - 1);
+        return *(ptr_ + size_ - 1);
     }
     
     T const& back() const {
         assert(ptr_ != nullptr);
-        return *(ptr_ + size - 1);
+        return *(ptr_ + size_ - 1);
     }
 
     array_view_iterator<T> begin() { return array_view_iterator<T>(ptr_); }
